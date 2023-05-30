@@ -1,0 +1,22 @@
+:root {
+  --primary-blue: #00296b;
+  --secondary-blue: #004a8f;
+  --primary-yellow: #fdc500;
+  --secondary-yellow: #ffd500;
+  --black: #292e1e;
+  --white: #ffffff;
+  --gray: #dfdfdf;
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+}
+
+.alert p {
+  margin: 0 !important;
+}
