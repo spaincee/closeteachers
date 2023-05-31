@@ -12,6 +12,7 @@ export class UsersService {
   baseUrl: string = 'https://api-teacher-app.up.railway.app/api/public/teachers';
   constructor(private httpClient: HttpClient) { }
 
+  //Este es el bloque nuevo
   getAll(): Promise<any> {
     return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}`))
   }
