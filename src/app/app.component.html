@@ -4,10 +4,12 @@
       <div class="header-left d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <a href="/"><img src="/assets/images/closeteacherslogo1.png" alt="My Fake Friends"></a>
       </div>
-      
+
       <div class="header-right">
-        <button [routerLink]="['/']" class="btn btn-primary m-2" title="Ir a Home">Registrarme</button>
-        <button [routerLink]="['/new']" class="btn btn-secondary" title="Añadir Usuario">Iniciar</button>
+        <button [routerLink]="['/register']" class="btn btn-primary m-2" title="Ir a Home">Registrarme</button>
+        <button [routerLink]="['/home']" class="btn btn-secondary" title="Añadir Usuario">Iniciar</button>
+        <button [routerLink]="['/dashboard']" class="btn btn-secondary" title="Añadir Usuario">Dashboard</button>
+        <button [routerLink]="['/login']" class="btn btn-secondary" title="Añadir Usuario">login</button>
       </div>
 
     </div>
@@ -17,8 +19,8 @@
 <main class="flex-shrink-0">
   <router-outlet></router-outlet>
 </main>
-<footer class="footer mt-auto py-3"> 
+<footer class="footer mt-auto py-3">
   <div class="container">
-    <span>CloseTeachers - Copyright &copy; 2023</span>  
-  </div>  
+    <span>CloseTeachers - Copyright &copy; 2023</span>
+  </div>
 </footer>
