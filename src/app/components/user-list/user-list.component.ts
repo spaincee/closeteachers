@@ -10,8 +10,8 @@ import { UsersService } from 'src/app/services/users.service';
 export class UserListComponent implements OnInit {
 
   arrUsers: User[] = [];
-  currentPage: number = 1;
-  totalPages: number = 1;
+  // currentPage: number = 1;
+  // totalPages: number = 1;
 
   constructor(private usersService: UsersService) {}
 
@@ -19,13 +19,11 @@ export class UserListComponent implements OnInit {
     this.gotoPage();
   }
 
-  async gotoPage(pNum: number = 1): Promise<void> {
+  async gotoPage(): Promise<void> {
     try {
-      let response = await this.usersService.getAll(pNum)
+      let response = await this.usersService.getAll()
       console.log(response);
-      this.currentPage = response.page;
-      this.totalPages = response.total_pages;
-      this.arrUsers = response.results;
+      this.arrUsers = response.teachers;
       console.log(this.arrUsers);
     }
     catch (error) {
