@@ -18,10 +18,7 @@ export class UserFormComponent implements OnInit {
 
   constructor(private usersService: UsersService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.userForm = new FormGroup({
-      first_name: new FormControl("", [
-        Validators.required
-      ]),
-      last_name: new FormControl("", [
+      fullname: new FormControl("", [
         Validators.required
       ]),
       username: new FormControl("", [
@@ -57,10 +54,7 @@ export class UserFormComponent implements OnInit {
 
       this.userForm = new FormGroup({
         id: new FormControl(id, []),
-        first_name: new FormControl(user?.first_name, [
-          Validators.required
-        ]),
-        last_name: new FormControl(user?.last_name, [
+        fullname: new FormControl(user?.fullname, [
           Validators.required
         ]),
         username: new FormControl(user?.username, [
@@ -97,7 +91,7 @@ export class UserFormComponent implements OnInit {
         let response = await this.usersService.update(user);
         if (response._id) {
           console.log(response);
-          this.msg = `Se ha Actualizado el Usuario ${response.first_name} ${response.last_name} con id: ${response._id}`;
+          this.msg = `Se ha Actualizado el Usuario ${response.fullname} con id: ${response._id}`;
           this.type = 'success';
           console.log(this.type);
           console.log(this.msg);
@@ -115,7 +109,7 @@ export class UserFormComponent implements OnInit {
         let response = await this.usersService.create(user);
         if (response.id) {
           console.log(response);
-          this.msg = `Se ha creado el Usuario ${response.first_name} ${response.last_name} con id: ${response.id}`;
+          this.msg = `Se ha creado el Usuario ${response.fullname} con id: ${response.id}`;
           this.type = 'success';
           console.log(this.msg);
         }

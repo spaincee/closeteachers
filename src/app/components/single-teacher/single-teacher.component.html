@@ -2,10 +2,10 @@
   <div class="card mb-3 p-3">
     <div class="row g-1">
       <div class="col-12 col-lg-4">
-        <img [src]="user?.image" class="img-fluid rounded" [alt]="user?.first_name">
+        <img [src]="user?.image" class="img-fluid rounded" [alt]="user?.fullname">
       </div>
       <div class="col-12 col-lg-8 user-info ">
-        <h1 class="card-title">{{ user?.first_name }} {{ user?.last_name }}</h1>
+        <h1 class="card-title">{{ user?.fullname }} {{ user?.last_name }}</h1>
         <p class="card-text"><strong>Username:<br> </strong>{{ user?.username }}</p>
         <p class="card-text"><strong>email:<br> </strong> {{ user?.email }}</p>
         <h3>Bio:</h3>

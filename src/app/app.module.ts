@@ -6,18 +6,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
-import { UserListComponent } from './components/user-list/user-list.component';
-import { UserCardComponent } from './components/user-card/user-card.component';
-import { SingleUserComponent } from './components/single-user/single-user.component';
+import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
+import { TeacherCardComponent } from './components/teacher-card/teacher-card.component';
+import { SingleTeacherComponent } from './components/single-teacher/single-teacher.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserListComponent,
-    UserCardComponent,
-    SingleUserComponent,
+    TeacherListComponent,
+    TeacherCardComponent,
+    SingleTeacherComponent,
     UserFormComponent,
     NotificationsComponent
   ],

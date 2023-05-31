@@ -4,11 +4,11 @@ import { User } from 'src/app/interfaces/user.interface';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
-  selector: 'app-single-user',
-  templateUrl: './single-user.component.html',
-  styleUrls: ['./single-user.component.css']
+  selector: 'app-single-teacher',
+  templateUrl: './single-teacher.component.html',
+  styleUrls: ['./single-teacher.component.css']
 })
-export class SingleUserComponent {
+export class SingleTeacherComponent {
 
   user!: User | any;
 
@@ -27,7 +27,7 @@ export class SingleUserComponent {
       try {
         let response = await this.usersServices.delete(pId);
         if (response._id ) {
-          alert('El Usuario ' + response.first_name + ' ' + response.last_name + ' ha sido eliminado Satisfactoriamente');
+          alert('El Usuario ' + response.fullname + ' ' + response.last_name + ' ha sido eliminado Satisfactoriamente');
           console.log(response);
         } else {
           alert(response.error);

@@ -4,10 +4,10 @@ import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  templateUrl: './teacher-list.component.html',
+  styleUrls: ['./teacher-list.component.css']
 })
-export class UserListComponent implements OnInit {
+export class TeacherListComponent implements OnInit {
 
   arrUsers: User[] = [];
   // currentPage: number = 1;

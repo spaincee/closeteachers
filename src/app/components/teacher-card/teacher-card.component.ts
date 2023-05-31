@@ -4,11 +4,11 @@ import { UsersService } from 'src/app/services/users.service';
 
 
 @Component({
-  selector: 'app-user-card',
-  templateUrl: './user-card.component.html',
-  styleUrls: ['./user-card.component.css']
+  selector: 'app-teacher-card',
+  templateUrl: './teacher-card.component.html',
+  styleUrls: ['./teacher-card.component.css']
 })
-export class UserCardComponent  {
+export class TeacherCardComponent  {
   @Input() myUser!: User;
 
   constructor(private usersServices: UsersService) { }
@@ -19,7 +19,7 @@ export class UserCardComponent  {
         let response = await this.usersServices.delete(pId);
         if (response._id ) {
           console.log(response);
-          alert('El Usuario ' + response.first_name + ' ' + response.last_name + ' ha sido eliminado Satisfactoriamente');
+          alert('El Usuario ' + response.fullname + ' ' + response.last_name + ' ha sido eliminado Satisfactoriamente');
         } else {
           alert(response.error);
         }

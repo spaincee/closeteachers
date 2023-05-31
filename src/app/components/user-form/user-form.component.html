@@ -4,9 +4,9 @@
 <app-notifications [msg]="msg" [type]="type"></app-notifications>
 <form novalidate [formGroup]="userForm" (ngSubmit)="getDataForm()">
   <div class="my-2">
-    <label for="first_name" class="form-label">Nombre (*)</label>
-    <input class="form-control" type="text" id="first_name" formControlName="first_name">
-    <p class="error" *ngIf="checkControl('first_name', 'required')">El Campo es Obligatorio</p>
+    <label for="fullname" class="form-label">Nombre (*)</label>
+    <input class="form-control" type="text" id="fullname" formControlName="fullname">
+    <p class="error" *ngIf="checkControl('fullname', 'required')">El Campo es Obligatorio</p>
   </div>
   <div class="my-2">
     <label for="last_name" class="form-label">Apellido (*)</label>

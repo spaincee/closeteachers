@@ -1,7 +1,10 @@
 <div class="card shadow-lg p-3">
-    <img [src]="myUser.image" [alt]="myUser.first_name">
+    <div class="class teacher-card-cover" style="background-image: url('/assets/images/testingcover.jpeg');">
+
+    </div>
+    <img class="teacher-card-avatar" src="assets/images/testingavatar2.jpeg" [alt]="myUser.fullname">
     <div class="card-body">
-      <h5 class="card-title">{{myUser.first_name}} {{myUser.last_name}}</h5>
+      <h5 class="card-title">{{myUser.fullname}}</h5>
       <p class="card-text"><small class="text-muted">@{{myUser.username}}</small></p>
     </div>
     
