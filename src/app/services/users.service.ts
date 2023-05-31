@@ -17,6 +17,7 @@ export class UsersService {
     return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}`))
   }
 
+  
   // getAll(pPage: number = 1): Promise<any> {
   //   return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}?page=${pPage}`))
   // }

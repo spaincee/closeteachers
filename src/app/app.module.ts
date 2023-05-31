@@ -11,6 +11,9 @@ import { TeacherCardComponent } from './components/teacher-card/teacher-card.com
 import { SingleTeacherComponent } from './components/single-teacher/single-teacher.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { NotificationsComponent } from './components/notifications/notifications
     TeacherCardComponent,
     SingleTeacherComponent,
     UserFormComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    DashboardComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
