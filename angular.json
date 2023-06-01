@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "A6AppApiExt": {
+    "closeteachers": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -27,6 +27,7 @@
             "styles": [
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
+
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
@@ -63,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "A6AppApiExt:build:production"
+              "browserTarget": "closeteachers:build:production"
             },
             "development": {
-              "browserTarget": "A6AppApiExt:build:development"
+              "browserTarget": "closeteachers:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "A6AppApiExt:build"
+            "browserTarget": "closeteachers:build"
           }
         },
         "test": {
@@ -92,7 +93,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           }
         }
       }

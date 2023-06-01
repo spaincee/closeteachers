@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'A6AppApiExt'`, () => {
+  it(`should have as title 'closeteachers'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('A6AppApiExt');
+    expect(app.title).toEqual('closeteachers');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('A6AppApiExt app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('closeteachers app is running!');
   });
 });

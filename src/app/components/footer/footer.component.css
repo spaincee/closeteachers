@@ -1,0 +1,8 @@
+footer {
+  background-color: var(--secondary-blue);
+  text-align: center;
+}
+
+footer span {
+  color: var(--white);
+}

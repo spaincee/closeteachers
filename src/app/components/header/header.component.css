@@ -1,0 +1,7 @@
+header {
+  background-color: var(--white);
+}
+
+header img {
+  max-width: 200px;
+}
