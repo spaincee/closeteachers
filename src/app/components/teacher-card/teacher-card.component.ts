@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { User } from 'src/app/interfaces/user.interface';
-import { UsersService } from 'src/app/services/users.service';
+import { PublicService } from 'src/app/services/public.service';
 
 
 @Component({
@@ -11,22 +11,22 @@ import { UsersService } from 'src/app/services/users.service';
 export class TeacherCardComponent  {
   @Input() myUser!: User;
 
-  constructor(private usersServices: UsersService) { }
+  constructor(private publicServices: PublicService) { }
 
-  async deleteUser(pId: string | undefined): Promise<void> {
-    if (pId !== undefined) {
-      try {
-        let response = await this.usersServices.delete(pId);
-        if (response._id ) {
-          console.log(response);
-          alert('El Usuario ' + response.fullname + ' ' + response.last_name + ' ha sido eliminado Satisfactoriamente');
-        } else {
-          alert(response.error);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  async deleteUser(): Promise<void> {
+    // if (pId !== undefined) {
+    //   try {
+    //     let response = await this.publicServices.delete(pId);
+    //     if (response.id_user ) {
+    //       console.log(response);
+    //       alert('El Usuario ' + response.fullname + ' ' + response.last_name + ' ha sido eliminado Satisfactoriamente');
+    //     } else {
+    //       alert(response.error);
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UsersService } from 'src/app/services/users.service';
+import { PublicService } from 'src/app/services/public.service';
 import { User } from '../../interfaces/user.interface';
 
 @Component({
@@ -16,7 +16,7 @@ export class UserFormComponent implements OnInit {
   msg: string = "";
   type: string = "";
 
-  constructor(private usersService: UsersService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private publicService: PublicService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.userForm = new FormGroup({
       fullname: new FormControl("", [
         Validators.required
@@ -49,7 +49,7 @@ export class UserFormComponent implements OnInit {
     let id = params.userid;
     if (id) {
       this.title = 'Actualizar'
-      const response = await this.usersService.getById(id);
+      const response = await this.publicService.getById(id);
       const user: User = response;
 
       this.userForm = new FormGroup({
@@ -88,10 +88,10 @@ export class UserFormComponent implements OnInit {
       console.log('Updated User');
 
       try {
-        let response = await this.usersService.update(user);
-        if (response._id) {
+        let response = await this.publicService.update(user);
+        if (response.id_user) {
           console.log(response);
-          this.msg = `Se ha Actualizado el Usuario ${response.fullname} con id: ${response._id}`;
+          this.msg = `Se ha Actualizado el Usuario ${response.fullname} con id: ${response.id_user}`;
           this.type = 'success';
           console.log(this.type);
           console.log(this.msg);
@@ -106,10 +106,10 @@ export class UserFormComponent implements OnInit {
       //Create
       console.log('Created New User');  
       try {
-        let response = await this.usersService.create(user);
-        if (response.id) {
+        let response = await this.publicService.create(user);
+        if (response.id_user) {
           console.log(response);
-          this.msg = `Se ha creado el Usuario ${response.fullname} con id: ${response.id}`;
+          this.msg = `Se ha creado el Usuario ${response.fullname} con id: ${response.id_user}`;
           this.type = 'success';
           console.log(this.msg);
         }

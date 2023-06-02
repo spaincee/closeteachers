@@ -1,77 +1,322 @@
 <body>
   <div class="login-root">
-    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+    <div
+      class="box-root flex-flex flex-direction--column"
+      style="min-height: 100vh; flex-grow: 1"
+    >
       <div class="loginbackground box-background--white padding-top--64">
         <div class="loginbackground-gridContainer">
-          <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
-            <div class="box-root" style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
-            </div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: top / start / 8 / end"
+          >
+            <div
+              class="box-root"
+              style="
+                background-image: linear-gradient(
+                  white 0%,
+                  rgb(247, 250, 252) 33%
+                );
+                flex-grow: 1;
+              "
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
-            <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+          <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5">
+            <div
+              class="box-root box-divider--light-all-2 animationLeftRight tans3s"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
-            <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 6 / start / auto / 2"
+          >
+            <div
+              class="box-root box-background--blue800"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
-            <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 7 / start / auto / 4"
+          >
+            <div
+              class="box-root box-background--blue animationLeftRight"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
-            <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+          <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6">
+            <div
+              class="box-root box-background--gray100 animationLeftRight tans3s"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
-            <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 2 / 15 / auto / end"
+          >
+            <div
+              class="box-root box-background--cyan200 animationRightLeft tans4s"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
-            <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 3 / 14 / auto / end"
+          >
+            <div
+              class="box-root box-background--blue animationRightLeft"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
-            <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+          <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20">
+            <div
+              class="box-root box-background--gray100 animationRightLeft tans4s"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
-            <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
+          <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17">
+            <div
+              class="box-root box-divider--light-all-2 animationRightLeft tans3s"
+              style="flex-grow: 1"
+            ></div>
           </div>
         </div>
       </div>
-      <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-        <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-          <h1><a href="" rel="dofollow"><img src="/assets/images/closeteacherslogo1.png" alt="" class="loginlogo"></a></h1>
+      <div
+        class="box-root padding-top--24 flex-flex flex-direction--column"
+        style="flex-grow: 1; z-index: 9"
+      >
+        <div
+          class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center"
+        >
+          <h1>
+            <a href="" rel="dofollow"
+              ><img
+                src="/assets/images/closeteacherslogo1.png"
+                alt=""
+                class="loginlogo"
+            /></a>
+          </h1>
         </div>
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15">Sign in to your account</span>
-              <form id="stripe-login">
+
+              <form
+                id="stripe-login"
+                [formGroup]="register"
+                (ngSubmit)="sendRegister()"
+              >
                 <div class="field padding-bottom--24">
-                  <label for="email">Email</label>
-                  <input type="email" name="email">
+                  <label for="username">Username</label>
+                  <input
+                    type="text"
+                    name="username"
+                    formControlName="username"
+                    required=""
+                    [ngClass]="{
+                      'is-invalid':
+                        register.controls['username'].touched &&
+                        register.controls['username'].invalid,
+                      'is-valid': register.controls['username'].valid
+                    }"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      register.controls['username'].touched &&
+                      register.controls['username'].invalid
+                    "
+                  >
+                    <p class="text-danger"
+                      *ngIf="register.controls['username'].errors?.['required']"
+                    >
+                      Ingrese su nick de usuario
+                    </p>
+                    <p class="text-danger"
+                      *ngIf="register.controls['username'].errors?.['minlength']"
+                    >
+                      La longitud debe ser mayo de 3 caracteres
+                    </p>
+                  </div>
                 </div>
+
                 <div class="field padding-bottom--24">
-                  <div class="grid--50-50">
-                    <label for="password">Password</label>
-                    <div class="reset-pass">
-                      <a href="#">Forgot your password?</a>
+                  <label for="fullname">Fullname</label>
+                  <input
+                    type="text"
+                    name="fullname"
+                    required=""
+                    formControlName="fullname"
+                    [ngClass]="{
+                      'is-invalid':
+                        register.controls['fullname'].touched &&
+                        register.controls['fullname'].invalid,
+                      'is-valid': register.controls['fullname'].valid
+                    }"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      register.controls['fullname'].touched &&
+                      register.controls['fullname'].invalid
+                    "
+                  >
+                    <p class="text-danger"
+                      *ngIf="register.controls['fullname'].errors?.['required']"
+                    >
+                      Ingrese nombre completo
+                    </p>
+                    <p class="text-danger"
+                      *ngIf="register.controls['fullname'].errors?.['minlength']"
+                    >
+                      La longitud debe ser mayor de 3 caracteres
+                    </p>
+                  </div>
+                </div>
+
+                <div class="field padding-bottom--24">
+                  <label for="email" class="form-label">Email </label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email"
+                    placeholder="tu@example.com"
+                    [ngClass]="{
+                      'is-invalid':
+                        register.controls['email'].touched &&
+                        register.controls['email'].invalid,
+                      'is-valid': register.controls['email'].valid
+                    }"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      register.controls['email'].touched &&
+                      register.controls['email'].invalid
+                    "
+                  >
+                    <p class="text-danger" *ngIf="register.controls['email'].errors?.['required']">
+                      Ingrese su correo electrónico
+                    </p>
+                    <p class="text-danger" *ngIf="register.controls['email'].errors?.['email']">
+                      Su correo electrónico no es válido
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row d-flex gap-1 justify-content-between">
+                  <div class="field padding-bottom--24 col-sm-6">
+                    <label for="newPassword" class="form-label">Contraseña</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      formControlName="password"
+                      placeholder=""
+                      value=""
+                      required=""
+                      [ngClass]="{
+                        'is-invalid':
+                          register.controls['password'].touched &&
+                          register.controls['password'].invalid,
+                        'is-valid': register.controls['password'].valid
+                      }"
+                    />
+                    <div
+                      class="invalid-feedback"
+                      *ngIf="
+                        register.controls['password'].touched &&
+                        register.controls['password'].invalid
+                      "
+                    >
+                      <p class="text-danger"
+                        *ngIf="register.controls['password'].errors?.['required']"
+                      >
+                        Ingrese una contraseña
+                      </p>
+                      <p class="text-danger"
+                        *ngIf="register.controls['password'].errors?.['minlength'] || register.controls['password'].errors?.['pattern']"
+                      >
+                        Su contraseña insegura
+                      </p>
                     </div>
                   </div>
-                  <input type="password" name="password">
+  
+                  <div class="field padding-bottom--24 col-sm-5">
+                    <label for="confirmPassword" class="form-label"
+                      >Confirmar contraseña</label
+                    >
+                    <input
+                      type="password"
+                      class="form-control"
+                      formControlName="confirmPassword"
+                      placeholder=""
+                      value=""
+                      required=""
+                      [ngClass]="{
+                        'is-invalid':
+                          register.controls['confirmPassword'].touched &&
+                          register.controls['confirmPassword'].invalid,
+                        'is-valid': register.controls['confirmPassword'].valid
+                      }"
+                    />
+                    <div
+                      class="invalid-feedback"
+                      *ngIf="
+                        register.controls['confirmPassword'].touched &&
+                        register.controls['confirmPassword'].invalid
+                      "
+                    >
+                      <p class="text-danger"
+                        *ngIf="register.controls['confirmPassword'].errors?.['required']"
+                      >
+                        Confirme su contraseña
+                      </p>
+                      <p class="text-danger"
+                        *ngIf="register.controls['confirmPassword'].errors?.['mustMatch']"
+                      >
+                        No coincide su contraseña
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
-                  <label for="checkbox">
-                    <input type="checkbox" name="checkbox"> Stay signed in for a week
-                  </label>
+
+                <div class="form-check d-flex justify-content-around form-switch align-items-center padding-bottom--24">
+                  <label class="form-label">Estudiante</label>
+                  <input
+                    id="rol"
+                    type="checkbox"
+                    class="form-check-input ms-1 w-25"
+                    formControlName="rol"
+                    value="true"
+                  />
+                  <label class="form-label">Profesor </label>
                 </div>
-                <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Continue">
+
+                <div class="field padding-bottom--24 ">
+                  <input
+                    class="bg-primary text-white"
+                    type="submit"
+                    name="submit"
+                    [disabled]="!register.valid"
+                    value="Registrarse"
+                  />
                 </div>
-                <div class="field">
-                  <a class="ssolink" href="#">Use single sign-on (Google) instead</a>
-                </div>
+                <!-- <div class="field">
+                  <a class="ssolink" href="#"
+                    >Use single sign-on (Google) instead</a
+                  >
+                </div> -->
               </form>
             </div>
           </div>
           <div class="footer-link padding-top--24">
-            <span>Don't have an account? <a href="">Sign up</a></span>
-            <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+            <span>Ya tienes una cuenta? <a [routerLink]="['/login']" >Inicia sesión</a></span>
+            <div
+              class="listing padding-top--24 padding-bottom--24 flex-flex center-center"
+            >
               <span><a href="#">© Stackfindover</a></span>
               <span><a href="#">Contact</a></span>
               <span><a href="#">Privacy & terms</a></span>
