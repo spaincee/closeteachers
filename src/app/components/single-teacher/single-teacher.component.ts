@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/interfaces/user.interface';
-import { UsersService } from 'src/app/services/users.service';
+import { PublicService } from 'src/app/services/public.service';
 
 @Component({
   selector: 'app-single-teacher',
@@ -12,12 +12,12 @@ export class SingleTeacherComponent {
 
   user!: User | any;
 
-  constructor(private usersServices: UsersService,private activatedRoute: ActivatedRoute) { }
+  constructor(private publicServices: PublicService,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async (params: any) => {
       let _id: string = (params.userid);
-      let response: any = await this.usersServices.getById(_id);
+      let response: any = await this.publicServices.getById(_id);
       this.user = response;
     })
   }
@@ -25,8 +25,8 @@ export class SingleTeacherComponent {
   async deleteUser(pId: string | undefined): Promise<void> {
     if (pId !== undefined) {
       try {
-        let response = await this.usersServices.delete(pId);
-        if (response._id ) {
+        let response = await this.publicServices.delete(pId);
+        if (response.id_user) {
           alert('El Usuario ' + response.fullname + ' ' + response.last_name + ' ha sido eliminado Satisfactoriamente');
           console.log(response);
         } else {

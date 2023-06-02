@@ -6,21 +6,15 @@ import { User } from '../interfaces/user.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class PublicService {
 
-  // baseUrl: string = 'https://peticiones.online/api/users/';
   baseUrl: string = 'https://api-teacher-app.up.railway.app/api/public/teachers';
   constructor(private httpClient: HttpClient) { }
 
-  //Este es el bloque nuevo
+  
   getAll(): Promise<any> {
     return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}`))
   }
-
-  
-  // getAll(pPage: number = 1): Promise<any> {
-  //   return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}?page=${pPage}`))
-  // }
 
   getById(pId: string): Promise<any> {
     return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}${pId}`))
@@ -31,7 +25,7 @@ export class UsersService {
   }
 
   update(pUser: User): Promise<User> {
-    return lastValueFrom(this.httpClient.put<User>(`${this.baseUrl}${pUser.id}`, pUser))
+    return lastValueFrom(this.httpClient.put<User>(`${this.baseUrl}${pUser.id_user}`, pUser))
   }
 
   delete(pId: string): Promise<any> {

@@ -9,8 +9,8 @@
     </div>
     
   <div class="d-flex justify-content-between">
-    <button [routerLink]="['/user', myUser._id]" class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
-    <button [routerLink]="['/updateuser', myUser._id]" class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i></button>
-    <button class="btn btn-danger" (click)="deleteUser(myUser._id)"><i class="fa-solid fa-trash"></i></button> 
+    <button [routerLink]="['/user', myUser.id_user]" class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
+    <button [routerLink]="['/updateuser', myUser.id_user]" class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i></button>
+    <button class="btn btn-danger" (click)="deleteUser()"><i class="fa-solid fa-trash"></i></button> 
   </div>
 </div>

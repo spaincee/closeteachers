@@ -10,14 +10,17 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   { path: "", pathMatch: 'full', redirectTo: 'home' },
   { path: "home", component: TeacherListComponent },
-  { path: "dashboard", component: DashboardComponent },
-  { path: "user/:userid", component: SingleTeacherComponent },
-  { path: "new", component: UserFormComponent },
-  { path: "updateuser/:userid", component: UserFormComponent },
 
   { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
 
-  { path: "register", component: RegisterComponent }
+  { path: "dashboard", component: DashboardComponent },
+
+  { path: "user/:userid", component: SingleTeacherComponent },
+  { path: "new", component: UserFormComponent },
+  { path: "updateuser/:userid", component: UserFormComponent }
+
+  
 
 
   // Router

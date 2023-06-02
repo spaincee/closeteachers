@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user.interface';
-import { UsersService } from 'src/app/services/users.service';
+import { PublicService } from 'src/app/services/public.service';
 
 @Component({
   selector: 'app-user-list',
@@ -13,7 +13,7 @@ export class TeacherListComponent implements OnInit {
   // currentPage: number = 1;
   // totalPages: number = 1;
 
-  constructor(private usersService: UsersService) {}
+  constructor(private publicService: PublicService) {}
 
   ngOnInit(): void {
     this.gotoPage();
@@ -21,7 +21,7 @@ export class TeacherListComponent implements OnInit {
 
   async gotoPage(): Promise<void> {
     try {
-      let response = await this.usersService.getAll()
+      let response = await this.publicService.getAll()
       console.log(response);
       this.arrUsers = response.teachers;
       console.log(this.arrUsers);
