@@ -6,10 +6,11 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   { path: "", pathMatch: 'full', redirectTo: 'home' },
-  { path: "home", component: TeacherListComponent },
+  { path: "home", component: HomeComponent },
 
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },

@@ -3,11 +3,11 @@ import { User } from 'src/app/interfaces/user.interface';
 import { PublicService } from 'src/app/services/public.service';
 
 @Component({
-  selector: 'app-teacher-list',
-  templateUrl: './teacher-list.component.html',
-  styleUrls: ['./teacher-list.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class TeacherListComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   arrUsers: User[] = [];
   // currentPage: number = 1;
@@ -30,4 +30,5 @@ export class TeacherListComponent implements OnInit {
       console.log(error);
     }
   }
+  
 }
