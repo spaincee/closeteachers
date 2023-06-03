@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { User } from '../interfaces/user.interface';
+import { User } from '../../interfaces/user.interface';
 import Swal from 'sweetalert2';
 
 @Component({

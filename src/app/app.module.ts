@@ -12,8 +12,8 @@ import { SingleTeacherComponent } from './components/single-teacher/single-teach
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
