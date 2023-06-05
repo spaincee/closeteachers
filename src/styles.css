@@ -22,3 +22,17 @@
 .alert p {
   margin: 0 !important;
 }
+
+.img-icono{
+  width: 25px;
+  height: 25px;
+}
+
+.model-img{
+  width: 100px;
+  height: 100px;
+}
+
+td i:hover {
+  cursor: pointer;
+}

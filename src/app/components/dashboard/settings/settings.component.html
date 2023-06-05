@@ -1,0 +1,360 @@
+<nav
+  style="
+    --bs-breadcrumb-divider: url(
+      &#34;data:image/svg + xml,
+      %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
+    );
+  "
+  aria-label="breadcrumb"
+>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#"><i class="fa-solid fa-house fs-5"></i></a>
+    </li>
+    <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+    <li class="breadcrumb-item active" aria-current="page">Configuración</li>
+  </ol>
+</nav>
+<!-- ------------------------- Sección de datos generales ------------------------------------------------->
+
+<div class="rounded-4 bg-light p-3">
+  <div class="">
+    <h4 class="mb-3">Datos generales</h4>
+    <form class="needs-validation" novalidate="">
+      <div class="row g-5">
+        <!-- seccion de imágen de perfil ----------------------------------------------->
+        <div
+          class="col-sm-2 d-flex gap-3 flex-column justify-content-start align-items-center"
+        >
+        <div class="position-relative">
+            <img
+            class="w-100 rounded-circle mt-2"
+            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+            alt=""
+          />
+          <div class="position-absolute top-0 start-0">
+            <span class="btn p-0 opacity-50" (click)="toggleInputImage()"><i class="fa-solid fa-camera-rotate fs-2 text-secondary"></i></span>
+          </div>
+        </div>
+          
+          <!-- <span class="btn btn-dark rounded-pill">Cambiar imágen</span> -->
+          <span class="btn btn-dark rounded-pill" (click)="toggleChangePassword()">Cambiar contraseña</span>
+        </div>
+        <!-- seccion de formulario general ----------------------------------------------->
+        <div class="row g-3 col-sm-10">
+          <div class="col-sm-6">
+            <label for="firstName" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              placeholder=""
+              value=""
+              required=""
+            />
+            <div class="invalid-feedback">Su nombre es requerido.</div>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="lastName" class="form-label">Apellidos</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              placeholder=""
+              value=""
+              required=""
+            />
+            <div class="invalid-feedback">Sus Apellidos son requeridos.</div>
+          </div>
+
+          <div class="col-sm-4">
+            <label for="username" class="form-label">Username</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text"
+                ><i class="fa-solid fa-at fs-5 text-dark"></i
+              ></span>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Username"
+                required=""
+              />
+              <div class="invalid-feedback">
+                Su nick de usuario es requerido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-8">
+            <label for="email" class="form-label">Email</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text"
+                ><i class="fa-regular fa-envelope fs-4 text-dark"></i
+              ></span>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="you@example.com"
+              />
+              <div class="invalid-feedback">
+                Por favor introduzca un email válido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <label for="phone" class="form-label"
+              >Teléfono<span class="text-body-secondary"
+                >(Optional)</span
+              ></label
+            >
+            <div class="input-group has-validation">
+              <span class="input-group-text"
+                ><i class="fa-solid fa-phone fs-4 text-dark"></i
+              ></span>
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                placeholder=""
+              />
+              <div class="invalid-feedback">
+                Por favor introduzca un número de teléfono válido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12" *ngIf="changeImage">
+            <label for="image" class="form-label">Imágen de perfil</label>
+            <input type="text" class="form-control" id="image" placeholder="" />
+          </div>
+          <!-- --------Sección de gestión de contraseña --------------------------------------------------->
+          <div class="border border-opacity-50 p-3 rounded-2 col-sm-12 row g-3" *ngIf="changePassword">
+            <div class="col-sm-3">
+              <label for="old-pass" class="form-label"
+                >Contraseña antigua</label
+              >
+              <input
+                type="{{ passwordVisible ? 'text' : 'password' }}"
+                class="form-control"
+                id="old-pass"
+                placeholder=""
+              />
+              <div class="invalid-feedback">
+                La contraseña antigua no coincide.
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <label for="new-pass" class="form-label">Contraseña nueva</label>
+              <input
+                type="{{ passwordVisible ? 'text' : 'password' }}"
+                class="form-control"
+                id="new-pass"
+                placeholder=""
+              />
+              <div class="invalid-feedback">
+                La contraseña no cumple los requisitos
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <label for="confirm-pass" class="form-label"
+                >Confirmar contraseña</label
+              >
+              <input
+                type="{{ passwordVisible ? 'text' : 'password' }}"
+                class="form-control"
+                id="confirm-pass"
+                placeholder=""
+              />
+              <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+            </div>
+
+            <div class="col-sm-3 d-flex align-items-end">
+              <span class="btn btn-dark rounded-pill">Actualizar</span>
+            </div>
+
+            <div class="row py-3 px-4">
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckChecked"
+                  (click)="togglePasswordVisibility()"
+                />
+                <label class="form-check-label" for="flexSwitchCheckChecked"
+                  >Mostrar contraseñas</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="mt-5" />
+      <!-- ------------------------- Sección de datos personales ------------------------------------------------->
+      <h4 class="mb-3 mt-0">Datos particulares</h4>
+      <div class="row g-3">
+        <div class="col-12">
+          <label for="address2" class="form-label"
+            >Address 2
+            <span class="text-body-secondary">(Optional)</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="address2"
+            placeholder="Apartment or suite"
+          />
+        </div>
+
+        <div class="col-md-5">
+          <label for="country" class="form-label">Country</label>
+          <select class="form-select" id="country" required="">
+            <option value="">Choose...</option>
+            <option>United States</option>
+          </select>
+          <div class="invalid-feedback">Please select a valid country.</div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="state" class="form-label">State</label>
+          <select class="form-select" id="state" required="">
+            <option value="">Choose...</option>
+            <option>California</option>
+          </select>
+          <div class="invalid-feedback">Please provide a valid state.</div>
+        </div>
+
+        <div class="col-md-3">
+          <label for="zip" class="form-label">Zip</label>
+          <input
+            type="text"
+            class="form-control"
+            id="zip"
+            placeholder=""
+            required=""
+          />
+          <div class="invalid-feedback">Zip code required.</div>
+        </div>
+      </div>
+
+      <hr class="my-4" />
+
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="same-address" />
+        <label class="form-check-label" for="same-address"
+          >Shipping address is the same as my billing address</label
+        >
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="save-info" />
+        <label class="form-check-label" for="save-info"
+          >Save this information for next time</label
+        >
+      </div>
+
+      <hr class="my-4" />
+
+      <h4 class="mb-3">Payment</h4>
+
+      <div class="my-3">
+        <div class="form-check">
+          <input
+            id="credit"
+            name="paymentMethod"
+            type="radio"
+            class="form-check-input"
+            checked=""
+            required=""
+          />
+          <label class="form-check-label" for="credit">Credit card</label>
+        </div>
+        <div class="form-check">
+          <input
+            id="debit"
+            name="paymentMethod"
+            type="radio"
+            class="form-check-input"
+            required=""
+          />
+          <label class="form-check-label" for="debit">Debit card</label>
+        </div>
+        <div class="form-check">
+          <input
+            id="paypal"
+            name="paymentMethod"
+            type="radio"
+            class="form-check-input"
+            required=""
+          />
+          <label class="form-check-label" for="paypal">PayPal</label>
+        </div>
+      </div>
+
+      <div class="row gy-3">
+        <div class="col-md-6">
+          <label for="cc-name" class="form-label">Name on card</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cc-name"
+            placeholder=""
+            required=""
+          />
+          <small class="text-body-secondary"
+            >Full name as displayed on card</small
+          >
+          <div class="invalid-feedback">Name on card is required</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="cc-number" class="form-label">Credit card number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cc-number"
+            placeholder=""
+            required=""
+          />
+          <div class="invalid-feedback">Credit card number is required</div>
+        </div>
+
+        <div class="col-md-3">
+          <label for="cc-expiration" class="form-label">Expiration</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cc-expiration"
+            placeholder=""
+            required=""
+          />
+          <div class="invalid-feedback">Expiration date required</div>
+        </div>
+
+        <div class="col-md-3">
+          <label for="cc-cvv" class="form-label">CVV</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cc-cvv"
+            placeholder=""
+            required=""
+          />
+          <div class="invalid-feedback">Security code required</div>
+        </div>
+      </div>
+
+      <hr class="my-4" />
+
+      <button class="w-100 btn btn-primary btn-lg" type="submit">
+        Continue to checkout
+      </button>
+    </form>
+  </div>
+</div>

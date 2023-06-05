@@ -18,6 +18,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MapComponent } from './components/map/map.component';
 import { HomeComponent } from './components/home/home.component';
+import { ProfileComponent } from './components/dashboard/profile/profile.component';
+import { MyteachersComponent } from './components/dashboard/myteachers/myteachers.component';
+import { MessagesComponent } from './components/dashboard/messages/messages.component';
+import { MystudentsComponent } from './components/dashboard/mystudents/mystudents.component';
+import { SettingsComponent } from './components/dashboard/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,12 @@ import { HomeComponent } from './components/home/home.component';
     HeaderComponent,
     FooterComponent,
     MapComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent,
+    MyteachersComponent,
+    MessagesComponent,
+    MystudentsComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

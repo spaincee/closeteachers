@@ -8,11 +8,11 @@ import { User } from '../interfaces/user.interface';
 })
 export class AdminService {
 
-  baseUrl: string = 'https://api-teacher-app.up.railway.app/api/admin';
+  baseUrl: string = 'https://api-teacher-app.up.railway.app/api/admin/dashboard';
 
   constructor(private httpClient: HttpClient) { }
 
-
+// Actualizar cuando se pongan todas las rutas desde un DASHBOARD
   getOneAdmin(id: number): Promise<User> {
     return lastValueFrom(this.httpClient.get<User>(`${this.baseUrl}/admins/${id}`))
   }
