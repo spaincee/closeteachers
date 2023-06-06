@@ -23,6 +23,7 @@ import { MyteachersComponent } from './components/dashboard/myteachers/myteacher
 import { MessagesComponent } from './components/dashboard/messages/messages.component';
 import { MystudentsComponent } from './components/dashboard/mystudents/mystudents.component';
 import { SettingsComponent } from './components/dashboard/settings/settings.component';
+import { UserslistsComponent } from './components/dashboard/userslists/userslists.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SettingsComponent } from './components/dashboard/settings/settings.comp
     MyteachersComponent,
     MessagesComponent,
     MystudentsComponent,
-    SettingsComponent
+    SettingsComponent,
+    UserslistsComponent
   ],
   imports: [
     BrowserModule,

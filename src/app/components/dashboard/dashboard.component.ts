@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  rol: string = 'profesor';
+  //rol: string = 'administrador';
+  //rol: string = 'profesor';
+  rol: string = 'alumno';
 }

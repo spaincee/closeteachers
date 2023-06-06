@@ -12,6 +12,7 @@ import { MyteachersComponent } from './components/dashboard/myteachers/myteacher
 import { MessagesComponent } from './components/dashboard/messages/messages.component';
 import { MystudentsComponent } from './components/dashboard/mystudents/mystudents.component';
 import { SettingsComponent } from './components/dashboard/settings/settings.component';
+import { UserslistsComponent } from './components/dashboard/userslists/userslists.component';
 
 const routes: Routes = [
   { path: "", pathMatch: 'full', redirectTo: 'home' },
@@ -26,6 +27,7 @@ const routes: Routes = [
     { path: "mystudents", component: MystudentsComponent },
     { path: "messages", component: MessagesComponent },
     { path: "settings", component: SettingsComponent },
+    { path: "lists", component: UserslistsComponent },
   ] },
 
   { path: "user/:userid", component: SingleTeacherComponent },

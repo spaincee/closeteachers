@@ -12,7 +12,7 @@ export class SettingsComponent {
   changeImage: boolean = false;
   addDescription: boolean = false;
   geolocation: boolean = false;
-  rol: string = 'profesor';
+  rol: string = 'alumno';
 
   togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
