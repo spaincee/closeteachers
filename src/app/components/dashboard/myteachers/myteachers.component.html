@@ -1,0 +1,194 @@
+<nav
+  style="
+    --bs-breadcrumb-divider: url(
+      &#34;data:image/svg + xml,
+      %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
+    );
+  "
+  aria-label="breadcrumb"
+>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#"><i class="fa-solid fa-house fs-5"></i></a>
+    </li>
+    <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+    <li class="breadcrumb-item active" aria-current="page">Mis Profesores</li>
+  </ol>
+</nav>
+
+<!-- ---------------------     Sección de tabla de profesores ----------------------------------------------->
+<div class="rounded-4 bg-light p-3">
+  <div class="table-responsive small">
+    <table class="table align-middle table-striped table-hover table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Materias</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Experiencia</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <img
+              class="img-icono rounded-circle"
+              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+              alt=""
+            />
+          </td>
+          <td>Yosuani Borges Gonzalez</td>
+          <td>@yoshua</td>
+          <td>yborges@gmail.com</td>
+          <td>+52 124 0000</td>
+          <td>Matemática, Javascript</td>
+          <td>$ 28.99</td>
+          <td>5 años</td>
+          <td>
+            <span class="p-1 bg-primary rounded-2 text-white">Pendiente...</span>
+          </td>
+          <td class="d-flex gap-4">
+            <i
+              class="fa-solid fa-eye fs-4 text-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#modal"
+            ></i>
+            <i
+              class="fa-regular fa-comments fs-4 text-success"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            ></i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img
+              class="img-icono rounded-circle"
+              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+              alt=""
+            />
+          </td>
+          <td>Yosuani Borges Gonzalez</td>
+          <td>@yoshua</td>
+          <td>yborges@gmail.com</td>
+          <td>+52 124 0000</td>
+          <td>Matemática, Javascript</td>
+          <td>$ 28.99</td>
+          <td>5 años</td>
+          <td>
+            <span class="p-1 bg-success rounded-2 text-white">Contratado</span>
+          </td>
+          <td class="d-flex gap-4">
+            <i class="fa-solid fa-eye fs-4 text-primary"></i>
+            <i class="fa-regular fa-comments fs-4 text-success"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal information -->
+
+<div
+  class="modal fade"
+  id="modal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Datos personales</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body px-4">
+        <div class="d-flex gap-3">
+          <img
+            class="model-img rounded-circle"
+            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+            alt=""
+          />
+          <div class="d-flex flex-column mt-2">
+            <h3 class="weight-500 fs-3 mb-0">Yosuani Borges</h3>
+            <span class="fs-5">@username</span>
+          </div>
+        </div>
+        <div class="d-flex flex-column gap-3 mt-5">
+          <div class="d-flex align-items-center gap-4 mb-3">
+            <i class="fa-solid fa-envelope fs-4"></i>
+            <p class="fs-5 mb-0">yborges@gmail.com</p>
+          </div>
+          <div class="d-flex align-items-center gap-4 mb-3">
+            <i class="fa-solid fa-phone fs-4"></i>
+            <p class="fs-5 mb-0">+52 646 124 0000</p>
+          </div>
+          <div class="d-flex align-items-center gap-4 mb-3">
+            <i class="fa-solid fa-map-location-dot fs-4"></i>
+            <p class="fs-5 mb-0">Ave. Independencia No. 1234 Colonia</p>
+          </div>
+          <div class="d-flex align-items-start gap-4 mb-3">
+            <i class="fa-solid fa-file fs-4"></i>
+            <p class="fs-5 mb-0">
+              Aquí encontrarás todas las herramientas y funciones necesarias
+              para tener el control total de tus actividades. Nuestro objetivo
+              es brindarte una experiencia fluida y eficiente mientras exploras
+              y gestionas tus datos. En esta vista podra manejar un listado con
+              todos los profesor que establecido contacto y podra intercambiar
+              mensajes con cada uno de ello. También podras tener la posibilidad
+              de modificar tus datos personales.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal comment -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Evaluación y comentario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Evaluación</label>
+              <input type="number" class="form-control" id="recipient-name">
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Comentario:</label>
+              <textarea class="form-control" id="message-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>

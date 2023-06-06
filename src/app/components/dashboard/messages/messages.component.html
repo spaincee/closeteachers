@@ -1,0 +1,97 @@
+<nav
+  style="
+    --bs-breadcrumb-divider: url(
+      &#34;data:image/svg + xml,
+      %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
+    );
+  "
+  aria-label="breadcrumb"
+>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#"><i class="fa-solid fa-house fs-5"></i></a>
+    </li>
+    <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+    <li class="breadcrumb-item active" aria-current="page">Mensajes</li>
+  </ol>
+</nav>
+<!-- ------------------------- Sección de mis contactos ------------------------------------------------->
+<div class="p-3 mt-4 row gap-5">
+  <div class="list-people shadow-lg p-3 col-md-3 col-12 rounded-4">
+    <input type="text" class="mb-3 form-control" placeholder="Search" />
+    <div class="icon-message d-flex align-items-center gap-3 mb-3 px-3">
+      <img
+        class="list-chat-img rounded-circle shadow"
+        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+        alt=""
+      />
+      <div class="d-flex flex-column mt-2">
+        <p class="weight-500 fs-5 mb-0">Yosuani Borges</p>
+        <span class="fs-6 text-muted">@username</span>
+      </div>
+    </div>
+    <div class="icon-message d-flex align-items-center gap-3 mb-3 px-3">
+      <img
+        class="list-chat-img rounded-circle shadow"
+        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
+        alt=""
+      />
+      <div class="d-flex flex-column mt-2">
+        <p class="weight-500 fs-5 mb-0">Anna Garcia</p>
+        <span class="fs-6 text-muted">@username</span>
+      </div>
+    </div>
+  </div>
+
+<!-- ------------------------- Sección del chat ------------------------------------------------->
+
+  <div class="card shadow-lg p-3 col-md-8 col-12 list-people rounded-4">
+    <div class="card-header">
+      <div class="d-flex align-items-center gap-3 px-3">
+        <img
+          class="list-chat-img rounded-circle shadow"
+          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
+          alt=""
+        />
+        <div class="mt-2">
+          <p class="weight-500 fs-5 mb-0">Anna Garcia</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-body overflow-auto">
+        <ul class="list-unstyled">
+            <li class="mb-5">
+                <div class="d-flex flex-column align-items-start">
+                    <div class="d-flex gap-3 ms-3">
+                        <p class="fs-6 mb-0"><strong>Anna Garcia</strong></p>
+                        <span class="text-muted">10:50 AM, 3 días atrás</span>
+                    </div>
+                    <div class="w-75 bg-light p-3 rounded-3">
+                        <span>Este es mi primer mensaje listo para hacer prueba</span>
+                    </div>
+                </div>
+            </li>
+            <li class="mb-5">
+                <div class="d-flex flex-column align-items-end">
+                    <div class="d-flex gap-3 me-3">
+                        <p class="fs-6 mb-0"><strong>Yosuani Borges</strong></p>
+                        <span class="text-muted">10:00 AM, 3 días atrás</span>
+                    </div>
+                    <div class="w-75 bg-middle p-3 rounded-4">
+                        <span>Este es mi primer mensaje listo para hacer prueba de como seria este mensaje si fuera bastante largo como un parrafo</span>
+                    </div>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="card-footer d-flex gap-3 align-items-center">
+      <input
+        type="text"
+        class="form-control rounded-pill"
+        placeholder="Escriba un mensaje..."
+      />
+      <i class="fa-solid fa-paper-plane fs-4"></i>
+    </div>
+  </div>
+</div>

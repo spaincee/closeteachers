@@ -1,0 +1,440 @@
+<nav
+  style="
+    --bs-breadcrumb-divider: url(
+      &#34;data:image/svg + xml,
+      %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
+    );
+  "
+  aria-label="breadcrumb"
+>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#"><i class="fa-solid fa-house fs-5"></i></a>
+    </li>
+    <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+    <li class="breadcrumb-item active" aria-current="page">Configuración</li>
+  </ol>
+</nav>
+<!-- ------------------------- Sección de datos generales ------------------------------------------------->
+
+<div class="rounded-4 bg-light p-3">
+  <div class="">
+    <h4 class="mb-3">Datos generales</h4>
+    <form class="needs-validation" novalidate="">
+      <div class="row g-5">
+        <!-- seccion de imágen de perfil ----------------------------------------------->
+        <div
+          class="col-sm-2 d-flex gap-3 flex-column justify-content-start align-items-center"
+        >
+          <div class="position-relative">
+            <img
+              class="w-100 rounded-circle mt-2"
+              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+              alt=""
+            />
+            <div class="position-absolute top-0 start-0">
+              <span class="btn p-0 opacity-50" (click)="toggleInputImage()"
+                ><i class="fa-solid fa-camera-rotate fs-2 text-secondary"></i
+              ></span>
+            </div>
+          </div>
+          <span
+            class="btn btn-dark rounded-pill"
+            (click)="toggleChangePassword()"
+            >Cambiar contraseña</span
+          >
+        </div>
+        <!-- seccion de formulario general ----------------------------------------------->
+        <div class="row g-3 col-sm-10">
+          <div class="col-sm-6">
+            <label for="firstName" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              placeholder=""
+              value=""
+              required=""
+            />
+            <div class="invalid-feedback">Su nombre es requerido.</div>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="lastName" class="form-label">Apellidos</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              placeholder=""
+              value=""
+              required=""
+            />
+            <div class="invalid-feedback">Sus Apellidos son requeridos.</div>
+          </div>
+
+          <div class="col-sm-4">
+            <label for="username" class="form-label">Username</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text"
+                ><i class="fa-solid fa-at fs-5 text-dark"></i
+              ></span>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Username"
+                required=""
+              />
+              <div class="invalid-feedback">
+                Su nick de usuario es requerido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-8">
+            <label for="email" class="form-label">Email</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text"
+                ><i class="fa-regular fa-envelope fs-4 text-dark"></i
+              ></span>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="you@example.com"
+              />
+              <div class="invalid-feedback">
+                Por favor introduzca un email válido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <label for="phone" class="form-label"
+              >Teléfono<span class="text-body-secondary"
+                >(Optional)</span
+              ></label
+            >
+            <div class="input-group has-validation">
+              <span class="input-group-text"
+                ><i class="fa-solid fa-phone fs-4 text-dark"></i
+              ></span>
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                placeholder=""
+              />
+              <div class="invalid-feedback">
+                Por favor introduzca un número de teléfono válido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12" *ngIf="changeImage">
+            <label for="image" class="form-label">Imágen de perfil</label>
+            <input type="text" class="form-control" id="image" placeholder="" />
+          </div>
+          <!-- --------Sección de gestión de contraseña --------------------------------------------------->
+          <div
+            class="border border-opacity-50 p-3 rounded-2 col-sm-12 row g-3"
+            *ngIf="changePassword"
+          >
+            <div class="col-sm-3">
+              <label for="old-pass" class="form-label"
+                >Contraseña antigua</label
+              >
+              <input
+                type="{{ passwordVisible ? 'text' : 'password' }}"
+                class="form-control"
+                id="old-pass"
+                placeholder=""
+              />
+              <div class="invalid-feedback">
+                La contraseña antigua no coincide.
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <label for="new-pass" class="form-label">Contraseña nueva</label>
+              <input
+                type="{{ passwordVisible ? 'text' : 'password' }}"
+                class="form-control"
+                id="new-pass"
+                placeholder=""
+              />
+              <div class="invalid-feedback">
+                La contraseña no cumple los requisitos
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <label for="confirm-pass" class="form-label"
+                >Confirmar contraseña</label
+              >
+              <input
+                type="{{ passwordVisible ? 'text' : 'password' }}"
+                class="form-control"
+                id="confirm-pass"
+                placeholder=""
+              />
+              <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+            </div>
+
+            <div class="col-sm-3 d-flex align-items-end">
+              <span class="btn btn-dark rounded-pill">Actualizar</span>
+            </div>
+
+            <div class="row py-3 px-4">
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckChecked"
+                  (click)="togglePasswordVisibility()"
+                />
+                <label class="form-check-label" for="flexSwitchCheckChecked"
+                  >Mostrar contraseñas</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!addDescription">
+            <span class="btn text-primary fs-5" (click)="toggleDescription()"
+              ><i class="fa-solid fa-plus fs-5 me-2"></i>Añadir
+              descripción</span
+            >
+          </div>
+
+          <div class="col-12" *ngIf="addDescription">
+            <label for="address2" class="form-label"
+              >Descripción
+              <span class="text-body-secondary">(Optional)</span></label
+            >
+            <textarea
+              class="form-control"
+              id="description"
+              rows="4"
+              placeholder="Apartment or suite"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <hr class="mt-5" />
+      <!-- ------------------------- Sección de datos particulares ------------------------------------------------->
+      <div class="teacher-section" *ngIf="rol === 'profesor'">
+        <h4 class="mb-3 mt-0">Datos particulares</h4>
+
+         <div class="row g-5">
+        <div class="col-sm-9">
+            <div class="row align-items-start">
+                <div class="col-sm-7 ">
+                    <label class="form-label">Localización</label>
+                    <div class="row">
+                        <div class="form-floating mb-3 col-sm-6">
+                            <input type="number" [disabled]="geolocation" class="form-control w-100" id="floatingInput" placeholder="Latitud">
+                            <label class="ms-3" for="floatingInput">Latitud</label>
+                        </div>
+    
+                        <div class="form-floating mb-3 col-sm-6">
+                            <input type="number" [disabled]="geolocation" class="form-control w-100" id="floatingInput" placeholder="Longitud">
+                            <label class="ms-3" for="floatingInput">Longitud</label>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="geolocation" (click)="useGeo()" />
+                        <label class="form-check-label" for="geolocation">Usar geolocalización</label>
+                    </div>
+                </div>
+    
+                <div class="col-sm-5">
+                    <label for="price" class="form-label">Precio</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-dollar-sign fs-4 text-dark"></i></span>
+                        <input id="price" type="number" class="form-control" placeholder="0.00">
+                    </div>
+
+                    <label for="experience" class="form-label">Experiencia</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-graduation-cap fs-4 text-dark"></i></span>
+                        <input id="experience" type="number" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>
+          <!-- ------------------------- Sección de materias ------------------------------------------------->
+          <hr class="my-4" />
+
+          <div class="row">
+            <div class="col-sm-2"><span class="fs-5 text-dark">Materias: </span></div>
+            <div class="col-sm-10">
+               <div class="d-flex flex-wrap gap-3">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="math" />
+                    <label class="form-check-label" for="math">Matemática</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Español</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Inglés</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Física</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Química</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Algebra</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Javascript</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">React</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Angular</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Python</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Vue</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Bootstrap</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Express</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">HTML5</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">CSS3</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">SASS y SCSS</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Historia</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Calculo 2</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">C#</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Java</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Next.js</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Node.js</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Docker</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Matlab</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" />
+                    <label class="form-check-label" for="save-info">Frances</label>
+                  </div>
+               </div>
+            </div>
+          </div>
+
+          <hr class="my-4" />
+
+          <div class="row g-3">
+            <div class="mb-3 col-sm-4">
+                <label for="title" class="form-label">Titulo de presentación</label>
+                <input type="text" class="form-control" id="title" placeholder="">
+              </div>
+    
+              <div class="mb-3 col-sm-8">
+                <label for="cover" class="form-label">Imágen del cover</label>
+                <input type="text" class="form-control" id="cover" placeholder="">
+              </div>
+          </div>
+          
+          
+          <div class="mb-3 col-sm-12">
+            <label for="brief_description" class="form-label">Breve reseña descriptiva</label>
+            <textarea class="form-control" id="brief_description" rows="3"></textarea>
+          </div>
+          
+
+        </div>
+ <!-- ------------------- Sección del Placeholder de la card ------------------------------------>
+        <div class="col-sm-3 align-items-start">
+          <div class="card shadow-lg p-3">
+            <div
+              class="class teacher-card-cover"
+              style="background-image: url('https://placehold.co/600x400/706c6c/FFF')"
+            ></div>
+            <img
+              class="teacher-card-avatar"
+              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+              alt=""
+            />
+            <div class="card-body">
+              <h5 class="card-title justify-content-center">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <small class="text-muted"
+                  ><span class="placeholder col-6"></span
+                >
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-6"></span></small>
+              </p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <a class="btn btn-primary disabled placeholder col-2"></a>
+              <a class="btn btn-primary disabled placeholder col-2"></a>
+              <a class="btn btn-primary disabled placeholder col-2"></a>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <hr class="my-4" />
+      </div>
+      <button class="w-100 btn btn-primary btn-lg" type="submit">
+        Guardar cambios
+      </button>
+    </form>
+  </div>
+</div>

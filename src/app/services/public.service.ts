@@ -16,6 +16,7 @@ export class PublicService {
     return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}`))
   }
 
+  //Eoliminar estos y poner los filtros publicos
   getById(pId: string): Promise<any> {
     return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}${pId}`))
   }

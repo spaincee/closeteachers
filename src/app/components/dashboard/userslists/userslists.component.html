@@ -1,0 +1,536 @@
+<nav
+  style="
+    --bs-breadcrumb-divider: url(
+      &#34;data:image/svg + xml,
+      %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
+    );
+  "
+  aria-label="breadcrumb"
+>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#"><i class="fa-solid fa-house fs-5"></i></a>
+    </li>
+    <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+    <li class="breadcrumb-item active" aria-current="page">Listados</li>
+  </ol>
+</nav>
+<!-- ------------------------- Sección de listados ------------------------------------------------->
+
+<div class="rounded-4 bg-light p-3">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        id="admins-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#admins-tab-pane"
+        type="button"
+        role="tab"
+        aria-controls="admins-tab-pane"
+        aria-selected="true"
+      >
+        Administradores
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="teachers-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#teachers-tab-pane"
+        type="button"
+        role="tab"
+        aria-controls="teachers-tab-pane"
+        aria-selected="false"
+      >
+        Profesores
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="students-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#students-tab-pane"
+        type="button"
+        role="tab"
+        aria-controls="students-tab-pane"
+        aria-selected="false"
+      >
+        Alumnos
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div
+      class="tab-pane fade show active"
+      id="admins-tab-pane"
+      role="tabpanel"
+      aria-labelledby="admins-tab"
+      tabindex="0"
+    >
+      <div class="table-responsive small mt-4">
+        <table class="table align-middle table-striped table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img
+                  class="img-icono rounded-circle"
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                  alt=""
+                />
+              </td>
+              <td>Yosuani Borges Gonzalez</td>
+              <td>@yoshua</td>
+              <td>yborges@gmail.com</td>
+              <td>
+                <span class="p-1 bg-success rounded-2 text-white">Activo</span>
+              </td>
+              <td class="d-flex gap-4">
+                <i
+                  class="fa-solid fa-eye fs-4 text-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal"
+                ></i>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input h-75"
+                    type="checkbox"
+                    role="switch"
+                    checked
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  class="img-icono rounded-circle"
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                  alt=""
+                />
+              </td>
+              <td>Yosuani Borges Gonzalez</td>
+              <td>@yoshua</td>
+              <td>yborges@gmail.com</td>
+              <td>
+                <span class="p-1 bg-warning rounded-2 text-white"
+                  >Inactivo</span
+                >
+              </td>
+              <td class="d-flex gap-4">
+                <i class="fa-solid fa-eye fs-4 text-primary"></i>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input h-75"
+                    type="checkbox"
+                    role="switch"
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="teachers-tab-pane"
+      role="tabpanel"
+      aria-labelledby="teachers-tab"
+      tabindex="0"
+    >
+      <div class="table-responsive small mt-4">
+        <table class="table align-middle table-striped table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Teléfono</th>
+              <th scope="col">Materias</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Experiencia</th>
+              <th scope="col">% Perfil</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img
+                  class="img-icono rounded-circle"
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                  alt=""
+                />
+              </td>
+              <td>Yosuani Borges Gonzalez</td>
+              <td>@yoshua</td>
+              <td>yborges@gmail.com</td>
+              <td>+52 646 271 9999</td>
+              <td>Matemática, Javascript, Express</td>
+              <td>29.99</td>
+              <td>5 años</td>
+              <td>
+                <div
+                  class="progress"
+                  role="progressbar"
+                  aria-label="Example with label"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  <div class="progress-bar" style="width: 100%">
+                    <span class="mx-auto">100%</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="p-1 bg-success rounded-2 text-white">Activo</span>
+              </td>
+              <td class="d-flex gap-4">
+                <i
+                  class="fa-solid fa-eye fs-4 text-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal"
+                ></i>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input h-75"
+                    type="checkbox"
+                    role="switch"
+                    checked
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  class="img-icono rounded-circle"
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                  alt=""
+                />
+              </td>
+              <td>Yosuani Borges Gonzalez</td>
+              <td>@yoshua</td>
+              <td>yborges@gmail.com</td>
+              <td>+52 646 271 9999</td>
+              <td>Matemática, Javascript, Express</td>
+              <td>29.99</td>
+              <td>5 años</td>
+              <td>
+                <div
+                  class="progress"
+                  role="progressbar"
+                  aria-label="Example with label"
+                  aria-valuenow="50"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  <div class="progress-bar" style="width: 50%">
+                    <span class="mx-auto">50%</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="p-1 bg-warning rounded-2 text-white"
+                  >Inactivo</span
+                >
+              </td>
+              <td class="d-flex gap-4">
+                <i
+                  class="fa-solid fa-eye fs-4 text-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal"
+                ></i>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input h-75"
+                    type="checkbox"
+                    role="switch"
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="students-tab-pane"
+      role="tabpanel"
+      aria-labelledby="students-tab"
+      tabindex="0"
+    >
+      <div class="table-responsive small mt-4">
+        <table class="table align-middle table-striped table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Teléfono</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img
+                  class="img-icono rounded-circle"
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                  alt=""
+                />
+              </td>
+              <td>Yosuani Borges Gonzalez</td>
+              <td>@yoshua</td>
+              <td>yborges@gmail.com</td>
+              <td>+52 646 271 9999</td>
+              <td>
+                <span class="p-1 bg-success rounded-2 text-white">Activo</span>
+              </td>
+              <td class="d-flex gap-4">
+                <i
+                  class="fa-solid fa-eye fs-4 text-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal"
+                ></i>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input h-75"
+                    type="checkbox"
+                    role="switch"
+                    checked
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  class="img-icono rounded-circle"
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                  alt=""
+                />
+              </td>
+              <td>Yosuani Borges Gonzalez</td>
+              <td>@yoshua</td>
+              <td>yborges@gmail.com</td>
+              <td>+52 646 271 9999</td>
+              <td>
+                <span class="p-1 bg-warning rounded-2 text-white"
+                  >Inactivo</span
+                >
+              </td>
+              <td class="d-flex gap-4">
+                <i
+                  class="fa-solid fa-eye fs-4 text-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal"
+                ></i>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input h-75"
+                    type="checkbox"
+                    role="switch"
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <span
+    class="btn text-primary fs-6"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    ><i class="fa-solid fa-plus fs-6 me-2"></i>Añadir nuevo usuario</span
+  >
+</div>
+
+<!-- Modal information -->
+
+<div
+  class="modal fade"
+  id="modal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Datos personales</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body px-4">
+        <div class="d-flex gap-3">
+          <img
+            class="model-img rounded-circle"
+            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+            alt=""
+          />
+          <div class="d-flex flex-column mt-2">
+            <h3 class="weight-500 fs-3 mb-0">Yosuani Borges</h3>
+            <span class="fs-5">@username</span>
+          </div>
+        </div>
+        <div class="d-flex flex-column gap-3 mt-5">
+          <div class="d-flex align-items-center gap-4 mb-3">
+            <i class="fa-solid fa-envelope fs-4"></i>
+            <p class="fs-5 mb-0">yborges@gmail.com</p>
+          </div>
+          <div class="d-flex align-items-center gap-4 mb-3">
+            <i class="fa-solid fa-phone fs-4"></i>
+            <p class="fs-5 mb-0">+52 646 124 0000</p>
+          </div>
+          <div class="d-flex align-items-center gap-4 mb-3">
+            <i class="fa-solid fa-map-location-dot fs-4"></i>
+            <p class="fs-5 mb-0">Ave. Independencia No. 1234 Colonia</p>
+          </div>
+          <div class="d-flex align-items-start gap-4 mb-3">
+            <i class="fa-solid fa-file fs-4"></i>
+            <p class="fs-5 mb-0">
+              Aquí encontrarás todas las herramientas y funciones necesarias
+              para tener el control total de tus actividades. Nuestro objetivo
+              es brindarte una experiencia fluida y eficiente mientras exploras
+              y gestionas tus datos. En esta vista podra manejar un listado con
+              todos los profesor que establecido contacto y podra intercambiar
+              mensajes con cada uno de ello. También podras tener la posibilidad
+              de modificar tus datos personales.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal New user -->
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Insertar nuevo usuario
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row g-3">
+            <div class="mb-3 col-sm-6">
+              <label for="username" class="col-form-label">Username</label>
+              <input type="text" class="form-control" id="username" />
+            </div>
+            <div class="mb-3 col-sm-6">
+              <label for="fullname" class="col-form-label">Nombre completo</label>
+              <input type="text" class="form-control" id="fullname" />
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-sm-6">
+                <label for="email" class="form-label">Email</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text"
+                    ><i class="fa-regular fa-envelope fs-4 text-dark"></i
+                  ></span>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="you@example.com"
+                  />
+                  <div class="invalid-feedback">
+                    Por favor introduzca un email válido.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label for="password" class="form-label">Contraseña</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text"
+                    ><i class="fa-solid fa-key fs-4 text-dark"></i></span>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder=""
+                  />
+                  <div class="invalid-feedback">
+                    Por favor introduzca una contraseña válida.
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="row g-3">
+            <div class="mb-3 col-sm-6">
+              <label for="role" class="col-form-label">Tipo de usuario</label>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                id="role"
+              >
+                <option selected>Seleccione un valor</option>
+                <option value="1">Administrador</option>
+                <option value="2">Profesor</option>
+                <option value="3">Alumno</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary">Insertar usuario</button>
+      </div>
+    </div>
+  </div>
+</div>
