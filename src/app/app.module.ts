@@ -4,19 +4,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import { AppComponent } from './app.component';
-import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
-import { TeacherCardComponent } from './components/teacher-card/teacher-card.component';
-import { SingleTeacherComponent } from './components/single-teacher/single-teacher.component';
-import { UserFormComponent } from './components/user-form/user-form.component';
-import { NotificationsComponent } from './components/notifications/notifications.component';
+import { TeacherListComponent } from './components/home/teacher-list/teacher-list.component';
+import { TeacherCardComponent } from './components/home/teacher-list/teacher-card/teacher-card.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { MapComponent } from './components/map/map.component';
+import { MapComponent } from './components/home/map/map.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { MyteachersComponent } from './components/dashboard/myteachers/myteachers.component';
@@ -30,9 +26,6 @@ import { UserslistsComponent } from './components/dashboard/userslists/userslist
     AppComponent,
     TeacherListComponent,
     TeacherCardComponent,
-    SingleTeacherComponent,
-    UserFormComponent,
-    NotificationsComponent,
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
