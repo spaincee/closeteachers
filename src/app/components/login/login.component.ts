@@ -20,7 +20,9 @@ export class LoginComponent {
         throw new Error('No debe dejar campos vacíos')
 
       let resp = await this.authService.login(data);
-
+      
+      localStorage.setItem('userId', resp.user.id_user);
+      localStorage.setItem('rol', resp.user.rol);
       localStorage.setItem('token', resp.token);
 
       Swal.fire({

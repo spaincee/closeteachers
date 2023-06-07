@@ -13,12 +13,16 @@ export class AdminService {
   constructor(private httpClient: HttpClient) { }
 
 // Actualizar cuando se pongan todas las rutas desde un DASHBOARD
+  getDashboardInfo(): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}`))
+  }
+
   getOneAdmin(id: number): Promise<User> {
     return lastValueFrom(this.httpClient.get<User>(`${this.baseUrl}/admins/${id}`))
   }
 
   getAllAdmin(): Promise<User[]> {
-    return lastValueFrom(this.httpClient.get<User[]>(`${this.baseUrl}/admins/`))
+    return lastValueFrom(this.httpClient.get<User[]>(`${this.baseUrl}/admins`))
   }
 
   getTeachers(): Promise<User[]> {

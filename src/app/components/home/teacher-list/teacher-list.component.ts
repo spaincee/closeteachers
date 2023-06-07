@@ -22,9 +22,7 @@ export class TeacherListComponent implements OnInit {
   async gotoPage(): Promise<void> {
     try {
       let response = await this.publicService.getAll()
-      console.log(response);
       this.arrUsers = response.teachers;
-      console.log(this.arrUsers);
     }
     catch (error) {
       console.log(error);
