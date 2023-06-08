@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { MessagesComponent } from './components/dashboard/messages/messages.comp
 import { MystudentsComponent } from './components/dashboard/mystudents/mystudents.component';
 import { SettingsComponent } from './components/dashboard/settings/settings.component';
 import { UserslistsComponent } from './components/dashboard/userslists/userslists.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,11 @@ import { UserslistsComponent } from './components/dashboard/userslists/userslist
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

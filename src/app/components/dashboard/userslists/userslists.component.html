@@ -43,6 +43,7 @@
         role="tab"
         aria-controls="teachers-tab-pane"
         aria-selected="false"
+        (click)="loadTeachersLists()"
       >
         Profesores
       </button>
@@ -57,11 +58,13 @@
         role="tab"
         aria-controls="students-tab-pane"
         aria-selected="false"
+        (click)="loadStudentsLists()"
       >
         Alumnos
       </button>
     </li>
   </ul>
+
   <div class="tab-content" id="myTabContent">
     <div
       class="tab-pane fade show active"
@@ -71,6 +74,7 @@
       tabindex="0"
     >
       <div class="table-responsive small mt-4">
+        <!----------------- tabla de administradores ------------------------------------------------------------->
         <table class="table align-middle table-striped table-hover table-sm">
           <thead>
             <tr>
@@ -83,59 +87,45 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let admin of adminsList">
               <td>
                 <img
                   class="img-icono rounded-circle"
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                  [src]="
+                    admin.image ? admin.image : './assets/images/no-image.png'
+                  "
                   alt=""
                 />
               </td>
-              <td>Yosuani Borges Gonzalez</td>
-              <td>@yoshua</td>
-              <td>yborges@gmail.com</td>
+              <td>{{ admin.fullname }}</td>
+              <td>{{ admin.username }}</td>
+              <td>{{ admin.email }}</td>
               <td>
-                <span class="p-1 bg-success rounded-2 text-white">Activo</span>
-              </td>
-              <td class="d-flex gap-4">
-                <i
-                  class="fa-solid fa-eye fs-4 text-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modal"
-                ></i>
-                <div class="form-check form-switch">
-                  <input
-                    class="form-check-input h-75"
-                    type="checkbox"
-                    role="switch"
-                    checked
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  class="img-icono rounded-circle"
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                  alt=""
-                />
-              </td>
-              <td>Yosuani Borges Gonzalez</td>
-              <td>@yoshua</td>
-              <td>yborges@gmail.com</td>
-              <td>
-                <span class="p-1 bg-warning rounded-2 text-white"
-                  >Inactivo</span
+                <span
+                  [ngClass]="{
+                    'bg-success': admin.status === 1,
+                    'bg-warning': admin.status !== 1
+                  }"
+                  class="p-1 bg-success rounded-2 text-white"
+                  >{{ admin.status === 1 ? "Activo" : "Inactivo" }}</span
                 >
               </td>
               <td class="d-flex gap-4">
-                <i class="fa-solid fa-eye fs-4 text-primary"></i>
+                <i
+                  data-id="{{ admin.id_user }}"
+                  class="fa-solid fa-eye fs-4 text-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal"
+                  (click)="seeUserInfor(admin.id_user)"
+                ></i>
                 <div class="form-check form-switch">
                   <input
+                    data-id="{{ admin.id_user }}"
                     class="form-check-input h-75"
                     type="checkbox"
                     role="switch"
+                    [checked]="admin.status === 1"
+                    (click)="changeStatus(admin.id_user)"
                   />
                 </div>
               </td>
@@ -152,6 +142,7 @@
       tabindex="0"
     >
       <div class="table-responsive small mt-4">
+        <!-- ------------------------Tabla Profesores---------------------------------------------------------------- -->
         <table class="table align-middle table-striped table-hover table-sm">
           <thead>
             <tr>
@@ -161,30 +152,31 @@
               <th scope="col">Email</th>
               <th scope="col">Teléfono</th>
               <th scope="col">Materias</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Experiencia</th>
-              <th scope="col">% Perfil</th>
               <th scope="col">Estado</th>
-              <th scope="col">Acciones</th>
+              <th scope="col" class="d-flex justify-content-center">
+                Acciones
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let teacher of teachersList">
               <td>
                 <img
                   class="img-icono rounded-circle"
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                  [src]="
+                    teacher.image
+                      ? teacher.image
+                      : './assets/images/no-image.png'
+                  "
                   alt=""
                 />
               </td>
-              <td>Yosuani Borges Gonzalez</td>
-              <td>@yoshua</td>
-              <td>yborges@gmail.com</td>
-              <td>+52 646 271 9999</td>
-              <td>Matemática, Javascript, Express</td>
-              <td>29.99</td>
-              <td>5 años</td>
-              <td>
+              <td>{{ teacher.fullname }}</td>
+              <td>@{{ teacher.username }}</td>
+              <td>{{ teacher.email }}</td>
+              <td>{{ teacher.phone }}</td>
+              <td>{{ teacher.subjects }}</td>
+              <!-- <td>
                 <div
                   class="progress"
                   role="progressbar"
@@ -197,71 +189,44 @@
                     <span class="mx-auto">100%</span>
                   </div>
                 </div>
-              </td>
+              </td> -->
               <td>
-                <span class="p-1 bg-success rounded-2 text-white">Activo</span>
+                <span
+                  [ngClass]="{
+                    'bg-success': teacher.status === 1,
+                    'bg-warning': teacher.status !== 1
+                  }"
+                  class="p-1 bg-success rounded-2 text-white"
+                  >{{ teacher.status === 1 ? "Activo" : "Inactivo" }}</span
+                >
               </td>
-              <td class="d-flex gap-4">
+              <td class="d-flex gap-4 justify-content-between">
                 <i
+                  class="fa-solid fs-4 text-success"
+                  [ngClass]="{
+                    'fa-circle-check': teacher.active === 1,
+                    'text-success': teacher.active === 1,
+                    'fa-ban': teacher.active !== 1,
+                    'text-danger': teacher.active !== 1
+                  }"
+                  (click)="activeTeacher(teacher.id_user)"
+                ></i>
+                <i
+                  data-id="{{ teacher.id_user }}"
                   class="fa-solid fa-eye fs-4 text-primary"
                   data-bs-toggle="modal"
                   data-bs-target="#modal"
+                  (click)="seeUserInfor(teacher.id_user)"
                 ></i>
+
                 <div class="form-check form-switch">
                   <input
+                    data-id="{{ teacher.id_user }}"
                     class="form-check-input h-75"
                     type="checkbox"
                     role="switch"
-                    checked
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  class="img-icono rounded-circle"
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                  alt=""
-                />
-              </td>
-              <td>Yosuani Borges Gonzalez</td>
-              <td>@yoshua</td>
-              <td>yborges@gmail.com</td>
-              <td>+52 646 271 9999</td>
-              <td>Matemática, Javascript, Express</td>
-              <td>29.99</td>
-              <td>5 años</td>
-              <td>
-                <div
-                  class="progress"
-                  role="progressbar"
-                  aria-label="Example with label"
-                  aria-valuenow="50"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  <div class="progress-bar" style="width: 50%">
-                    <span class="mx-auto">50%</span>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <span class="p-1 bg-warning rounded-2 text-white"
-                  >Inactivo</span
-                >
-              </td>
-              <td class="d-flex gap-4">
-                <i
-                  class="fa-solid fa-eye fs-4 text-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modal"
-                ></i>
-                <div class="form-check form-switch">
-                  <input
-                    class="form-check-input h-75"
-                    type="checkbox"
-                    role="switch"
+                    [checked]="teacher.status === 1"
+                    (click)="changeStatusTeacher(teacher.id_user)"
                   />
                 </div>
               </td>
@@ -278,6 +243,7 @@
       tabindex="0"
     >
       <div class="table-responsive small mt-4">
+        <!-- ---------------------- Tabla Estudiantes ---------------------------------------------------------- -->
         <table class="table align-middle table-striped table-hover table-sm">
           <thead>
             <tr>
@@ -291,65 +257,48 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let student of studentsList">
               <td>
                 <img
                   class="img-icono rounded-circle"
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                  [src]="
+                    student.image
+                      ? student.image
+                      : './assets/images/no-image.png'
+                  "
                   alt=""
                 />
               </td>
-              <td>Yosuani Borges Gonzalez</td>
-              <td>@yoshua</td>
-              <td>yborges@gmail.com</td>
-              <td>+52 646 271 9999</td>
+              <td>{{ student.fullname }}</td>
+              <td>@{{ student.username }}</td>
+              <td>{{ student.email }}</td>
+              <td>{{ student.phone ? student.phone : "--" }}</td>
               <td>
-                <span class="p-1 bg-success rounded-2 text-white">Activo</span>
-              </td>
-              <td class="d-flex gap-4">
-                <i
-                  class="fa-solid fa-eye fs-4 text-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modal"
-                ></i>
-                <div class="form-check form-switch">
-                  <input
-                    class="form-check-input h-75"
-                    type="checkbox"
-                    role="switch"
-                    checked
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  class="img-icono rounded-circle"
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                  alt=""
-                />
-              </td>
-              <td>Yosuani Borges Gonzalez</td>
-              <td>@yoshua</td>
-              <td>yborges@gmail.com</td>
-              <td>+52 646 271 9999</td>
-              <td>
-                <span class="p-1 bg-warning rounded-2 text-white"
-                  >Inactivo</span
+                <span
+                  [ngClass]="{
+                    'bg-success': student.status === 1,
+                    'bg-warning': student.status !== 1
+                  }"
+                  class="p-1 bg-success rounded-2 text-white"
+                  >{{ student.status === 1 ? "Activo" : "Inactivo" }}</span
                 >
               </td>
               <td class="d-flex gap-4">
                 <i
+                  data-id="{{ student.id_user }}"
                   class="fa-solid fa-eye fs-4 text-primary"
                   data-bs-toggle="modal"
                   data-bs-target="#modal"
+                  (click)="seeUserInfor(student.id_user)"
                 ></i>
                 <div class="form-check form-switch">
                   <input
+                    data-id="{{ student.id_user }}"
                     class="form-check-input h-75"
                     type="checkbox"
                     role="switch"
+                    [checked]="student.status === 1"
+                    (click)="changeStatusStudent(student.id_user)"
                   />
                 </div>
               </td>
@@ -360,6 +309,7 @@
     </div>
   </div>
 </div>
+
 <div>
   <span
     class="btn text-primary fs-6"
@@ -369,7 +319,7 @@
   >
 </div>
 
-<!-- Modal information -->
+<!-- Modal information ----------------------------------------------------------------->
 
 <div
   class="modal fade"
@@ -395,37 +345,56 @@
         <div class="d-flex gap-3">
           <img
             class="model-img rounded-circle"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+            [src]="
+              userInfo.image ? userInfo.image : './assets/images/no-image.png'
+            "
             alt=""
           />
           <div class="d-flex flex-column mt-2">
-            <h3 class="weight-500 fs-3 mb-0">Yosuani Borges</h3>
-            <span class="fs-5">@username</span>
+            <h3 class="weight-500 fs-3 mb-0">{{ userInfo.fullname }}</h3>
+            <span class="fs-5">@{{ userInfo.username }}</span>
           </div>
         </div>
         <div class="d-flex flex-column gap-3 mt-5">
-          <div class="d-flex align-items-center gap-4 mb-3">
-            <i class="fa-solid fa-envelope fs-4"></i>
-            <p class="fs-5 mb-0">yborges@gmail.com</p>
+          <div class="row g-3">
+            <div class="d-flex align-items-center gap-4 mb-3 col-sm-6">
+              <i class="fa-solid fa-envelope fs-4"></i>
+              <p class="fs-5 mb-0">{{ userInfo.email }}</p>
+            </div>
+            <div
+              class="d-flex align-items-center gap-4 mb-3 col-sm-6"
+              *ngIf="userInfo.rol === 'profesor'"
+            >
+              <i class="fa-solid fa-dollar-sign fs-4"></i>
+              <p class="fs-5 mb-0">{{ userInfo.price }}</p>
+            </div>
           </div>
-          <div class="d-flex align-items-center gap-4 mb-3">
-            <i class="fa-solid fa-phone fs-4"></i>
-            <p class="fs-5 mb-0">+52 646 124 0000</p>
+          <div class="row g-3">
+            <div class="d-flex align-items-center gap-4 mb-3 col-sm-6">
+              <i class="fa-solid fa-phone fs-4"></i>
+              <p class="fs-5 mb-0">
+                {{ userInfo.phone ? userInfo.phone : "--" }}
+              </p>
+            </div>
+            <div
+              class="d-flex align-items-center gap-4 mb-3 col-sm-6"
+              *ngIf="userInfo.rol === 'profesor'"
+            >
+              <i class="fa-solid fa-graduation-cap fs-4"></i>
+              <p class="fs-5 mb-0">{{ userInfo.experience }} años</p>
+            </div>
           </div>
-          <div class="d-flex align-items-center gap-4 mb-3">
+          <div
+            class="d-flex align-items-center gap-4 mb-3"
+            *ngIf="userInfo.rol === 'profesor'"
+          >
             <i class="fa-solid fa-map-location-dot fs-4"></i>
-            <p class="fs-5 mb-0">Ave. Independencia No. 1234 Colonia</p>
+            <p class="fs-5 mb-0">{{ userInfo.location }}</p>
           </div>
           <div class="d-flex align-items-start gap-4 mb-3">
             <i class="fa-solid fa-file fs-4"></i>
             <p class="fs-5 mb-0">
-              Aquí encontrarás todas las herramientas y funciones necesarias
-              para tener el control total de tus actividades. Nuestro objetivo
-              es brindarte una experiencia fluida y eficiente mientras exploras
-              y gestionas tus datos. En esta vista podra manejar un listado con
-              todos los profesor que establecido contacto y podra intercambiar
-              mensajes con cada uno de ello. También podras tener la posibilidad
-              de modificar tus datos personales.
+              {{ userInfo.description ? userInfo.description : "--" }}
             </p>
           </div>
         </div>
@@ -447,66 +416,83 @@
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-          Insertar nuevo usuario
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Insertar nuevo usuario
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="insert" (ngSubmit)="insertNewUser()">
           <div class="row g-3">
             <div class="mb-3 col-sm-6">
               <label for="username" class="col-form-label">Username</label>
-              <input type="text" class="form-control" id="username" />
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                formControlName="username"
+              />
             </div>
             <div class="mb-3 col-sm-6">
-              <label for="fullname" class="col-form-label">Nombre completo</label>
-              <input type="text" class="form-control" id="fullname" />
+              <label for="fullname" class="col-form-label"
+                >Nombre completo</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="fullname"
+                formControlName="fullname"
+              />
             </div>
           </div>
           <div class="row g-3">
             <div class="col-sm-6">
-                <label for="email" class="form-label">Email</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text"
-                    ><i class="fa-regular fa-envelope fs-4 text-dark"></i
-                  ></span>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    placeholder="you@example.com"
-                  />
-                  <div class="invalid-feedback">
-                    Por favor introduzca un email válido.
-                  </div>
+              <label for="email" class="form-label">Email</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text"
+                  ><i class="fa-regular fa-envelope fs-4 text-dark"></i
+                ></span>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  formControlName="email"
+                  placeholder="you@example.com"
+                />
+                <div class="invalid-feedback">
+                  Por favor introduzca un email válido.
                 </div>
               </div>
-              <div class="col-sm-6">
-                <label for="password" class="form-label">Contraseña</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text"
-                    ><i class="fa-solid fa-key fs-4 text-dark"></i></span>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    placeholder=""
-                  />
-                  <div class="invalid-feedback">
-                    Por favor introduzca una contraseña válida.
-                  </div>
+            </div>
+            <div class="col-sm-6">
+              <label for="password" class="form-label">Contraseña</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text"
+                  ><i class="fa-solid fa-key fs-4 text-dark"></i
+                ></span>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  formControlName="password"
+                  placeholder=""
+                />
+                <div class="invalid-feedback">
+                  Por favor introduzca una contraseña válida.
                 </div>
               </div>
+            </div>
           </div>
           <div class="row g-3">
             <div class="mb-3 col-sm-6">
@@ -514,23 +500,48 @@
               <select
                 class="form-select"
                 aria-label="Default select example"
-                id="role"
+                id="rol"
+                formControlName="rol"
               >
-                <option selected>Seleccione un valor</option>
-                <option value="1">Administrador</option>
-                <option value="2">Profesor</option>
-                <option value="3">Alumno</option>
+                <option value="administrador">Administrador</option>
+                <option value="profesor">Profesor</option>
+                <option value="alumno">Alumno</option>
               </select>
             </div>
           </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              (click)="resetForm()"
+            >
+              Cerrar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              name="submit"
+              [disabled]="!insert.valid"
+              [attr.data-bs-dismiss]="closeModal"
+              id="liveToastBtn"
+            >
+              Insertar usuario
+            </button>
+          </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Cerrar
-        </button>
-        <button type="button" class="btn btn-primary">Insertar usuario</button>
-      </div>
+    </div>
+  </div>
+</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" [ngClass]="{'show': showToast}">
+    <div class="toast-header bg-success">
+      <strong class="me-auto text-white">Satisfactorio</strong>
+      <button type="button" class="btn-close" aria-label="Close" (click)="closeToast()"></button>
+    </div>
+    <div class="toast-body bg-success-light">
+      Se ha registrado un nuevo usuario.
     </div>
   </div>
 </div>

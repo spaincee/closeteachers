@@ -13,24 +13,32 @@ export class AdminService {
   constructor(private httpClient: HttpClient) { }
 
 // Actualizar cuando se pongan todas las rutas desde un DASHBOARD
-  getOneAdmin(id: number): Promise<User> {
-    return lastValueFrom(this.httpClient.get<User>(`${this.baseUrl}/admins/${id}`))
+  getDashboardInfo(): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}`))
   }
 
-  getAllAdmin(): Promise<User[]> {
-    return lastValueFrom(this.httpClient.get<User[]>(`${this.baseUrl}/admins/`))
+  getOneAdmin(id: number): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/admins/${id}`))
   }
 
-  getTeachers(): Promise<User[]> {
-    return lastValueFrom(this.httpClient.get<User[]>(`${this.baseUrl}/teachers`))
+  getUserInfo(id: number): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/userInfo/${id}`))
   }
 
-  getStudents(): Promise<User[]> {
-    return lastValueFrom(this.httpClient.get<User[]>(`${this.baseUrl}/students`))
+  getAllAdmin(): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/admins`))
   }
 
-  createAdmin(data: any): Promise<any> {
-    return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/admins`, data))
+  getTeachers(): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/teachers`))
+  }
+
+  getStudents(): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/students`))
+  }
+
+  insertUser(data: any): Promise<any> {
+    return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/newUser`, data))
   }
 
   updateAdmin(id: number, data: any): Promise<any> {
