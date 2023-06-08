@@ -17,24 +17,28 @@ export class AdminService {
     return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}`))
   }
 
-  getOneAdmin(id: number): Promise<User> {
-    return lastValueFrom(this.httpClient.get<User>(`${this.baseUrl}/admins/${id}`))
+  getOneAdmin(id: number): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/admins/${id}`))
   }
 
-  getAllAdmin(): Promise<User[]> {
-    return lastValueFrom(this.httpClient.get<User[]>(`${this.baseUrl}/admins`))
+  getUserInfo(id: number): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/userInfo/${id}`))
   }
 
-  getTeachers(): Promise<User[]> {
-    return lastValueFrom(this.httpClient.get<User[]>(`${this.baseUrl}/teachers`))
+  getAllAdmin(): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/admins`))
   }
 
-  getStudents(): Promise<User[]> {
-    return lastValueFrom(this.httpClient.get<User[]>(`${this.baseUrl}/students`))
+  getTeachers(): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/teachers`))
   }
 
-  createAdmin(data: any): Promise<any> {
-    return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/admins`, data))
+  getStudents(): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/students`))
+  }
+
+  insertUser(data: any): Promise<any> {
+    return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/newUser`, data))
   }
 
   updateAdmin(id: number, data: any): Promise<any> {

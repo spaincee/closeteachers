@@ -114,18 +114,6 @@ export class RegisterComponent {
           });
           break;
       }
-      // if (message.includes('400')) {
-      //   alert('Error en correo');
-      // }
-      // if (message.includes('500')) {
-      //   alert('Error en username');
-      // } else {
-      //   Swal.fire({
-      //     text: `Se ha producido el siguiente error: ${error.message}, por favor revise sus datos`,
-      //     confirmButtonColor: '#3085d6',
-      //     icon: 'warning',
-      //   });
-      // }
     }
   }
 }

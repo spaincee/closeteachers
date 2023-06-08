@@ -17,9 +17,7 @@ export class ProfileComponent implements OnInit {
     private adminService: AdminService,
     private teacherService: TeacherService,
     private studentService: StudentService
-  ){
-    
-  }
+  ){}
 
   ngOnInit(): void {
     this.loadDashboardProfile();
@@ -45,11 +43,10 @@ export class ProfileComponent implements OnInit {
         default:
           break;
       }
-      console.log(this.userLogged);
       
     }
     catch (error) {
-      console.log(error);
+      console.log(error); //Aqui tengo que poner una alerta
     }
   }
 }

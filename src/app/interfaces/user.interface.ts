@@ -13,6 +13,7 @@ export interface User {
   brief_description?: string;
   price?: number;
   experience?: number;
+  cover?: string;
   active?: number;
   status?: number;
 }
