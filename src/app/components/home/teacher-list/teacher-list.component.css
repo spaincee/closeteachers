@@ -22,13 +22,9 @@
   font-weight: bold;
 }
 
-.home-sidebar {
-  background-color: gray;
-}
-
-.teacher-filter {
-  height: 60px;
-  background-color: gray;
+.app-teacher-list-container {
+  display: block;
+  padding: 20px;
 }
 
 
@@ -63,3 +59,4 @@ button[disabled]:hover {
   color: #c1c1c1;
   cursor: not-allowed;
 }
+

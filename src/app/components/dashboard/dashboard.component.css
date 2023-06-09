@@ -102,3 +102,38 @@ header img {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
+
+.img-icono{
+  width: 25px;
+  height: 25px;
+}
+
+.model-img{
+  width: 100px;
+  height: 100px;
+}
+
+td i:hover {
+  cursor: pointer;
+}
+
+.card {
+  position: relative;
+ }
+ 
+ img.teacher-card-avatar {
+   position: relative;
+   border-radius: 50%;
+   width: 100px;
+   height: 100px;
+   margin: auto;
+   margin-top: -40px;
+ }
+ 
+ .teacher-card-cover {
+   height: 160px;
+   background-position: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   border-radius: 5px 5px 0px 0px;
+ }

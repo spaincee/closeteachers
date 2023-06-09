@@ -1,27 +1,28 @@
 
+<div class="app-teacher-list-container">
 
+  <section class="teacher-filter my-2">
 
-<section class="container teacher-filter my-2">
+  </section>
 
-</section>
-
-<section class="container mt-2">
-  <div class="row">
-    <div class="teacher-list col-lg-9 col-12 p-0">
-      <div class="row g-2 pe-3">
-        <article class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" *ngFor="let user of arrUsers">
-          <app-teacher-card [myUser]="user"></app-teacher-card>
-        </article>
-        <!-- <nav aria-label="Page navigation example" class="mt-5">
-          <ul class="pagination justify-content-center pagination-lg">
-            <li class="page-item"><button class="page-link previous" (click)="gotoPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button></li>
-            <li class="page-item"><button class="page-link next" (click)="gotoPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button></li>
-          </ul>
-        </nav> -->
+  <section class="mt-2">
+    <div class="row g-0">
+      <div class="teacher-list col-lg-6 col-12 p-0">
+        <div class="row g-2 pe-3">
+          <article class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" *ngFor="let user of arrUsers">
+            <app-teacher-card [myUser]="user"></app-teacher-card>
+          </article>
+          <!-- <nav aria-label="Page navigation example" class="mt-5">
+            <ul class="pagination justify-content-center pagination-lg">
+              <li class="page-item"><button class="page-link previous" (click)="gotoPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button></li>
+              <li class="page-item"><button class="page-link next" (click)="gotoPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button></li>
+            </ul>
+          </nav> -->
+        </div>
+      </div>
+      <div class="home-map col-lg-6 col-12">
+        <app-map></app-map>
       </div>
     </div>
-    <div class="home-sidebar col-lg-3 col-12">
-
-    </div>
-  </div>
-</section>
+  </section>
+</div>
