@@ -9,6 +9,10 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Icon, Style } from 'ol/style';
 import * as olProj from 'ol/proj';
+import Rotate from 'ol/control/Rotate';
+import { fromLonLat } from 'ol/proj';
+import Control from 'ol/control/Control';
+
 
 @Component({
   selector: 'app-map',
@@ -23,11 +27,13 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     const baseLayer = new TileLayer({
-      source: new OSM()
+      source: new OSM({
+        attributions: [] // Eliminar la atribución
+      })
     });
-
+  
     this.markerSource = new VectorSource();
-
+  
     const markerLayer = new VectorLayer({
       source: this.markerSource,
       style: new Style({
@@ -37,20 +43,33 @@ export class MapComponent implements OnInit {
         })
       })
     });
-
+  
     this.map = new Map({
       target: 'map',
       layers: [baseLayer, markerLayer],
       view: new View({
-        center: olProj.fromLonLat([-73.100836, 7.067076]),
+        center: fromLonLat([-73.100836, 7.067076]),
         zoom: 15
       })
     });
-
+  
     const initialMarker = new Feature({
-      geometry: new Point(olProj.fromLonLat([-73.100836, 7.067076]))
+      geometry: new Point(fromLonLat([-73.100836, 7.067076]))
     });
     this.markerSource.addFeature(initialMarker);
+  
+    const resetButton = document.createElement('button');
+    resetButton.innerHTML = 'Restablecer';
+    resetButton.addEventListener('click', () => {
+      this.map.getView().setCenter(fromLonLat([-73.100836, 7.067076]));
+      this.map.getView().setZoom(15);
+    });
+  
+    const resetControl = new Control({
+      element: resetButton
+    });
+  
+    this.map.addControl(resetControl);
   }
 
   addRandomMarkers(): void {
