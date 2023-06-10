@@ -14,7 +14,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     
-    
+    if (req.url.includes('public') || req.url.includes('auth')) {
+      return next.handle(req);
+    }
     
     const token = localStorage.getItem('token')!;
     // Verifica si el encabezado de autorización ya está presente en la solicitud

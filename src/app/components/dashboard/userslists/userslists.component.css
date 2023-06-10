@@ -1,0 +1,7 @@
+.fa-arrows-rotate{
+    cursor: pointer;
+}
+
+.fa-arrows-rotate:hover{
+   transform: scale(1.1);
+}

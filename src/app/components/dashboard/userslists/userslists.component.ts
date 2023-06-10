@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
 import { AdminService } from 'src/app/services/admin.service';
@@ -100,6 +100,12 @@ export class UserslistsComponent implements OnInit {
     this.userInfo = result.user;
   }
 
+  refreshLists(){
+    this.loadAdminsLists();
+    this.loadTeachersLists();
+    this.loadStudentsLists();
+  }
+
   async insertNewUser() {
     try{
       await this.adminService.insertUser(this.insert.value);
@@ -140,7 +146,13 @@ export class UserslistsComponent implements OnInit {
     this.insert.reset();
   }
 
-  
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const toastElement = document.querySelector('.toast');
+    if (toastElement && !toastElement.contains(event.target as Node)) {
+      this.closeToast();
+    }
+  }
 
   closeToast() {
     this.showToast = false;
