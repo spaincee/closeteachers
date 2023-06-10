@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
 import { PublicService } from 'src/app/services/public.service';
+import { subjectsData } from 'src/assets/data/subjects.data';
 
 @Component({
   selector: 'app-teacher-list',
@@ -10,10 +12,17 @@ import { PublicService } from 'src/app/services/public.service';
 export class TeacherListComponent implements OnInit {
 
   arrUsers: User[] = [];
-  // currentPage: number = 1;
-  // totalPages: number = 1;
+  subjectList: string [] = subjectsData.sort();
+  filterForm: FormGroup;
 
-  constructor(private publicService: PublicService) {}
+  constructor(private publicService: PublicService) {
+    this.filterForm = new FormGroup({
+      subject: new FormControl('',[]),
+      price: new FormControl('',[]),
+      experience: new FormControl('',[]),
+      score: new FormControl('',[])
+    })
+  }
 
   ngOnInit(): void {
     this.gotoPage();
@@ -27,5 +36,15 @@ export class TeacherListComponent implements OnInit {
     catch (error) {
       console.log(error);
     }
+  }
+
+  async saveFormValues(){
+    const subject = this.filterForm.get('subject')?.value;
+    let data: any;
+    if(subject !== undefined)
+      data = await this.publicService.getTeachersbySubject(subject);
+      //this.arrUsers = data.teachers;
+      console.log(data);
+      
   }
 }
