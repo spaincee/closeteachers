@@ -4,8 +4,10 @@
     </div>
     <img class="teacher-card-avatar" src="assets/images/testingavatar2.jpeg" [alt]="myUser.fullname">
     <div class="card-body">
-      <h5 class="card-title">{{myUser.fullname}}</h5>
-      <p class="card-text"><small class="text-muted">@{{myUser.username}}</small></p>
+      <h5 class="card-name">{{myUser.fullname}}</h5>
+      <p class="card-subjects"><small class="text-muted">{{myUser.subjects}}</small></p>
+      <p class="card-description"><small class="text-muted">{{myUser.brief_description}}</small></p>
+      <p class="card-location"><small class="text-muted">{{myUser.location}}</small></p>
     </div>
     
   <div class="d-flex justify-content-between">
