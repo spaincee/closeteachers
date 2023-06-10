@@ -12,6 +12,8 @@ import * as olProj from 'ol/proj';
 import Rotate from 'ol/control/Rotate';
 import { fromLonLat } from 'ol/proj';
 import Control from 'ol/control/Control';
+import { User } from 'src/app/interfaces/user.interface';
+import { PublicService } from 'src/app/services/public.service';
 
 
 @Component({
@@ -23,9 +25,17 @@ export class MapComponent implements OnInit {
   private map!: Map;
   private markerSource!: VectorSource;
 
-  constructor() { }
+  teacherLists: User[] = [];
+  locations: any[]= [];
 
-  ngOnInit(): void {
+
+  constructor(private publicService: PublicService) { }
+
+  async ngOnInit(): Promise<void> {
+
+    const data = await this.publicService.getAll();
+    this.teacherLists = data.teachers
+
     const baseLayer = new TileLayer({
       source: new OSM({
         attributions: [] // Eliminar la atribución
@@ -48,20 +58,20 @@ export class MapComponent implements OnInit {
       target: 'map',
       layers: [baseLayer, markerLayer],
       view: new View({
-        center: fromLonLat([-73.100836, 7.067076]),
+        center: fromLonLat([-75.5744, 6.2509]),
         zoom: 15
       })
     });
   
     const initialMarker = new Feature({
-      geometry: new Point(fromLonLat([-73.100836, 7.067076]))
+      geometry: new Point(fromLonLat([-75.5744, 6.2509]))
     });
     this.markerSource.addFeature(initialMarker);
   
     const resetButton = document.createElement('button');
     resetButton.innerHTML = 'Restablecer';
     resetButton.addEventListener('click', () => {
-      this.map.getView().setCenter(fromLonLat([-73.100836, 7.067076]));
+      this.map.getView().setCenter(fromLonLat([-75.5744, 6.2509]));
       this.map.getView().setZoom(15);
     });
   
@@ -70,16 +80,21 @@ export class MapComponent implements OnInit {
     });
   
     this.map.addControl(resetControl);
+
+    this.addTeacherMarkers();
   }
 
-  addRandomMarkers(): void {
-    for (let i = 0; i < 10; i++) {
-      const randomLon = -73.100836 + Math.random() * 0.01;
-      const randomLat = 7.067076 + Math.random() * 0.01;
-      const marker = new Feature({
-        geometry: new Point(olProj.fromLonLat([randomLon, randomLat]))
+  addTeacherMarkers(): void {
+    this.teacherLists.forEach(teacher => {
+      if(typeof teacher['location'] === 'string'){
+        const locationString = JSON.parse(teacher['location']);
+        const trimmedString = locationString.slice(1, -1);
+        this.locations = trimmedString.split(',').map((location: String) => parseFloat(location.trim()));
+      }
+      const initialMarker = new Feature({
+        geometry: new Point(fromLonLat([this.locations[1], this.locations[0]]))
       });
-      this.markerSource.addFeature(marker);
-    }
+      this.markerSource.addFeature(initialMarker);
+    })
   }
 }
