@@ -45,6 +45,10 @@ export class AdminService {
     return lastValueFrom(this.httpClient.put<any>(`${this.baseUrl}/admins/${id}`, data))
   }
 
+  updateProfile(data: User): Promise<any> {
+    return lastValueFrom(this.httpClient.put<any>(`${this.baseUrl}/change_profile`, data)); //Ajustar cuando se actualicen las rutas en la API
+  }
+
   changePassword(data: any): Promise<any> {
     return lastValueFrom(this.httpClient.patch<any>(`${this.baseUrl}/admins/change_password`, data))
   }

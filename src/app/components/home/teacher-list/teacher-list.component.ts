@@ -12,6 +12,7 @@ import { subjectsData } from 'src/assets/data/subjects.data';
 export class TeacherListComponent implements OnInit {
 
   arrUsers: User[] = [];
+  arrUsersFiltered: User[] = [];
   subjectList: string [] = subjectsData.sort();
   filterForm: FormGroup;
 
@@ -39,12 +40,30 @@ export class TeacherListComponent implements OnInit {
   }
 
   async saveFormValues(){
-    const subject = this.filterForm.get('subject')?.value;
-    let data: any;
-    if(subject !== undefined)
-      data = await this.publicService.getTeachersbySubject(subject);
-      //this.arrUsers = data.teachers;
-      console.log(data);
+    this.arrUsers.forEach(teacher => {
+      if(teacher.subjects)
+      {
+        const subject = JSON.parse(teacher.subjects);
+        console.log(subject);
+      }
+      
+      
+    })
+    
+    
+    
+    // const subject = this.filterForm.get('subject')?.value;
+    // let data: any;
+    // try{
+    //   if(subject !== undefined)
+    //     //data = await this.publicService.getTeachersbySubject(subject);
+    //     //this.arrUsers = data.teachers;
+    //   console.log(subject);
+    // }catch(error: any){
+    //   console.log(error);
+      
+    // }
+    
       
   }
 }

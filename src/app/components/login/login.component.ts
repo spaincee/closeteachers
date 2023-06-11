@@ -26,14 +26,6 @@ export class LoginComponent {
       localStorage.setItem('token', resp.token);
 
       this.router.navigate(['/dashboard/profile']);
-      // Swal.fire({
-      //   title: 'Bienvenido!',
-      //   text: resp.msg,
-      //   icon: 'success',
-      //   confirmButtonColor: '#3085d6',
-      // }).then((result) => {
-      //   if (result.isConfirmed) 
-      // });
 
     } catch (error: any) {
       if (error instanceof HttpErrorResponse) {
