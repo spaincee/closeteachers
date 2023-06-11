@@ -25,7 +25,7 @@ export class TeacherService {
     return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/students/${id}/message`, message));
   }
 
-  updteProfile(data: User): Promise<any> {
+  updateProfile(data: User): Promise<any> {
     return lastValueFrom(this.httpClient.put<any>(`${this.baseUrl}/change_profile`, data)); //Ajustar cuando se actualicen las rutas en la API
   }
 

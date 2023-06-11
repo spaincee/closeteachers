@@ -33,12 +33,12 @@ export class StudentService {
     return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/teachers/${id}/contact`, null));
   }
 
-  updteProfile(data: User): Promise<any> {
-    return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/change_profile`, data));
+  updateProfile(data: User): Promise<any> {
+    return lastValueFrom(this.httpClient.put<any>(`${this.baseUrl}/change_profile`, data));
   }
 
-  changePassword(id: number): Promise<any> {
-    return lastValueFrom(this.httpClient.patch<any>(`${this.baseUrl}/teachers/${id}/comments`, null))
+  changePassword(data: any): Promise<any> {
+    return lastValueFrom(this.httpClient.patch<any>(`${this.baseUrl}/change_password`, data))
   }
 
 

@@ -1,0 +1,27 @@
+.img-icono{
+    width: 25px;
+    height: 25px;
+}
+
+img.teacher-card-avatar {
+    position: relative;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-top: -40px;
+  }
+  
+  .teacher-card-cover {
+    height: 160px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .profile-img{
+    width: 150px;
+    height: 150px;
+    margin: auto;
+  }

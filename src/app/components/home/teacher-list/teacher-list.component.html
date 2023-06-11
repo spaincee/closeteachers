@@ -1,5 +1,6 @@
 <div class="app-teacher-list-container">
   <section class="teacher-filter my-2"></section>
+  
   <form action="" [formGroup]="filterForm" (ngSubmit)="saveFormValues()">
     <div class="d-flex justify-content-between align-items-end gap-5 mb-4">
       <div class="col">
@@ -50,6 +51,7 @@
       </div>
     </div>
   </form>
+
   <section class="mt-2">
     <div class="row g-0">
       <div class="teacher-list col-lg-6 col-12 p-0">

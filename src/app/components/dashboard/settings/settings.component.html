@@ -33,8 +33,12 @@
         >
           <div class="position-relative">
             <img
-              class="w-100 h-100 rounded-circle mt-2"
-              [src]="userLogged.image ? userLogged.image : './assets/images/no-image.png'"
+              class="profile-img object-fit-fill rounded-circle mt-2"
+              [src]="
+                userLogged.image
+                  ? userLogged.image
+                  : './assets/images/no-image.png'
+              "
               alt=""
             />
             <div class="position-absolute top-0 start-0">
@@ -62,8 +66,18 @@
               required=""
               [(ngModel)]="userLogged.fullname"
               formControlName="fullname"
+              [ngClass]="{
+                'is-invalid':
+                  settingForm.controls['fullname'].touched &&
+                  settingForm.controls['fullname'].invalid,
+                'is-valid': settingForm.controls['fullname'].valid
+              }"
             />
-            <div class="invalid-feedback">Su nombre es requerido.</div>
+            <div class="invalid-feedback" *ngIf="settingForm.controls['fullname'].touched && settingForm.controls['fullname'].invalid">
+              <p *ngIf="settingForm.controls['fullname'].errors?.['required']">
+                Por favor, inserte su nombre completo, este campo es OBLIGATORIO
+              </p>
+            </div>
           </div>
 
           <div class="col-sm-6">
@@ -80,9 +94,17 @@
                 required=""
                 [(ngModel)]="userLogged.username"
                 formControlName="username"
+                [ngClass]="{
+                  'is-invalid':
+                    settingForm.controls['username'].touched &&
+                    settingForm.controls['username'].invalid,
+                  'is-valid': settingForm.controls['username'].valid
+                }"
               />
-              <div class="invalid-feedback">
-                Su nick de usuario es requerido.
+              <div class="invalid-feedback" *ngIf="settingForm.controls['username'].touched && settingForm.controls['username'].invalid">
+                <p *ngIf="settingForm.controls['username'].errors?.['required']">
+                  Por favor, inserte su nick de usuario, este campo es OBLIGATORIO
+                </p>
               </div>
             </div>
           </div>
@@ -100,9 +122,17 @@
                 placeholder="you@example.com"
                 [(ngModel)]="userLogged.email"
                 formControlName="email"
+                [ngClass]="{
+                  'is-invalid':
+                    settingForm.controls['email'].touched &&
+                    settingForm.controls['email'].invalid,
+                  'is-valid': settingForm.controls['email'].valid
+                }"
               />
-              <div class="invalid-feedback">
-                Por favor introduzca un email válido.
+              <div class="invalid-feedback" *ngIf="settingForm.controls['email'].touched && settingForm.controls['email'].invalid">
+                <p *ngIf="settingForm.controls['email'].errors?.['required'] || settingForm.controls['email'].errors?.['pattern']">
+                  Por favor, inserte un correo electrónico válido.
+                </p>
               </div>
             </div>
           </div>
@@ -143,57 +173,80 @@
             />
           </div>
           <!-- --------Sección de gestión de contraseña --------------------------------------------------->
-          <form>
+          <form [formGroup]="passwordForm" (ngSubmit)="changePasswordForm()">
             <div
               class="border border-opacity-50 p-3 rounded-2 col-sm-12 row g-3"
               *ngIf="changePassword"
             >
               <div class="col-sm-3">
-                <label for="old-pass" class="form-label"
+                <label for="oldPassword" class="form-label"
                   >Contraseña antigua</label
                 >
                 <input
                   type="{{ passwordVisible ? 'text' : 'password' }}"
                   class="form-control"
-                  id="old-pass"
+                  id="oldPassword"
                   placeholder=""
-                />
-                <div class="invalid-feedback">
-                  La contraseña antigua no coincide.
-                </div>
+                  formControlName="oldPassword"
+                />              
               </div>
               <div class="col-sm-3">
-                <label for="new-pass" class="form-label"
+                <label for="newPassword" class="form-label"
                   >Contraseña nueva</label
                 >
                 <input
                   type="{{ passwordVisible ? 'text' : 'password' }}"
                   class="form-control"
-                  id="new-pass"
+                  id="newPassword"
                   placeholder=""
+                  formControlName="newPassword"
+                  [ngClass]="{'is-invalid':
+                    passwordForm.controls['newPassword'].touched &&
+                    passwordForm.controls['newPassword'].invalid,
+                    'is-valid': passwordForm.controls['newPassword'].valid
+                  }"
                 />
-                <div class="invalid-feedback">
-                  La contraseña no cumple los requisitos
+                <div class="invalid-feedback" *ngIf="passwordForm.controls['newPassword'].touched && passwordForm.controls['newPassword'].invalid">
+                  <p *ngIf="passwordForm.controls['newPassword'].errors?.['required']">
+                    Por favor, elija una contraseña, este campo es OBLIGATORIO
+                  </p>
+                  <p *ngIf="passwordForm.controls['newPassword'].errors?.['minlength'] || passwordForm.controls['newPassword'].errors?.['pattern']">
+                    Su contraseña no cumple con la seguridad requerida
+                  </p>
                 </div>
               </div>
 
               <div class="col-sm-3">
-                <label for="confirm-pass" class="form-label"
+                <label for="confirmPassword" class="form-label"
                   >Confirmar contraseña</label
                 >
                 <input
                   type="{{ passwordVisible ? 'text' : 'password' }}"
                   class="form-control"
-                  id="confirm-pass"
+                  id="confirmPassword"
                   placeholder=""
+                  formControlName="confirmPassword"
+                  [ngClass]="{
+                    'is-invalid':
+                      passwordForm.controls['confirmPassword'].touched &&
+                      passwordForm.controls['confirmPassword'].invalid,
+                    'is-valid': passwordForm.controls['confirmPassword'].valid
+                  }"
                 />
-                <div class="invalid-feedback">
-                  Las contraseñas no coinciden.
+                <div class="invalid-feedback" *ngIf=" passwordForm.controls['confirmPassword'].touched && passwordForm.controls['confirmPassword'].invalid">
+                  <p *ngIf="passwordForm.controls['confirmPassword'].errors?.['required']">
+                    Debe confirmar su contraseña
+                  </p>
+                  <p *ngIf="passwordForm.controls['confirmPassword'].errors?.['mustMatch']">
+                    No coincide su contraseña
+                  </p>
                 </div>
               </div>
 
               <div class="col-sm-3 d-flex align-items-end">
-                <span class="btn btn-dark rounded-pill">Actualizar</span>
+                <button type="submit" class="btn btn-dark rounded-pill" [disabled]="!passwordForm.valid">
+                  Actualizar
+                </button>
               </div>
 
               <div class="row py-3 px-4">
@@ -251,7 +304,6 @@
                   <div class="form-floating mb-3 col-sm-6">
                     <input
                       type="number"
-                      
                       class="form-control w-100"
                       id="latitude"
                       placeholder="Latitud"
@@ -264,7 +316,6 @@
                   <div class="form-floating mb-3 col-sm-6">
                     <input
                       type="number"
-                      
                       class="form-control w-100"
                       id="longitude"
                       placeholder="Longitud"
@@ -326,13 +377,10 @@
               <div class="col-sm-2">
                 <span class="fs-5 text-dark">Materias: </span>
               </div>
-              <div class="col-sm-10" >
+              <div class="col-sm-10">
                 <div class="d-flex flex-wrap gap-3">
                   <div class="d-flex flex-wrap gap-3">
-                  <div
-                    *ngFor="
-                      let subject of subjectsList;
-                      let i = index">
+                    <div *ngFor="let subject of subjectsList; let i = index">
                       <div>
                         <div class="form-check">
                           <input
@@ -341,12 +389,15 @@
                             [value]="subject"
                             [id]="i"
                             [checked]="existSubject(subject)"
-                            (click)="subjectsControl(subject)"/>
-                          <label class="form-check-label" [for]="i">{{subject}}</label>
+                            (click)="subjectsControl(subject)"
+                          />
+                          <label class="form-check-label" [for]="i">{{
+                            subject
+                          }}</label>
                         </div>
-                      </div> 
-                    </div> 
-                  </div>                 
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -386,11 +437,21 @@
             <div class="card shadow-lg p-3">
               <div
                 class="class teacher-card-cover"
-                [style.background-image]="'url(' + (userLogged.cover ? userLogged.cover : 'https://placehold.co/600x400/423f3f/FFFFFF/png') + ')'"
+                [style.background-image]="
+                  'url(' +
+                  (userLogged.cover
+                    ? userLogged.cover
+                    : 'https://placehold.co/600x400/423f3f/FFFFFF/png') +
+                  ')'
+                "
               ></div>
               <img
                 class="teacher-card-avatar"
-                [src]="userLogged.image ? userLogged.image : './assets/images/no-image.png'" 
+                [src]="
+                  userLogged.image
+                    ? userLogged.image
+                    : './assets/images/no-image.png'
+                "
                 alt=""
               />
               <div class="card-body">
@@ -421,5 +482,28 @@
         Guardar cambios
       </button>
     </form>
+  </div>
+</div>
+<!-- ----------------- Toats de mensaje satisfactorio ----------------------------------->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div
+    class="toast"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    [ngClass]="{ show: showToast }"
+  >
+    <div class="toast-header bg-success">
+      <strong class="me-auto text-white">Satisfactorio</strong>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="closeToast()"
+      ></button>
+    </div>
+    <div class="toast-body bg-success-light">
+      {{toastMessage}}
+    </div>
   </div>
 </div>

@@ -87,9 +87,14 @@ export class MapComponent implements OnInit {
   addTeacherMarkers(): void {
     this.teacherLists.forEach(teacher => {
       if(typeof teacher['location'] === 'string'){
-        const locationString = JSON.parse(teacher['location']);
-        const trimmedString = locationString.slice(1, -1);
-        this.locations = trimmedString.split(',').map((location: String) => parseFloat(location.trim()));
+        const result = JSON.parse(teacher['location']);
+        if(typeof result === 'string'){
+          const trimmedString = result.slice(1, -1);
+          this.locations = trimmedString.split(',').map((location: String) => parseFloat(location.trim()));
+        }
+        if(typeof result === 'object'){
+          this.locations = result;
+        }
       }
       const initialMarker = new Feature({
         geometry: new Point(fromLonLat([this.locations[1], this.locations[0]]))
@@ -97,4 +102,7 @@ export class MapComponent implements OnInit {
       this.markerSource.addFeature(initialMarker);
     })
   }
+
+  
 }
+

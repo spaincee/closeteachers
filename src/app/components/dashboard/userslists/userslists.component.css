@@ -1,7 +1,17 @@
-.fa-arrows-rotate{
+.fa-arrows-rotate {
     cursor: pointer;
 }
 
-.fa-arrows-rotate:hover{
-   transform: scale(1.1);
+.fa-arrows-rotate:hover {
+    transform: scale(1.1);
+}
+
+.img-icono {
+    width: 25px;
+    height: 25px;
+}
+
+.model-img {
+    width: 100px;
+    height: 100px;
 }
