@@ -17,19 +17,19 @@ export class StudentService {
     return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}`));
   }
 
-  getMyTeacherInfo(id: number): Promise<User> {
-    return lastValueFrom(this.httpClient.get<User>(`${this.baseUrl}/my_teacher/${id}`));
+  getMyTeacherInfo(id: number): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/my_teacher/${id}`));
   }
 
   getTeachers(): Promise<User[]> {
     return lastValueFrom(this.httpClient.get<User[]>(`${this.baseUrl}/teachers`));
   }
 
-  sendMessage(id: number, message: string): Promise<any> {
-    return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/teachers/${id}/message`, message));
+  sendMessage(id: number, data: any): Promise<any> {
+    return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/teachers/${id}/message`, data));
   }
 
-  contactTeacher(id: number): Promise<User> {
+  contactTeacher(id: number): Promise<any> {
     return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/teachers/${id}/contact`, null));
   }
 
@@ -38,7 +38,11 @@ export class StudentService {
   }
 
   changePassword(data: any): Promise<any> {
-    return lastValueFrom(this.httpClient.patch<any>(`${this.baseUrl}/change_password`, data))
+    return lastValueFrom(this.httpClient.put<any>(`${this.baseUrl}/change_password`, data))
+  }
+
+  ratingAndCommenting(id: number, data: any): Promise<any> {
+    return lastValueFrom(this.httpClient.patch<any>(`${this.baseUrl}/teachers/${id}/comments`, data))
   }
 
 

@@ -12,16 +12,15 @@ import { subjectsData } from 'src/assets/data/subjects.data';
 export class TeacherListComponent implements OnInit {
 
   arrUsers: User[] = [];
-  arrUsersFiltered: User[] = [];
   subjectList: string [] = subjectsData.sort();
   filterForm: FormGroup;
 
   constructor(private publicService: PublicService) {
     this.filterForm = new FormGroup({
       subject: new FormControl('',[]),
-      price: new FormControl('',[]),
-      experience: new FormControl('',[]),
-      score: new FormControl('',[])
+      price: new FormControl('0',[]),
+      experience: new FormControl('0',[]),
+      score: new FormControl('0',[])
     })
   }
 
@@ -40,30 +39,58 @@ export class TeacherListComponent implements OnInit {
   }
 
   async saveFormValues(){
-    this.arrUsers.forEach(teacher => {
-      if(teacher.subjects)
-      {
-        const subject = JSON.parse(teacher.subjects);
-        console.log(subject);
-      }
-      
-      
-    })
+    let arrUsersFiltered: User[] = this.arrUsers;
+
+    if(this.filterForm.get('subject')?.value){
+      arrUsersFiltered = this.filterbySubject(arrUsersFiltered, this.filterForm.get('subject')?.value);
+    }
+    if(this.filterForm.get('price')?.value > 0){
+      arrUsersFiltered = this.filterbyPrice(arrUsersFiltered, this.filterForm.get('price')?.value);
+    }
+    if(this.filterForm.get('experience')?.value > 0){
+      arrUsersFiltered = this.filterbyExperience(arrUsersFiltered, this.filterForm.get('experience')?.value);
+    }
     
+    this.arrUsers = arrUsersFiltered;
     
-    
-    // const subject = this.filterForm.get('subject')?.value;
-    // let data: any;
-    // try{
-    //   if(subject !== undefined)
-    //     //data = await this.publicService.getTeachersbySubject(subject);
-    //     //this.arrUsers = data.teachers;
-    //   console.log(subject);
-    // }catch(error: any){
-    //   console.log(error);
-      
-    // }
-    
-      
   }
+
+  // Funciones para filtros
+  filterbySubject(teachers: User[], subject: string): User[] {
+    let result: User[] = [];
+    teachers.forEach(teacher => {
+      if(teacher.subjects){
+        if(JSON.parse(teacher.subjects).includes(subject)){
+          result.push(teacher);
+        }
+      }
+    })
+    return result;
+  }
+
+  filterbyPrice(teachers: User[], price: number): User[] {
+    let result: User[] = [];
+    teachers.forEach(teacher => {
+      if(teacher.price !== undefined && teacher.price <= price){
+        result.push(teacher);
+      }
+    })
+    return result;
+  }
+
+  filterbyExperience(teachers: User[], experience: number): User[] {
+    let result: User[] = [];
+    teachers.forEach(teacher => {
+      if(teacher.experience !== undefined && teacher.experience <= experience){
+        result.push(teacher);
+      }
+    })
+    return result;
+  }
+
+  resetFilters(){
+    this.gotoPage();
+    this.filterForm.reset();
+  }
+
 }

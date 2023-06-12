@@ -19,79 +19,100 @@
 <div class="p-3 mt-4 row gap-5">
   <div class="list-people shadow-lg p-3 col-md-3 col-12 rounded-4">
     <input type="text" class="mb-3 form-control" placeholder="Search" />
-    <div class="icon-message d-flex align-items-center gap-3 mb-3 px-3">
+    <div
+      class="icon-message d-flex align-items-center gap-3 mb-3 px-3"
+      *ngFor="let contact of myContacts"
+      (click)="ourComunication(contact.id_user)"
+    >
       <img
         class="list-chat-img rounded-circle shadow"
-        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+        [src]="contact.image ? contact.image : './assets/images/no-image.png'"
         alt=""
       />
       <div class="d-flex flex-column mt-2">
-        <p class="weight-500 fs-5 mb-0">Yosuani Borges</p>
-        <span class="fs-6 text-muted">@username</span>
-      </div>
-    </div>
-    <div class="icon-message d-flex align-items-center gap-3 mb-3 px-3">
-      <img
-        class="list-chat-img rounded-circle shadow"
-        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
-        alt=""
-      />
-      <div class="d-flex flex-column mt-2">
-        <p class="weight-500 fs-5 mb-0">Anna Garcia</p>
-        <span class="fs-6 text-muted">@username</span>
+        <p class="weight-500 fs-5 mb-0">{{ contact.fullname }}</p>
+        <span class="fs-6 text-muted">@{{ contact.username }}</span>
       </div>
     </div>
   </div>
 
-<!-- ------------------------- Sección del chat ------------------------------------------------->
+  <!-- ------------------------- Sección del chat ------------------------------------------------->
 
   <div class="card shadow-lg p-3 col-md-8 col-12 list-people rounded-4">
     <div class="card-header">
       <div class="d-flex align-items-center gap-3 px-3">
         <img
           class="list-chat-img rounded-circle shadow"
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
+          [src]="
+            userChatActive.image
+              ? userChatActive.image
+              : './assets/images/no-image.png'
+          "
           alt=""
         />
         <div class="mt-2">
-          <p class="weight-500 fs-5 mb-0">Anna Garcia</p>
+          <p class="weight-500 fs-5 mb-0">{{ userChatActive.fullname }}</p>
         </div>
       </div>
     </div>
-    <div class="card-body overflow-auto">
-        <ul class="list-unstyled">
-            <li class="mb-5">
-                <div class="d-flex flex-column align-items-start">
-                    <div class="d-flex gap-3 ms-3">
-                        <p class="fs-6 mb-0"><strong>Anna Garcia</strong></p>
-                        <span class="text-muted">10:50 AM, 3 días atrás</span>
-                    </div>
-                    <div class="w-75 bg-light p-3 rounded-3">
-                        <span>Este es mi primer mensaje listo para hacer prueba</span>
-                    </div>
-                </div>
-            </li>
-            <li class="mb-5">
-                <div class="d-flex flex-column align-items-end">
-                    <div class="d-flex gap-3 me-3">
-                        <p class="fs-6 mb-0"><strong>Yosuani Borges</strong></p>
-                        <span class="text-muted">10:00 AM, 3 días atrás</span>
-                    </div>
-                    <div class="w-75 bg-middle p-3 rounded-4">
-                        <span>Este es mi primer mensaje listo para hacer prueba de como seria este mensaje si fuera bastante largo como un parrafo</span>
-                    </div>
-                </div>
-            </li>
-            
-        </ul>
+    <div class="card-body overflow-auto" #cardBody>
+      <div class="text-center fs-4 text-muted" *ngIf="messageChatActive.length === 0">No tiene mensajes con este profesor...</div>
+      <ul class="list-unstyled" *ngIf="messageChatActive.length !== 0">
+        <li class="mb-5" *ngFor="let message of messageChatActive">
+          <div
+            class="d-flex flex-column"
+            [ngClass]="{
+              'align-items-start': message.sender === 'profesor',
+              'align-items-end': message.sender === 'alumno'
+            }"
+          >
+            <div
+              class="d-flex gap-3 ms-3"
+              *ngIf="message.sender === 'profesor'"
+            >
+              <p class="fs-6 mb-0"><strong>Profesor</strong></p>
+              <span class="text-muted">{{ message.sent_time }}</span>
+            </div>
+            <div class="d-flex gap-3 me-3" *ngIf="message.sender === 'alumno'">
+              <span class="text-muted">{{ message.sent_time }}</span>
+              <p class="fs-6 mb-0"><strong>Yo</strong></p>
+            </div>
+            <div
+              class="mw-50 p-3"
+              [ngClass]="{
+                'bg-light': message.sender === 'profesor',
+                'bg-middle': message.sender === 'alumno',
+                'text-start': message.sender === 'profesor',
+                'text-end': message.sender === 'alumno',
+                'cloud-message-left': message.sender === 'profesor',
+                'cloud-message-right': message.sender === 'alumno'
+              }"
+            >
+              <span>{{ message.message }}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
-    <div class="card-footer d-flex gap-3 align-items-center">
-      <input
-        type="text"
-        class="form-control rounded-pill"
-        placeholder="Escriba un mensaje..."
-      />
-      <i class="fa-solid fa-paper-plane fs-4"></i>
-    </div>
+    <form #chatForm="ngForm" (ngSubmit)="sendMessage(chatForm)">
+      <div class="card-footer d-flex gap-3 align-items-center">
+        <input
+          type="text"
+          class="d-none"
+          [ngModel]="userChatActive.id_user"
+          name="receiverId"
+        />
+        <input
+          type="text"
+          class="form-control rounded-pill"
+          name="message"
+          placeholder="Escriba un mensaje..."
+          ngModel
+        />
+        <button type="submit">
+          <i class="fa-solid fa-paper-plane fs-4"></i>
+        </button>
+      </div>
+    </form>
   </div>
 </div>

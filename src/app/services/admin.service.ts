@@ -50,7 +50,7 @@ export class AdminService {
   }
 
   changePassword(data: any): Promise<any> {
-    return lastValueFrom(this.httpClient.patch<any>(`${this.baseUrl}/admins/change_password`, data))
+    return lastValueFrom(this.httpClient.put<any>(`${this.baseUrl}/change_password`, data));
   }
 
   changeStatusAdmin(id: number): Promise<any> {

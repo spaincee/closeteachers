@@ -14,3 +14,15 @@ div.icon-message:hover{
 .bg-middle{
     background-color: #ced4da;
 }
+
+.cloud-message-right{
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.cloud-message-left{
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}

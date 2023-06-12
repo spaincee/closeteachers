@@ -21,8 +21,8 @@ export class TeacherService {
     return lastValueFrom(this.httpClient.get<User>(`${this.baseUrl}/students/${id}`));
   }
 
-  sendMessage(id: number, message: string): Promise<any> {
-    return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/students/${id}/message`, message));
+  sendMessage(id: number, data: any): Promise<any> {
+    return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/students/${id}/message`, data));
   }
 
   updateProfile(data: User): Promise<any> {
@@ -30,7 +30,7 @@ export class TeacherService {
   }
 
   changePassword(data: any): Promise<any> {
-    return lastValueFrom(this.httpClient.patch<any>(`${this.baseUrl}/change_password`, data))
+    return lastValueFrom(this.httpClient.put<any>(`${this.baseUrl}/change_password`, data))
   }
 
   agreeStudent(id: number): Promise<any> {

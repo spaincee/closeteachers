@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -28,6 +28,7 @@ export class MapComponent implements OnInit {
   teacherLists: User[] = [];
   locations: any[]= [];
 
+  @Input() arrUsers?: User[];
 
   constructor(private publicService: PublicService) { }
 
@@ -84,7 +85,9 @@ export class MapComponent implements OnInit {
     this.addTeacherMarkers();
   }
 
-  addTeacherMarkers(): void {
+  
+
+  addTeacherMarkers(): void {    
     this.teacherLists.forEach(teacher => {
       if(typeof teacher['location'] === 'string'){
         const result = JSON.parse(teacher['location']);
