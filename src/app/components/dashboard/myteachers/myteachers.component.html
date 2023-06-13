@@ -17,9 +17,13 @@
 </nav>
 
 <!-- ---------------------     Sección de tabla de profesores ----------------------------------------------->
-<div class="rounded-4 bg-light p-3">
+<div class="rounded-4 bg-light p-3 mb-4">
   <div class="table-responsive small">
-    <table class="table align-middle table-striped table-hover table-sm">
+    <div class="text-center fs-4 text-muted" *ngIf="withoutTeachers">
+      {{ this.teachersActiveList }}
+    </div>
+    <table class="table align-middle table-striped table-hover table-sm caption-top" *ngIf="!withoutTeachers">
+      <caption class="fs-4">Mis profesores</caption>
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -35,7 +39,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let teacher of teachersList">
+        <tr *ngFor="let teacher of teachersActiveList">
           <td>
             <img
               class="img-icono rounded-circle"
@@ -61,8 +65,8 @@
               class="p-1 bg-success rounded-2 text-white"
               >{{
                 teacher.relationship === 1 ? "Contactado" : "Pendiente..."
-              }}</span
-            >
+              }}</span>
+   
           </td>
           <td class="d-flex gap-4">
             <i
@@ -80,6 +84,72 @@
                 teacher.relationship === 1 ? '#commentModal' : '#noRelationship'
               "
               (click)="seeCommentTeacher(teacher.id_user)"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="rounded-4 bg-light p-3 mb-4">
+  <div class="table-responsive small">
+    <div class="text-center fs-4 text-muted" *ngIf="withoutPending">
+      {{ this.teachersPendingList }}
+    </div>
+    <table class="table align-middle table-striped table-hover table-sm caption-top" *ngIf="!withoutPending">
+      <caption class="fs-4">Solicitudes pendientes</caption>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Materias</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Experiencia</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let teacher of teachersPendingList">
+          <td>
+            <img
+              class="img-icono rounded-circle"
+              [src]="
+                teacher.image ? teacher.image : './assets/images/no-image.png'
+              "
+              alt=""
+            />
+          </td>
+          <td>{{ teacher.fullname }}</td>
+          <td>@{{ teacher.username }}</td>
+          <td>{{ teacher.email }}</td>
+          <td>{{ teacher.phone }}</td>
+          <td class="">{{ stringToArray(teacher.subjects).splice(0, 4) }}</td>
+          <td>$ {{ teacher.price }}</td>
+          <td>{{ teacher.experience }} años</td>
+          <td>
+            <span
+              [ngClass]="{
+                'bg-success': teacher.relationship === 1,
+                'bg-primary': teacher.relationship !== 1
+              }"
+              class="p-1 bg-success rounded-2 text-white"
+              >{{
+                teacher.relationship === 1 ? "Contactado" : "Pendiente..."
+              }}</span>
+   
+          </td>
+          <td class="d-flex gap-4">
+            <i
+              data-id="{{ teacher.id_user }}"
+              class="fa-solid fa-eye fs-4 text-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#infoModal"
+              (click)="seeUserInfor(teacher.id_user)"
             ></i>
           </td>
         </tr>

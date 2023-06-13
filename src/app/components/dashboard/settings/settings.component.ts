@@ -80,44 +80,9 @@ export class SettingsComponent implements OnInit {
 
 
   // Iniciamos el componenete cargado los datos del usuario registrado
-  async ngOnInit() {
-    
-    this.loadData();
-    
-    // Si el usuario tiene valores definido en estas dos caracteristicas entonces se muestran
-    if(this.userLogged.image)
-      this.toggleInputImage();
- 
-    if(this.userLogged.description)
-      this.toggleDescription();
+  async ngOnInit(): Promise<void> {
 
-    // Preparamos la ubicacion del usuario en caso de ser un profesor
-    if(typeof this.userLogged['location'] === 'string'){
-      const result = JSON.parse(this.userLogged['location']);
-      if(typeof result === 'string'){
-        const trimmedString = result.slice(1, -1);
-      this.location = trimmedString.split(',').map((location: String) => parseFloat(location.trim()));
-      }
-      if(typeof result === 'object'){
-        this.location = result;
-      }
-    }    
-    
-    // Preparamos el listado de materias que tiene el usuario en caso de ser un profesor
-    if(typeof this.userLogged['subjects'] === 'string'){
-      const result = JSON.parse(this.userLogged['subjects']);
-      if(typeof result === 'string'){
-        const trimmedString = result.slice(1, -1);
-      this.subjectsSelected = trimmedString.split(',').map((subject: String) => subject.trim());
-      }
-      if(typeof result === 'object'){
-        this.subjectsSelected = result;
-      } 
-    }
-  }
-
-  // Funcion para cargar los datos del usuario registrado
-  async loadData(): Promise<void> {
+    // Funcion para cargar los datos del usuario registrado
     let data: any;
     try{
       switch (this.rol) {
@@ -157,7 +122,42 @@ export class SettingsComponent implements OnInit {
         });
       }
     }
+    
+    // Si el usuario tiene valores definido en estas dos caracteristicas entonces se muestran
+    if(this.userLogged.image)
+      this.toggleInputImage();
+ 
+    if(this.userLogged.description)
+      this.toggleDescription();
+
+    // Preparamos la ubicacion del usuario en caso de ser un profesor
+    if(typeof this.userLogged['location'] === 'string'){
+      const result = JSON.parse(this.userLogged['location']);
+      
+      
+      if(typeof result === 'string'){
+        const trimmedString = result.slice(1, -1);
+      this.location = trimmedString.split(',').map((location: String) => parseFloat(location.trim()));
+      }
+      if(typeof result === 'object'){
+        this.location = result;
+      }
+    }    
+    
+    // Preparamos el listado de materias que tiene el usuario en caso de ser un profesor
+    if(typeof this.userLogged['subjects'] === 'string'){
+      const result = JSON.parse(this.userLogged['subjects']);
+      if(typeof result === 'string'){
+        const trimmedString = result.slice(1, -1);
+      this.subjectsSelected = trimmedString.split(',').map((subject: String) => subject.trim());
+      }
+      if(typeof result === 'object'){
+        this.subjectsSelected = result;
+      } 
+    }
   }
+
+  
 
    // Verifica que las materias que se estan generando esten definidas previamente por el profesor, si es asi
   // las marca como checkeadas.

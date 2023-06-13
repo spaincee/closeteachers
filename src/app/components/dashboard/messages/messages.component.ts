@@ -17,8 +17,8 @@ export class MessagesComponent implements AfterViewChecked {
   rol: string | null = localStorage.getItem('rol');
 
   myContacts: User[] = [];
-
   messageChatActive: any[]= [];
+
   userChatActive: User = {
     username: '',
     fullname: '',
@@ -44,11 +44,11 @@ export class MessagesComponent implements AfterViewChecked {
         switch (this.rol) { 
           case 'profesor':
             data = await this.teacherService.getDashboardInfo();
-            this.myContacts = data.students;
+            this.myContacts = data.studentsActive;
             break;
           case 'alumno':
             data = await this.studentService.getDashboardInfo();
-            this.myContacts = data.teachers;            
+            this.myContacts = data.teachersActive;            
             break;
     
           default:
@@ -76,12 +76,18 @@ export class MessagesComponent implements AfterViewChecked {
       }
     }
 
-    async ourComunication(id_user?: number){
+    async ourComunication(id_user: any){
       let data;
-      if(this.rol === 'alumno')
-        data = await this.studentService.getMyTeacherInfo(id_user!);
+      if(this.rol === 'alumno'){
+        data = await this.studentService.getMyTeacherInfo(id_user);
         this.userChatActive = data.teacher[0];
         this.messageChatActive = data.chat;
+      }else{
+        data = await this.teacherService.getMyStudentInfo(id_user);
+        this.userChatActive = data.student[0];
+        this.messageChatActive = data.chat;
+      }
+        
     }
 
     scrollToBottom(): void {

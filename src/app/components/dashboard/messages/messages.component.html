@@ -56,26 +56,30 @@
       </div>
     </div>
     <div class="card-body overflow-auto" #cardBody>
-      <div class="text-center fs-4 text-muted" *ngIf="messageChatActive.length === 0">No tiene mensajes con este profesor...</div>
+      <div class="text-center fs-4 text-muted" *ngIf="messageChatActive.length === 0">No tiene mensajes con este usuario...</div>
       <ul class="list-unstyled" *ngIf="messageChatActive.length !== 0">
         <li class="mb-5" *ngFor="let message of messageChatActive">
           <div
             class="d-flex flex-column"
             [ngClass]="{
-              'align-items-start': message.sender === 'profesor',
-              'align-items-end': message.sender === 'alumno'
-            }"
-          >
-            <div
-              class="d-flex gap-3 ms-3"
-              *ngIf="message.sender === 'profesor'"
-            >
+              'align-items-start': (message.sender === 'profesor' && rol === 'alumno') || (message.sender === 'alumno' && rol === 'profesor'),
+              'align-items-end': (message.sender === 'alumno' && rol === 'alumno') || (message.sender === 'profesor' && rol === 'profesor')}
+              ">
+            <div class="d-flex gap-3 ms-3" *ngIf="message.sender === 'profesor' && rol === 'alumno'">
               <p class="fs-6 mb-0"><strong>Profesor</strong></p>
               <span class="text-muted">{{ message.sent_time }}</span>
             </div>
-            <div class="d-flex gap-3 me-3" *ngIf="message.sender === 'alumno'">
+            <div class="d-flex gap-3 ms-3" *ngIf="message.sender === 'profesor' && rol === 'profesor'">
+             <span class="text-muted">{{ message.sent_time }}</span>
+             <p class="fs-6 mb-0"><strong>Yo</strong></p>
+            </div>
+            <div class="d-flex gap-3 ms-3" *ngIf="message.sender === 'alumno' && rol === 'profesor'">
+              <p class="fs-6 mb-0"><strong>Alumno</strong></p>
               <span class="text-muted">{{ message.sent_time }}</span>
-              <p class="fs-6 mb-0"><strong>Yo</strong></p>
+            </div>
+            <div class="d-flex gap-3 ms-3" *ngIf="message.sender === 'alumno' && rol === 'alumno'">
+             <span class="text-muted">{{ message.sent_time }}</span>
+             <p class="fs-6 mb-0"><strong>Yo</strong></p>
             </div>
             <div
               class="mw-50 p-3"
@@ -84,16 +88,15 @@
                 'bg-middle': message.sender === 'alumno',
                 'text-start': message.sender === 'profesor',
                 'text-end': message.sender === 'alumno',
-                'cloud-message-left': message.sender === 'profesor',
-                'cloud-message-right': message.sender === 'alumno'
-              }"
-            >
+                'cloud-message-left': (message.sender === 'profesor' && rol === 'alumno') || (message.sender === 'alumno' && rol === 'profesor'),
+                'cloud-message-right': (message.sender === 'alumno' && rol === 'alumno') || (message.sender === 'profesor' && rol === 'profesor')}">
               <span>{{ message.message }}</span>
             </div>
           </div>
         </li>
       </ul>
     </div>
+
     <form #chatForm="ngForm" (ngSubmit)="sendMessage(chatForm)">
       <div class="card-footer d-flex gap-3 align-items-center">
         <input
@@ -109,7 +112,7 @@
           placeholder="Escriba un mensaje..."
           ngModel
         />
-        <button type="submit">
+        <button type="submit" class="btn btn-link" style="padding: 0; background: none; border: none; box-shadow: none;">
           <i class="fa-solid fa-paper-plane fs-4"></i>
         </button>
       </div>

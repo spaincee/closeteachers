@@ -13,9 +13,13 @@ import Swal from 'sweetalert2';
 export class MyteachersComponent implements OnInit {
   showToast: boolean = false;
   toastmessage: string = '';
+  withoutTeachers:boolean = false;
+  withoutPending:boolean = false;
 
-  teachersList: User[] = [];
+  teachersActiveList: User[] = [];
+  teachersPendingList: User[] = [];
   subjectsList: string[] = [];
+
   usedId: number = 0;
   score: number = 0;
   comment: string = '';
@@ -39,12 +43,24 @@ export class MyteachersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadTicherLists();
+    this.loadTicherActiveLists();
+    this.loadTicherPendingLists();
   }
 
-  async loadTicherLists(): Promise<any> {
+  async loadTicherActiveLists(): Promise<any> {
     const data = await this.studentService.getDashboardInfo();
-    this.teachersList = data.teachers;
+    this.teachersActiveList = data.teachersActive;
+
+    if(typeof this.teachersActiveList === 'string')
+      this.withoutTeachers = true;
+  }
+
+  async loadTicherPendingLists(): Promise<any> {
+    const data = await this.studentService.getDashboardInfo();
+    this.teachersPendingList = data.teachersPending;
+
+    if(typeof this.teachersPendingList === 'string')
+      this.withoutPending = true;
   }
 
   stringToArray(string: string | undefined): string[] {
@@ -55,7 +71,6 @@ export class MyteachersComponent implements OnInit {
   async seeUserInfor(id_user: any): Promise<any> {
     const result = await this.studentService.getMyTeacherInfo(id_user);
     this.userInfo = result.teacher[0];
-    console.log(this.userInfo);
   }
 
   async seeCommentTeacher(id_user: any): Promise<any> {

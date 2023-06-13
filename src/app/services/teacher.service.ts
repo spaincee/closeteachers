@@ -17,8 +17,8 @@ export class TeacherService {
     return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}`));
   }
 
-  getStudentInfo(id: number): Promise<User> {
-    return lastValueFrom(this.httpClient.get<User>(`${this.baseUrl}/students/${id}`));
+  getMyStudentInfo(id: number): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/students/${id}`));
   }
 
   sendMessage(id: number, data: any): Promise<any> {
