@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -8,12 +8,11 @@ import Point from 'ol/geom/Point';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Icon, Style } from 'ol/style';
-import * as olProj from 'ol/proj';
-import Rotate from 'ol/control/Rotate';
 import { fromLonLat } from 'ol/proj';
 import Control from 'ol/control/Control';
 import { User } from 'src/app/interfaces/user.interface';
 import { PublicService } from 'src/app/services/public.service';
+import { ComunicationsService } from 'src/app/services/comunications.service';
 
 
 @Component({
@@ -21,21 +20,22 @@ import { PublicService } from 'src/app/services/public.service';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnChanges {
   private map!: Map;
   private markerSource!: VectorSource;
 
   teacherLists: User[] = [];
   locations: any[]= [];
 
-  @Input() arrUsers?: User[];
+  @Input() lista: any[] = [];
 
-  constructor(private publicService: PublicService) { }
+  constructor(
+    private publicService: PublicService,
+    private comunicationService: ComunicationsService) { 
+      // this.teacherLists = this.comunicationService.getUpdatedList();
+    }
 
   async ngOnInit(): Promise<void> {
-
-    const data = await this.publicService.getAll();
-    this.teacherLists = data.teachers
 
     const baseLayer = new TileLayer({
       source: new OSM({
@@ -82,12 +82,23 @@ export class MapComponent implements OnInit {
   
     this.map.addControl(resetControl);
 
-    this.addTeacherMarkers();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['lista']) {
+      this.teacherLists = changes['lista'].currentValue;
+      console.log(this.teacherLists);
+      
+      this.addTeacherMarkers();
+
+    }
   }
 
   
 
-  addTeacherMarkers(): void {    
+  addTeacherMarkers(): void {  
+    this.markerSource.clear();
+
     this.teacherLists.forEach(teacher => {
       if(typeof teacher['location'] === 'string'){
         const result = JSON.parse(teacher['location']);
@@ -99,6 +110,7 @@ export class MapComponent implements OnInit {
           this.locations = result;
         }
       }
+      console.log(this.locations);
       const initialMarker = new Feature({
         geometry: new Point(fromLonLat([this.locations[1], this.locations[0]]))
       });

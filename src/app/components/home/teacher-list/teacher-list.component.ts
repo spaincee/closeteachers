@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
+import { ComunicationsService } from 'src/app/services/comunications.service';
 import { PublicService } from 'src/app/services/public.service';
 import { subjectsData } from 'src/assets/data/subjects.data';
 
@@ -11,21 +12,28 @@ import { subjectsData } from 'src/assets/data/subjects.data';
 })
 export class TeacherListComponent implements OnInit {
 
+  @Output() listaActualizada: EventEmitter<any[]> = new EventEmitter<any[]>();
+
   arrUsers: User[] = [];
   subjectList: string [] = subjectsData.sort();
+
   filterForm: FormGroup;
 
-  constructor(private publicService: PublicService) {
+  constructor(
+    private publicService: PublicService,
+    private comunicationService: ComunicationsService) {
     this.filterForm = new FormGroup({
       subject: new FormControl('',[]),
       price: new FormControl('0',[]),
       experience: new FormControl('0',[]),
       score: new FormControl('0',[])
     })
+
+    this.gotoPage();
   }
 
   ngOnInit(): void {
-    this.gotoPage();
+   
   }
 
   async gotoPage(): Promise<void> {
@@ -36,23 +44,24 @@ export class TeacherListComponent implements OnInit {
     catch (error) {
       console.log(error);
     }
-  }
+  } 
 
   async saveFormValues(){
-    let arrUsersFiltered: User[] = this.arrUsers;
+    await this.gotoPage();
 
     if(this.filterForm.get('subject')?.value){
-      arrUsersFiltered = this.filterbySubject(arrUsersFiltered, this.filterForm.get('subject')?.value);
+      this.arrUsers = this.filterbySubject(this.arrUsers, this.filterForm.get('subject')?.value);
     }
     if(this.filterForm.get('price')?.value > 0){
-      arrUsersFiltered = this.filterbyPrice(arrUsersFiltered, this.filterForm.get('price')?.value);
+      this.arrUsers = this.filterbyPrice(this.arrUsers, this.filterForm.get('price')?.value);
     }
     if(this.filterForm.get('experience')?.value > 0){
-      arrUsersFiltered = this.filterbyExperience(arrUsersFiltered, this.filterForm.get('experience')?.value);
+      this.arrUsers = this.filterbyExperience(this.arrUsers, this.filterForm.get('experience')?.value);
     }
     
-    this.arrUsers = arrUsersFiltered;
-    
+    this.listaActualizada.emit(this.arrUsers);
+    //this.comunicationService.actualizarLista(this.arrUsers);
+
   }
 
   // Funciones para filtros
