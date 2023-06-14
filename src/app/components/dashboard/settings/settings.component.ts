@@ -1,8 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -27,14 +25,12 @@ export class SettingsComponent implements OnInit {
   showToast: boolean = false;
 
   toastMessage: string = '';
-
   subjectsList: string[] = subjectsData;
   subjectsSelected: string[] = [];
   location: number[] = [];
-  settingForm: FormGroup;
-  passwordForm: FormGroup;
 
   rol: string | null = localStorage.getItem('rol');
+
   userLogged: User = {
     username: '',
     fullname: '',
@@ -43,11 +39,15 @@ export class SettingsComponent implements OnInit {
     rol: '',
   };
 
+  settingForm: FormGroup;
+  passwordForm: FormGroup;
+
   constructor(
     private adminService: AdminService,
     private teacherService: TeacherService,
     private studentService: StudentService
   ) {
+    
     this.settingForm = new FormGroup({
       fullname: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
@@ -78,27 +78,51 @@ export class SettingsComponent implements OnInit {
     
   }
 
+
   // Iniciamos el componenete cargado los datos del usuario registrado
   async ngOnInit(): Promise<void> {
+
+    // Funcion para cargar los datos del usuario registrado
     let data: any;
-    switch (this.rol) {
-      case 'administrador':
-        data = await this.adminService.getDashboardInfo();
-        this.userLogged = data.admin;
-        break;
-      case 'profesor':
-        data = await this.teacherService.getDashboardInfo();
-        this.userLogged = data.teacher;
-        break;
-      case 'alumno':
-        data = await this.studentService.getDashboardInfo();
-        this.userLogged = data.student;
-        break;
+    try{
+      switch (this.rol) {
+        case 'administrador':
+          data = await this.adminService.getDashboardInfo();
+          this.userLogged = data.admin;
+          break;
+        case 'profesor':
+          data = await this.teacherService.getDashboardInfo();
+          this.userLogged = data.teacher;
+          break;
+        case 'alumno':
+          data = await this.studentService.getDashboardInfo();
+          this.userLogged = data.student;
+          break;
+  
+        default:
+          break;
+      } 
+    }catch(error: any){
+      if (error instanceof HttpErrorResponse) {
+        let errorMsg = `Se produjo un error desconocido: ${error.message}`;
+        
+        if(error.error.msg !== undefined)
+          errorMsg = error.error.msg;
 
-      default:
-        break;
+        Swal.fire({
+          text: errorMsg,
+          confirmButtonColor: '#3085d6',
+          icon: 'warning',
+        });
+      }else{
+        Swal.fire({
+          text: error.message,
+          confirmButtonColor: '#3085d6',
+          icon: 'warning',
+        });
+      }
     }
-
+    
     // Si el usuario tiene valores definido en estas dos caracteristicas entonces se muestran
     if(this.userLogged.image)
       this.toggleInputImage();
@@ -106,10 +130,11 @@ export class SettingsComponent implements OnInit {
     if(this.userLogged.description)
       this.toggleDescription();
 
-
     // Preparamos la ubicacion del usuario en caso de ser un profesor
     if(typeof this.userLogged['location'] === 'string'){
       const result = JSON.parse(this.userLogged['location']);
+      
+      
       if(typeof result === 'string'){
         const trimmedString = result.slice(1, -1);
       this.location = trimmedString.split(',').map((location: String) => parseFloat(location.trim()));
@@ -131,6 +156,8 @@ export class SettingsComponent implements OnInit {
       } 
     }
   }
+
+  
 
    // Verifica que las materias que se estan generando esten definidas previamente por el profesor, si es asi
   // las marca como checkeadas.
@@ -160,7 +187,7 @@ export class SettingsComponent implements OnInit {
       let result: any;
     switch (this.rol) {
       case 'administrador':
-        result = await this.adminService.changePassword(data);
+        result = await this.adminService.changePassword(data);   ///Aqui pasa algo
         this.toastMessage = result.msg;
         this.showToast = true;
         this.passwordForm.reset();
@@ -183,7 +210,7 @@ export class SettingsComponent implements OnInit {
     }
     }catch(error: any){
       if (error instanceof HttpErrorResponse) {
-        let errorMsg = 'Se produjo un error desconocido';
+        let errorMsg = `Se produjo un error desconocido: ${error.message}`;
         
         if(error.error.msg !== undefined)
           errorMsg = error.error.msg;
@@ -232,7 +259,7 @@ export class SettingsComponent implements OnInit {
     }
     }catch(error: any){
       if (error instanceof HttpErrorResponse) {
-        let errorMsg = 'Se produjo un error desconocido';
+        let errorMsg = `Se produjo un error desconocido: ${error}`;
         
         if(error.error.msg !== undefined)
           errorMsg = error.error.msg;

@@ -1,6 +1,6 @@
 <div class="app-teacher-list-container">
   <section class="teacher-filter my-2"></section>
-  
+
   <form action="" [formGroup]="filterForm" (ngSubmit)="saveFormValues()">
     <div class="d-flex justify-content-between align-items-end gap-5 mb-4">
       <div class="col">
@@ -10,9 +10,7 @@
           id="subject"
           aria-label="Default select example"
           size="1"
-          formControlName="subject"
-        >
-          <option selected>Seleciona una materia</option>
+          formControlName="subject">
           <option *ngFor="let subject of subjectList" [value]="subject">
             {{ subject }}
           </option>
@@ -21,8 +19,16 @@
       <div class="col">
         <label for="price" class="form-label">Precio/hora</label>
         <div class="d-flex gap-2 align-items-center">
-          <input type="range" class="form-range" min="0" max="100" id="price" formControlName="price"/>
-          <span class="text-primary fs-4">0</span>
+          <input
+            type="range"
+            class="form-range"
+            min="0"
+            max="100"
+            id="price"
+            [value]="filterForm.get('price')?.value"
+            formControlName="price"
+          />
+          <span class="text-primary fs-4">{{filterForm.get("price")?.value}}</span>
         </div>
       </div>
       <div class="col">
@@ -34,20 +40,30 @@
             min="0"
             max="60"
             id="experience"
+            [value]="filterForm.get('experience')?.value"
             formControlName="experience"
           />
-          <span class="text-primary fs-4">0</span>
+          <span class="text-primary fs-4">{{filterForm.get("experience")?.value}}</span>
         </div>
       </div>
       <div class="col">
         <label for="score" class="form-label">Puntuacion</label>
         <div class="d-flex gap-2 align-items-center">
-          <input type="range" class="form-range" min="0" max="5" id="score" formControlName="score"/>
-          <span class="text-primary fs-4">0</span>
+          <input
+            type="range"
+            class="form-range"
+            min="0"
+            max="5"
+            id="score"
+            [value]="filterForm.get('score')?.value"
+            formControlName="score"
+          />
+          <span class="text-primary fs-4">{{filterForm.get("score")?.value}}</span>
         </div>
       </div>
-      <div class="col">
+      <div class="col d-flex gap-3">
         <button class="btn btn-primary" type="submit">Filtrar</button>
+        <button class="btn btn-success" type="" (click)="resetFilters()">Resetear filtros</button>
       </div>
     </div>
   </form>
@@ -71,7 +87,7 @@
         </div>
       </div>
       <div class="home-map col-lg-6 col-12">
-        <app-map></app-map>
+        <app-map [arrUsers]="arrUsers"></app-map>
       </div>
     </div>
   </section>

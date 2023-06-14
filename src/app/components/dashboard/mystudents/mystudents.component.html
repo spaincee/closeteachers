@@ -16,9 +16,16 @@
   </ol>
 </nav>
 
-<div class="rounded-4 bg-light p-3">
+<div class="rounded-4 bg-light p-3 mb-3">
   <div class="table-responsive small">
-    <table class="table align-middle  table-striped table-hover table-sm">
+    <div class="text-center fs-4 text-muted" *ngIf="withoutStudents">
+      {{ this.studentActiveList }}
+    </div>
+    <table
+      class="table align-middle table-striped table-hover table-sm caption-top"
+      *ngIf="!withoutStudents"
+    >
+      <caption class="fs-4">Mis alumnos</caption>
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -31,56 +38,112 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let student of studentActiveList">
           <td>
             <img
               class="img-icono rounded-circle"
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+              [src]="
+                student.image ? student.image : './assets/images/no-image.png'
+              "
               alt=""
             />
           </td>
-          <td>Benjamin Aris Duarte</td>
-          <td>@ben</td>
-          <td>bejamin90@gmail.com</td>
-          <td>+52 646 555 0000</td>
+          <td>{{ student.fullname }}</td>
+          <td>@{{ student.username }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.phone }}</td>
           <td>
-            <span class="p-1 bg-success rounded-2 text-white">Aceptado</span>
+            <span
+              [ngClass]="{
+                'bg-success': student.relationship === 1,
+                'bg-primary': student.relationship !== 1
+              }"
+              class="p-1 bg-success rounded-2 text-white"
+              >{{
+                student.relationship === 1 ? "Aceptado" : "Pendiente..."
+              }}</span
+            >
           </td>
           <td class="d-flex gap-4">
             <i
+              data-id="{{ student.id_user }}"
               class="fa-solid fa-eye fs-4 text-primary"
               data-bs-toggle="modal"
-              data-bs-target="#modal"
+              data-bs-target="#infoModal"
+              (click)="seeUserInfor(student.id_user)"
             ></i>
-            <div class="form-check form-switch">
-              <input class="form-check-input h-75" type="checkbox" role="switch" checked >
-          </div> 
           </td>
         </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="rounded-4 bg-light p-3">
+  <div class="table-responsive small">
+    <div class="text-center fs-4 text-muted" *ngIf="withoutPending">
+      {{ this.studentPendingList }}
+    </div>
+    <table
+      class="table align-middle table-striped table-hover table-sm caption-top"
+      *ngIf="!withoutPending"
+    >
+      <caption class="fs-4">Alumnos solicitantes</caption>
+      <thead>
         <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of studentPendingList">
           <td>
             <img
               class="img-icono rounded-circle"
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+              [src]="
+                student.image ? student.image : './assets/images/no-image.png'
+              "
               alt=""
             />
           </td>
-          <td>Benjamin Aris Duarte</td>
-          <td>@ben</td>
-          <td>bejamin90@gmail.com</td>
-          <td>+52 646 555 0000</td>
+          <td>{{ student.fullname }}</td>
+          <td>@{{ student.username }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.phone }}</td>
           <td>
-            <span class="p-1 bg-primary rounded-2 text-white">Pendiente...</span>
+            <span
+              [ngClass]="{
+                'bg-success': student.relationship === 1,
+                'bg-primary': student.relationship !== 1
+              }"
+              class="p-1 bg-success rounded-2 text-white"
+              >{{
+                student.relationship === 1 ? "Aceptado" : "Pendiente..."
+              }}</span
+            >
           </td>
           <td class="d-flex gap-4">
             <i
+              data-id="{{ student.id_user }}"
               class="fa-solid fa-eye fs-4 text-primary"
               data-bs-toggle="modal"
-              data-bs-target="#modal"
+              data-bs-target="#infoModal"
+              (click)="seeUserInfor(student.id_user)"
             ></i>
             <div class="form-check form-switch">
-              <input class="form-check-input h-75" type="checkbox" role="switch" >
-          </div> 
+              <input
+                class="form-check-input h-75"
+                type="checkbox"
+                role="switch"
+                [checked]="student.relationship === 1"
+                (click)="changeStudentrelationship(student.id_user)"
+              />
+            </div>
           </td>
         </tr>
       </tbody>
@@ -92,7 +155,7 @@
 
 <div
   class="modal fade"
-  id="modal"
+  id="infoModal"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
@@ -114,37 +177,35 @@
         <div class="d-flex gap-3">
           <img
             class="model-img rounded-circle"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+            [src]="
+              userInfo.image ? userInfo.image : './assets/images/no-image.png'
+            "
             alt=""
           />
           <div class="d-flex flex-column mt-2">
-            <h3 class="weight-500 fs-3 mb-0">Benjamin Aris Duarte</h3>
-            <span class="fs-5">@ben</span>
+            <h3 class="weight-500 fs-3 mb-0">{{ userInfo.fullname }}</h3>
+            <span class="fs-5">@{{ userInfo.username }}</span>
           </div>
         </div>
         <div class="d-flex flex-column gap-3 mt-5">
           <div class="d-flex align-items-center gap-4 mb-3">
             <i class="fa-solid fa-envelope fs-4"></i>
-            <p class="fs-5 mb-0">benjamin90@gmail.com</p>
+            <p class="fs-5 mb-0">{{ userInfo.email }}</p>
           </div>
           <div class="d-flex align-items-center gap-4 mb-3">
             <i class="fa-solid fa-phone fs-4"></i>
-            <p class="fs-5 mb-0">+52 646 555 0000</p>
+            <p class="fs-5 mb-0">
+              {{ userInfo.phone ? userInfo.phone : "--" }}
+            </p>
           </div>
           <div class="d-flex align-items-center gap-4 mb-3">
             <i class="fa-solid fa-map-location-dot fs-4"></i>
-            <p class="fs-5 mb-0">Ave. Lagunas No. 89 Colonia Obrera</p>
+            <p class="fs-5 mb-0">--</p>
           </div>
           <div class="d-flex align-items-start gap-4 mb-3">
             <i class="fa-solid fa-file fs-4"></i>
             <p class="fs-5 mb-0">
-              Aquí encontrarás todas las herramientas y funciones necesarias
-              para tener el control total de tus actividades. Nuestro objetivo
-              es brindarte una experiencia fluida y eficiente mientras exploras
-              y gestionas tus datos. En esta vista podra manejar un listado con
-              todos los profesor que establecido contacto y podra intercambiar
-              mensajes con cada uno de ello. También podras tener la posibilidad
-              de modificar tus datos personales.
+              {{ userInfo.description ? userInfo.description : "--" }}
             </p>
           </div>
         </div>
@@ -153,52 +214,6 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Cerrar
         </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal comment -->
-
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-          Evaluación y comentario
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label"
-              >Evaluación</label
-            >
-            <input type="number" class="form-control" id="recipient-name" />
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Comentario:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Cerrar
-        </button>
-        <button type="button" class="btn btn-primary">Guardar cambios</button>
       </div>
     </div>
   </div>

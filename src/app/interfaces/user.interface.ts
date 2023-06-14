@@ -16,4 +16,5 @@ export interface User {
   cover?: string;
   active?: number;
   status?: number;
+  relationship?: number;
 }
