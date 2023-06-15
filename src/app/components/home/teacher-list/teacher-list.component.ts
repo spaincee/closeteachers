@@ -48,6 +48,8 @@ export class TeacherListComponent implements OnInit {
     try {
       let response = await this.publicService.getAll()
       this.arrUsers = response.teachers;
+      console.log(this.arrUsers);
+      
     }
     catch (error) {
       console.log(error);
@@ -65,6 +67,9 @@ export class TeacherListComponent implements OnInit {
     }
     if(this.filterForm.get('experience')?.value > 0){
       this.arrUsers = this.filterbyExperience(this.arrUsers, this.filterForm.get('experience')?.value);
+    }
+    if(this.filterForm.get('score')?.value > 0){
+      this.arrUsers = this.filterbyScore(this.arrUsers, this.filterForm.get('score')?.value);
     }
     
     this.listaActualizada.emit(this.arrUsers);
@@ -98,6 +103,16 @@ export class TeacherListComponent implements OnInit {
     let result: User[] = [];
     teachers.forEach(teacher => {
       if(teacher.experience !== undefined && teacher.experience <= experience){
+        result.push(teacher);
+      }
+    })
+    return result;
+  }
+
+  filterbyScore(teachers: User[], score: number): User[] {
+    let result: User[] = [];
+    teachers.forEach(teacher => {
+      if(teacher.average !== null && teacher.average! >= score){
         result.push(teacher);
       }
     })

@@ -17,4 +17,5 @@ export interface User {
   active?: number;
   status?: number;
   relationship?: number;
+  average?: number
 }
