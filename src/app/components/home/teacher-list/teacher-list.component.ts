@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
-import { ComunicationsService } from 'src/app/services/comunications.service';
 import { PublicService } from 'src/app/services/public.service';
 import { subjectsData } from 'src/assets/data/subjects.data';
 
@@ -14,14 +13,24 @@ export class TeacherListComponent implements OnInit {
 
   @Output() listaActualizada: EventEmitter<any[]> = new EventEmitter<any[]>();
 
+  stars: number[]=[1, 2, 3, 4, 5];
   arrUsers: User[] = [];
   subjectList: string [] = subjectsData.sort();
+
+  userToShow: User = {
+    username: '',
+    fullname: '',
+    email: '',
+    password: '',
+    rol: '',
+  };
+  userToShowAVG: number = 0;
+  userToShowComments?: any[];
 
   filterForm: FormGroup;
 
   constructor(
-    private publicService: PublicService,
-    private comunicationService: ComunicationsService) {
+    private publicService: PublicService) {
     this.filterForm = new FormGroup({
       subject: new FormControl('',[]),
       price: new FormControl('0',[]),
@@ -32,8 +41,7 @@ export class TeacherListComponent implements OnInit {
     this.gotoPage();
   }
 
-  ngOnInit(): void {
-   
+  ngOnInit(): void { 
   }
 
   async gotoPage(): Promise<void> {
@@ -60,7 +68,6 @@ export class TeacherListComponent implements OnInit {
     }
     
     this.listaActualizada.emit(this.arrUsers);
-    //this.comunicationService.actualizarLista(this.arrUsers);
 
   }
 
@@ -100,6 +107,29 @@ export class TeacherListComponent implements OnInit {
   resetFilters(){
     this.gotoPage();
     this.filterForm.reset();
+  }
+
+  async seeUserInfo(id: number | undefined): Promise<void>{
+    try{
+      if(id !== undefined){
+        const data = await this.publicService.getTeacherInfo(id);
+        this.userToShow = data.teacher[0];
+        this.userToShowAVG = data.teacherAVG[0].average;
+        const result: any[] = data.teacherComments;
+        this.userToShowComments = result.filter((comment)=> comment.comments !== null);        
+      }  
+      console.log(this.userToShowComments);
+        
+
+    }catch(error: any){
+      console.log(error.message);
+
+    }
+  }
+
+  stringToArray(string: string | undefined): string[] {
+    if (string !== undefined) return JSON.parse(string);
+    return [];
   }
 
 }

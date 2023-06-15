@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Host, Input } from '@angular/core';
 import { User } from 'src/app/interfaces/user.interface';
 import { PublicService } from 'src/app/services/public.service';
+import { TeacherListComponent } from '../teacher-list.component';
 
 
 @Component({
@@ -11,22 +12,17 @@ import { PublicService } from 'src/app/services/public.service';
 export class TeacherCardComponent  {
   @Input() myUser!: User;
 
-  constructor(private publicServices: PublicService) { }
+  constructor(
+    @Host() private _teacherList: TeacherListComponent,
+    private publicService: PublicService) { }
 
-  async deleteUser(): Promise<void> {
-    // if (pId !== undefined) {
-    //   try {
-    //     let response = await this.publicServices.delete(pId);
-    //     if (response.id_user ) {
-    //       console.log(response);
-    //       alert('El Usuario ' + response.fullname + ' ' + response.last_name + ' ha sido eliminado Satisfactoriamente');
-    //     } else {
-    //       alert(response.error);
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+  stringToArray(string: string | undefined): string[] {
+    if (string !== undefined) return JSON.parse(string);
+    return [];
+  }
+
+  async seeUserInfo(id: number | undefined): Promise<void>{
+    this._teacherList.seeUserInfo(id);
   }
 
 }

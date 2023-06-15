@@ -16,8 +16,8 @@ export class PublicService {
     return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}`))
   }
 
-  getTeacherInfo(id: number): Promise<User> {
-    return lastValueFrom(this.httpClient.get<User>(`${this.baseUrl}/${id}`));
+  getTeacherInfo(id: number): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/${id}`));
   }
 
   getTeachersbySubject(subject: string): Promise<User[]> {

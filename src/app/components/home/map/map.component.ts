@@ -12,7 +12,6 @@ import { fromLonLat } from 'ol/proj';
 import Control from 'ol/control/Control';
 import { User } from 'src/app/interfaces/user.interface';
 import { PublicService } from 'src/app/services/public.service';
-import { ComunicationsService } from 'src/app/services/comunications.service';
 
 
 @Component({
@@ -22,7 +21,7 @@ import { ComunicationsService } from 'src/app/services/comunications.service';
 })
 export class MapComponent implements OnInit, OnChanges {
   private map!: Map;
-  private markerSource!: VectorSource;
+  private markerSource: VectorSource = new VectorSource();
 
   teacherLists: User[] = [];
   locations: any[]= [];
@@ -30,16 +29,14 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() lista: any[] = [];
 
   constructor(
-    private publicService: PublicService,
-    private comunicationService: ComunicationsService) { 
-      // this.teacherLists = this.comunicationService.getUpdatedList();
+    private publicService: PublicService) { 
     }
 
   async ngOnInit(): Promise<void> {
 
     const baseLayer = new TileLayer({
       source: new OSM({
-        attributions: [] // Eliminar la atribución
+        attributions: []
       })
     });
   
@@ -49,8 +46,10 @@ export class MapComponent implements OnInit, OnChanges {
       source: this.markerSource,
       style: new Style({
         image: new Icon({
-          src: 'https://openlayers.org/en/latest/examples/data/icon.png',
-          scale: 1.0, // Ajusta el valor para cambiar el tamaño de los marcadores (1.0 = tamaño original)
+          // src: 'https://openlayers.org/en/latest/examples/data/icon.png',
+          src: './assets/images/placeholder.png',
+          scale: 0.12, 
+          anchor: [0.5, 1],
         })
       })
     });
@@ -87,7 +86,6 @@ export class MapComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['lista']) {
       this.teacherLists = changes['lista'].currentValue;
-      console.log(this.teacherLists);
       
       this.addTeacherMarkers();
 
@@ -110,7 +108,7 @@ export class MapComponent implements OnInit, OnChanges {
           this.locations = result;
         }
       }
-      console.log(this.locations);
+
       const initialMarker = new Feature({
         geometry: new Point(fromLonLat([this.locations[1], this.locations[0]]))
       });
