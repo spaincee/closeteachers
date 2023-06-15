@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
 import { StudentService } from 'src/app/services/student.service';
 import { TeacherService } from 'src/app/services/teacher.service';
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 export class MessagesComponent implements AfterViewChecked {
 
   @ViewChild('cardBody') cardBody!: ElementRef;
+  @ViewChild('chatForm', { static: false }) chatForm!: NgForm;
 
   rol: string | null = localStorage.getItem('rol');
 
@@ -111,6 +113,8 @@ export class MessagesComponent implements AfterViewChecked {
           result = await this.teacherService.sendMessage(data.receiverId, data)
         }
         this.ourComunication(data.receiverId);
+        
+        this.chatForm.resetForm();
 
       }else{
         console.log('Error');

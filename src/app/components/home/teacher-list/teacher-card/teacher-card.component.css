@@ -1,4 +1,4 @@
-button {
+.btn-card {
   width: 100%;
   margin: 5px;
 }
@@ -65,5 +65,10 @@ img.teacher-card-avatar {
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 5px 5px 0px 0px;
+}
+
+.model-img {
+  width: 100px;
+  height: 100px;
 }
 

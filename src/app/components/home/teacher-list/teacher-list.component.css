@@ -60,3 +60,25 @@ button[disabled]:hover {
   cursor: not-allowed;
 }
 
+.not-found{
+  margin: auto;
+}
+
+.model-img {
+  width: 100px;
+  height: 100px;
+}
+
+.icon-img {
+  width: 40px;
+  height: 40px;
+}
+
+.custom-modal-body {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.bg-middle{
+  background-color: #ced4da;
+}

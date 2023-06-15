@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
 import { PublicService } from 'src/app/services/public.service';
@@ -11,21 +11,37 @@ import { subjectsData } from 'src/assets/data/subjects.data';
 })
 export class TeacherListComponent implements OnInit {
 
+  @Output() listaActualizada: EventEmitter<any[]> = new EventEmitter<any[]>();
+
+  stars: number[]=[1, 2, 3, 4, 5];
   arrUsers: User[] = [];
   subjectList: string [] = subjectsData.sort();
+
+  userToShow: User = {
+    username: '',
+    fullname: '',
+    email: '',
+    password: '',
+    rol: '',
+  };
+  userToShowAVG: number = 0;
+  userToShowComments?: any[];
+
   filterForm: FormGroup;
 
-  constructor(private publicService: PublicService) {
+  constructor(
+    private publicService: PublicService) {
     this.filterForm = new FormGroup({
       subject: new FormControl('',[]),
       price: new FormControl('0',[]),
       experience: new FormControl('0',[]),
       score: new FormControl('0',[])
     })
+
+    this.gotoPage();
   }
 
-  ngOnInit(): void {
-    this.gotoPage();
+  ngOnInit(): void { 
   }
 
   async gotoPage(): Promise<void> {
@@ -36,23 +52,23 @@ export class TeacherListComponent implements OnInit {
     catch (error) {
       console.log(error);
     }
-  }
+  } 
 
   async saveFormValues(){
-    let arrUsersFiltered: User[] = this.arrUsers;
+    await this.gotoPage();
 
     if(this.filterForm.get('subject')?.value){
-      arrUsersFiltered = this.filterbySubject(arrUsersFiltered, this.filterForm.get('subject')?.value);
+      this.arrUsers = this.filterbySubject(this.arrUsers, this.filterForm.get('subject')?.value);
     }
     if(this.filterForm.get('price')?.value > 0){
-      arrUsersFiltered = this.filterbyPrice(arrUsersFiltered, this.filterForm.get('price')?.value);
+      this.arrUsers = this.filterbyPrice(this.arrUsers, this.filterForm.get('price')?.value);
     }
     if(this.filterForm.get('experience')?.value > 0){
-      arrUsersFiltered = this.filterbyExperience(arrUsersFiltered, this.filterForm.get('experience')?.value);
+      this.arrUsers = this.filterbyExperience(this.arrUsers, this.filterForm.get('experience')?.value);
     }
     
-    this.arrUsers = arrUsersFiltered;
-    
+    this.listaActualizada.emit(this.arrUsers);
+
   }
 
   // Funciones para filtros
@@ -91,6 +107,29 @@ export class TeacherListComponent implements OnInit {
   resetFilters(){
     this.gotoPage();
     this.filterForm.reset();
+  }
+
+  async seeUserInfo(id: number | undefined): Promise<void>{
+    try{
+      if(id !== undefined){
+        const data = await this.publicService.getTeacherInfo(id);
+        this.userToShow = data.teacher[0];
+        this.userToShowAVG = data.teacherAVG[0].average;
+        const result: any[] = data.teacherComments;
+        this.userToShowComments = result.filter((comment)=> comment.comments !== null);        
+      }  
+      console.log(this.userToShowComments);
+        
+
+    }catch(error: any){
+      console.log(error.message);
+
+    }
+  }
+
+  stringToArray(string: string | undefined): string[] {
+    if (string !== undefined) return JSON.parse(string);
+    return [];
   }
 
 }

@@ -2,21 +2,26 @@
   <section class="teacher-filter my-2"></section>
 
   <form action="" [formGroup]="filterForm" (ngSubmit)="saveFormValues()">
-    <div class="d-flex justify-content-between align-items-end gap-5 mb-4">
-      <div class="col">
+    <div
+      class="row d-flex justify-content-between align-items-end g-3 pb-4 border-bottom border-1"
+    >
+      <!-- Filtor materia -->
+      <div class="col mt-0">
         <label for="subject" class="form-label">Materias</label>
         <select
           class="form-select"
           id="subject"
           aria-label="Default select example"
           size="1"
-          formControlName="subject">
+          formControlName="subject"
+        >
           <option *ngFor="let subject of subjectList" [value]="subject">
             {{ subject }}
           </option>
         </select>
       </div>
-      <div class="col">
+      <!-- Filtor precios -->
+      <div class="col mt-0">
         <label for="price" class="form-label">Precio/hora</label>
         <div class="d-flex gap-2 align-items-center">
           <input
@@ -28,10 +33,13 @@
             [value]="filterForm.get('price')?.value"
             formControlName="price"
           />
-          <span class="text-primary fs-4">{{filterForm.get("price")?.value}}</span>
+          <span class="text-primary fs-4">{{
+            filterForm.get("price")?.value
+          }}</span>
         </div>
       </div>
-      <div class="col">
+      <!-- Filtor experiecnia -->
+      <div class="col mt-0">
         <label for="experience" class="form-label">Experiencia</label>
         <div class="d-flex gap-2 align-items-center">
           <input
@@ -43,10 +51,13 @@
             [value]="filterForm.get('experience')?.value"
             formControlName="experience"
           />
-          <span class="text-primary fs-4">{{filterForm.get("experience")?.value}}</span>
+          <span class="text-primary fs-4">{{
+            filterForm.get("experience")?.value
+          }}</span>
         </div>
       </div>
-      <div class="col">
+      <!-- Filtor puntuacion -->
+      <div class="col mt-0">
         <label for="score" class="form-label">Puntuacion</label>
         <div class="d-flex gap-2 align-items-center">
           <input
@@ -58,37 +69,186 @@
             [value]="filterForm.get('score')?.value"
             formControlName="score"
           />
-          <span class="text-primary fs-4">{{filterForm.get("score")?.value}}</span>
+          <span class="text-primary fs-4">{{
+            filterForm.get("score")?.value
+          }}</span>
         </div>
       </div>
-      <div class="col d-flex gap-3">
-        <button class="btn btn-primary" type="submit">Filtrar</button>
-        <button class="btn btn-success" type="" (click)="resetFilters()">Resetear filtros</button>
+      <!-- botones -->
+      <div class="col mt-0 d-flex gap-3">
+        <button class="btn btn-primary rounded-pill" type="submit">
+          Filtrar
+        </button>
+        <button
+          class="btn btn-success rounded-pill"
+          type=""
+          (click)="resetFilters()"
+        >
+          Resetear filtros
+        </button>
       </div>
     </div>
   </form>
 
-  <section class="mt-2">
+  <section class="mt-0">
     <div class="row g-0">
-      <div class="teacher-list col-lg-6 col-12 p-0">
+      <div
+        class="home-map col-sm-12 col-md-12 col-lg-5 col-xl-5 order-lg-last mb-3"
+      >
+        <app-map [lista]="arrUsers"></app-map>
+      </div>
+      <div class="teacher-list col-sm-12 col-md-12 col-lg-7 col-xl-7 mt-4 p-0">
         <div class="row g-2 pe-3">
+          <div *ngIf="arrUsers.length === 0">
+            <div class="col-12 fs-4 text-muted text-center">
+              No se encontró ningún resultado...
+            </div>
+            <div class="d-flex justify-content-center">
+              <img
+                class="not-found w-75 object-fit-fill"
+                src="./assets/images/not-found.png"
+                alt=""
+              />
+            </div>
+          </div>
           <article
-            class="teacher-card col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6"
+            class="teacher-card col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4"
             *ngFor="let user of arrUsers"
           >
             <app-teacher-card [myUser]="user"></app-teacher-card>
           </article>
-          <!-- <nav aria-label="Page navigation example" class="mt-5">
-            <ul class="pagination justify-content-center pagination-lg">
-              <li class="page-item"><button class="page-link previous" (click)="gotoPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button></li>
-              <li class="page-item"><button class="page-link next" (click)="gotoPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button></li>
-            </ul>
-          </nav> -->
         </div>
-      </div>
-      <div class="home-map col-lg-6 col-12">
-        <app-map [arrUsers]="arrUsers"></app-map>
       </div>
     </div>
   </section>
+</div>
+
+<!-- Modal information -->
+
+<div
+  class="modal fade"
+  id="infoModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Datos personales</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body px-4 custom-modal-body">
+        <div class="d-flex gap-3">
+          <img
+            class="model-img rounded-circle"
+            [src]="
+              userToShow.image
+                ? userToShow.image
+                : './assets/images/no-image.png'
+            "
+            alt=""
+          />
+          <div class="d-flex flex-column mt-2">
+            <h3 class="weight-500 fs-3 mb-0">{{ userToShow.fullname }}</h3>
+            <span class="fs-5">@{{ userToShow.username }}</span>
+          </div>
+        </div>
+        <div class="d-flex flex-column gap-3 mt-5">
+          <div class="row g-3">
+            <div class="d-flex align-items-center gap-4 mb-3 col-sm-6">
+              <i class="fa-solid fa-envelope fs-4"></i>
+              <p class="fs-5 mb-0">{{ userToShow.email }}</p>
+            </div>
+            <div
+              class="d-flex align-items-center gap-4 mb-3 col-sm-6"
+              *ngIf="userToShow.rol === 'profesor'"
+            >
+              <i class="fa-solid fa-dollar-sign fs-4"></i>
+              <p class="fs-5 mb-0">{{ userToShow.price }}</p>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="d-flex align-items-center gap-4 mb-3 col-sm-6">
+              <i class="fa-solid fa-phone fs-4"></i>
+              <p class="fs-5 mb-0">
+                {{ userToShow.phone ? userToShow.phone : "--" }}
+              </p>
+            </div>
+            <div
+              class="d-flex align-items-center gap-4 mb-3 col-sm-6"
+              *ngIf="userToShow.rol === 'profesor'"
+            >
+              <i class="fa-solid fa-graduation-cap fs-4"></i>
+              <p class="fs-5 mb-0">{{ userToShow.experience }} años</p>
+            </div>
+          </div>
+          <div
+            class="d-flex align-items-center gap-4 mb-3"
+            *ngIf="userToShow.rol === 'profesor'"
+          >
+            <i class="fa-solid fa-map-location-dot fs-4"></i>
+            <p class="fs-5 mb-0">{{ userToShow.location }}</p>
+          </div>
+          <div
+            class="d-flex align-items-center gap-4 mb-3"
+            *ngIf="userToShow.rol === 'profesor'"
+          >
+            <i class="fa-solid fa-book fs-4"></i>
+            <p class="fs-5 mb-0">{{ stringToArray(userToShow.subjects) }}</p>
+          </div>
+          <div class="d-flex align-items-start gap-4 mb-3">
+            <i class="fa-solid fa-file fs-4"></i>
+            <p class="fs-5 mb-0">
+              {{ userToShow.description ? userToShow.description : "--" }}
+            </p>
+          </div>
+          <div class="d-flex align-items-start gap-4 mb-3">
+            <i class="fa-solid fa-ranking-star fs-4"></i>
+            <span class="fs-5 mb-0 d-flex gap-2" *ngFor="let item of stars">
+              <i
+                class="fs-3"
+                [ngClass]="{
+                  'fa-solid': (item - 0.5) < userToShowAVG || (item - 0.5) === userToShowAVG,
+                  'fa-star': (item - 0.5) < userToShowAVG || (item - 0.5) > userToShowAVG,
+                  'text-warning': (item - 0.5) < userToShowAVG || (item - 0.5) === userToShowAVG,
+                  'fa-star-half-stroke': (item - 0.5) === userToShowAVG,
+                  'fa-regular': (item - 0.5) > userToShowAVG
+                }"></i>
+ 
+            </span>
+          </div>
+          <hr />
+          <div class="">
+            <div class="text-center">
+              <span class="text-muted fs-4">Comentarios</span>
+            </div>
+            <div
+              class="d-flex align-items-center gap-3 mb-3"
+              *ngFor="let comment of userToShowComments"
+            >
+              <img
+                class="icon-img rounded-circle"
+                src="./assets/images/testingavatar2.jpeg"
+                alt=""
+              />
+              <div class="fs-5 bg-middle rounded-pill p-3">{{ comment.comments }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

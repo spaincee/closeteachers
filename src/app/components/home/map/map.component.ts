@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -8,8 +8,6 @@ import Point from 'ol/geom/Point';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Icon, Style } from 'ol/style';
-import * as olProj from 'ol/proj';
-import Rotate from 'ol/control/Rotate';
 import { fromLonLat } from 'ol/proj';
 import Control from 'ol/control/Control';
 import { User } from 'src/app/interfaces/user.interface';
@@ -21,25 +19,24 @@ import { PublicService } from 'src/app/services/public.service';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnChanges {
   private map!: Map;
-  private markerSource!: VectorSource;
+  private markerSource: VectorSource = new VectorSource();
 
   teacherLists: User[] = [];
   locations: any[]= [];
 
-  @Input() arrUsers?: User[];
+  @Input() lista: any[] = [];
 
-  constructor(private publicService: PublicService) { }
+  constructor(
+    private publicService: PublicService) { 
+    }
 
   async ngOnInit(): Promise<void> {
 
-    const data = await this.publicService.getAll();
-    this.teacherLists = data.teachers
-
     const baseLayer = new TileLayer({
       source: new OSM({
-        attributions: [] // Eliminar la atribución
+        attributions: []
       })
     });
   
@@ -49,8 +46,10 @@ export class MapComponent implements OnInit {
       source: this.markerSource,
       style: new Style({
         image: new Icon({
-          src: 'https://openlayers.org/en/latest/examples/data/icon.png',
-          scale: 1.0, // Ajusta el valor para cambiar el tamaño de los marcadores (1.0 = tamaño original)
+          // src: 'https://openlayers.org/en/latest/examples/data/icon.png',
+          src: './assets/images/placeholder.png',
+          scale: 0.12, 
+          anchor: [0.5, 1],
         })
       })
     });
@@ -82,12 +81,22 @@ export class MapComponent implements OnInit {
   
     this.map.addControl(resetControl);
 
-    this.addTeacherMarkers();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['lista']) {
+      this.teacherLists = changes['lista'].currentValue;
+      
+      this.addTeacherMarkers();
+
+    }
   }
 
   
 
-  addTeacherMarkers(): void {    
+  addTeacherMarkers(): void {  
+    this.markerSource.clear();
+
     this.teacherLists.forEach(teacher => {
       if(typeof teacher['location'] === 'string'){
         const result = JSON.parse(teacher['location']);
@@ -99,6 +108,7 @@ export class MapComponent implements OnInit {
           this.locations = result;
         }
       }
+
       const initialMarker = new Feature({
         geometry: new Point(fromLonLat([this.locations[1], this.locations[0]]))
       });
