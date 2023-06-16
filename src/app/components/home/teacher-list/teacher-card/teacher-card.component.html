@@ -9,11 +9,20 @@
       ')'
     "
   ></div>
-  <img
+  <div
+    class="teacher-card-avatar"
+    [style.backgroundImage]="
+      'url(' +
+      (myUser.image ? myUser.image : './assets/images/no-image.png') +
+      ')'
+    "
+    [title]="myUser.fullname"
+  ></div>
+  <!-- <img
     class="teacher-card-avatar"
     [src]="myUser.image ? myUser.image : './assets/images/no-image.png'"
     [alt]="myUser.fullname"
-  />
+  /> -->
   <div class="card-body">
     <h5 class="card-name">{{ myUser.fullname }}</h5>
     <p class="card-subjects">

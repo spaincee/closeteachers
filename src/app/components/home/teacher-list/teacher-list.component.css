@@ -82,3 +82,11 @@ button[disabled]:hover {
 .bg-middle{
   background-color: #ced4da;
 }
+
+.teacher-avatar{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: top;
+}

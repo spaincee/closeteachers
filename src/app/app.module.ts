@@ -21,6 +21,7 @@ import { MystudentsComponent } from './components/dashboard/mystudents/mystudent
 import { SettingsComponent } from './components/dashboard/settings/settings.component';
 import { UserslistsComponent } from './components/dashboard/userslists/userslists.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

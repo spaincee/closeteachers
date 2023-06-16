@@ -10,6 +10,7 @@ import { MessagesComponent } from './components/dashboard/messages/messages.comp
 import { MystudentsComponent } from './components/dashboard/mystudents/mystudents.component';
 import { SettingsComponent } from './components/dashboard/settings/settings.component';
 import { UserslistsComponent } from './components/dashboard/userslists/userslists.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path: "", pathMatch: 'full', redirectTo: 'home' },
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
 
-  { path: "dashboard", component: DashboardComponent, children: [
+  { path: "dashboard", component: DashboardComponent, canActivate: [ LoginGuard ], children: [
     { path: "profile", component: ProfileComponent },
     { path: "myteachers", component: MyteachersComponent },
     { path: "mystudents", component: MystudentsComponent },
