@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     this.gotoPage();
   }
 
+  
   async gotoPage(): Promise<void> {
     try {
       let response = await this.publicService.getAll()

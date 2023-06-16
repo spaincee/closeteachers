@@ -51,16 +51,19 @@ p {
  position: relative;
 }
 
-img.teacher-card-avatar {
+.teacher-card-avatar {
   position: relative;
   border-radius: 50%;
   width: 70px;
+  height: 70px;
   margin: auto;
   margin-top: -40px;
+  background-size: cover;
+  background-position: top;
 }
 
 .teacher-card-cover {
-  height: 160px;
+  height: 100px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

@@ -1,95 +1,100 @@
 <div class="app-teacher-list-container">
-  <section class="teacher-filter my-2"></section>
-
-  <form action="" [formGroup]="filterForm" (ngSubmit)="saveFormValues()">
-    <div
-      class="row d-flex justify-content-between align-items-end g-3 pb-4 border-bottom border-1"
-    >
-      <!-- Filtor materia -->
-      <div class="col mt-0">
-        <label for="subject" class="form-label fs-5">Materias</label>
-        <select
-          class="form-select"
-          id="subject"
-          aria-label="Default select example"
-          size="1"
-          formControlName="subject"
-        >
-          <option *ngFor="let subject of subjectList" [value]="subject">
-            {{ subject }}
-          </option>
-        </select>
-      </div>
-      <!-- Filtor precios -->
-      <div class="col mt-0">
-        <label for="price" class="form-label fs-5">Precio/hora <span class="text-muted fs-6">(hasta)</span></label>
-        <div class="d-flex gap-2 align-items-center">
-          <input
-            type="range"
-            class="form-range"
-            min="0"
-            max="100"
-            id="price"
-            [value]="filterForm.get('price')?.value"
-            formControlName="price"
-          />
-          <span class="text-primary fs-4">{{
-            filterForm.get("price")?.value
-          }}</span>
+  <section class="teacher-filter my-2">
+    <form action="" [formGroup]="filterForm" (ngSubmit)="saveFormValues()">
+      <div
+        class="row d-flex justify-content-between align-items-end g-3 pb-4 border-bottom border-1"
+      >
+        <!-- Filtor materia -->
+        <div class="col mt-0">
+          <label for="subject" class="form-label fs-5">Materias</label>
+          <select
+            class="form-select"
+            id="subject"
+            aria-label="Default select example"
+            size="1"
+            formControlName="subject"
+          >
+            <option *ngFor="let subject of subjectList" [value]="subject">
+              {{ subject }}
+            </option>
+          </select>
+        </div>
+        <!-- Filtor precios -->
+        <div class="col mt-0">
+          <label for="price" class="form-label fs-5"
+            >Precio/hora <span class="text-muted fs-6">(hasta)</span></label
+          >
+          <div class="d-flex gap-2 align-items-center">
+            <input
+              type="range"
+              class="form-range"
+              min="0"
+              max="100"
+              id="price"
+              [value]="filterForm.get('price')?.value"
+              formControlName="price"
+            />
+            <span class="text-primary fs-4">{{
+              filterForm.get("price")?.value
+            }}</span>
+          </div>
+        </div>
+        <!-- Filtor experiecnia -->
+        <div class="col mt-0">
+          <label for="experience" class="form-label fs-5"
+            >Experiencia <span class="text-muted fs-6">(hasta)</span></label
+          >
+          <div class="d-flex gap-2 align-items-center">
+            <input
+              type="range"
+              class="form-range"
+              min="0"
+              max="60"
+              id="experience"
+              [value]="filterForm.get('experience')?.value"
+              formControlName="experience"
+            />
+            <span class="text-primary fs-4">{{
+              filterForm.get("experience")?.value
+            }}</span>
+          </div>
+        </div>
+        <!-- Filtor puntuacion -->
+        <div class="col mt-0">
+          <label for="score" class="form-label fs-5"
+            >Puntuación <span class="text-muted fs-6">(desde)</span></label
+          >
+          <div class="d-flex gap-2 align-items-center">
+            <input
+              type="range"
+              class="form-range"
+              min="0"
+              max="5"
+              id="score"
+              [value]="filterForm.get('score')?.value"
+              formControlName="score"
+            />
+            <span class="text-primary fs-4">{{
+              filterForm.get("score")?.value
+            }}</span>
+          </div>
+        </div>
+        <!-- botones -->
+        <div class="col mt-0 d-flex gap-3">
+          <button class="btn btn-primary rounded-pill" type="submit">
+            Filtrar
+          </button>
+          <button
+            class="btn btn-success rounded-pill"
+            type=""
+            (click)="resetFilters()"
+          >
+            Resetear filtros
+          </button>
         </div>
       </div>
-      <!-- Filtor experiecnia -->
-      <div class="col mt-0">
-        <label for="experience" class="form-label fs-5">Experiencia <span class="text-muted fs-6">(hasta)</span></label>
-        <div class="d-flex gap-2 align-items-center">
-          <input
-            type="range"
-            class="form-range"
-            min="0"
-            max="60"
-            id="experience"
-            [value]="filterForm.get('experience')?.value"
-            formControlName="experience"
-          />
-          <span class="text-primary fs-4">{{
-            filterForm.get("experience")?.value
-          }}</span>
-        </div>
-      </div>
-      <!-- Filtor puntuacion -->
-      <div class="col mt-0">
-        <label for="score" class="form-label fs-5">Puntuación <span class="text-muted fs-6">(desde)</span></label>
-        <div class="d-flex gap-2 align-items-center">
-          <input
-            type="range"
-            class="form-range"
-            min="0"
-            max="5"
-            id="score"
-            [value]="filterForm.get('score')?.value"
-            formControlName="score"
-          />
-          <span class="text-primary fs-4">{{
-            filterForm.get("score")?.value
-          }}</span>
-        </div>
-      </div>
-      <!-- botones -->
-      <div class="col mt-0 d-flex gap-3">
-        <button class="btn btn-primary rounded-pill" type="submit">
-          Filtrar
-        </button>
-        <button
-          class="btn btn-success rounded-pill"
-          type=""
-          (click)="resetFilters()"
-        >
-          Resetear filtros
-        </button>
-      </div>
-    </div>
-  </form>
-
+    </form>
+  </section>
   <section class="mt-0">
     <div class="row g-0">
       <div
@@ -111,12 +116,66 @@
               />
             </div>
           </div>
+
           <article
             class="teacher-card col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4"
-            *ngFor="let user of arrUsers"
+            *ngFor="
+              let user of arrUsers
+                | paginate : { itemsPerPage: 6, currentPage: p }
+            "
           >
             <app-teacher-card [myUser]="user"></app-teacher-card>
           </article>
+          <div class="pagination-controls mt-4 d-flex justify-content-end">
+            <pagination-controls
+              (pageChange)="p = $event"
+            ></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="ranking mb-5">
+    <hr />
+    <div class="d-flex gap-2 align-items-center justify-content-center mt-3 mb-5">
+      <i class="fa-solid fa-star text-warning fs-5"></i>
+      <i class="fa-solid fa-star text-warning fs-4"></i>
+      <i class="fa-solid fa-star text-warning fs-3"></i>
+      <h1 class="display-5 fw-bold text-body-emphasis mb-0">Clasificación</h1>
+      <i class="fa-solid fa-star text-warning fs-3"></i>
+      <i class="fa-solid fa-star text-warning fs-4"></i>
+      <i class="fa-solid fa-star text-warning fs-5"></i>
+    </div>
+    <div class="theBests">
+      <div class="d-flex flex-wrap justify-content-evenly gap-2 mt-3">
+        <div class="d-flex align-items-center flex-column gap-2" *ngFor="let teacher of arrUsersSorted">
+          <div
+            class="teacher-avatar"
+            [style.backgroundImage]="
+              'url(' +
+              (teacher.image ? teacher.image : './assets/images/no-image.png') +
+              ')'
+            "
+            [title]="teacher.fullname"
+          ></div>
+          <h5 class="card-name">{{ teacher.fullname }}</h5>
+          <div class="d-flex justify-content-center">
+            <span class="fs-5 mb-0 d-flex gap-2" *ngFor="let item of stars">
+              <i
+                class="fs-3"
+                [ngClass]="{
+                  'fa-solid':
+                    item - 0.5 < (teacher?.average || 0) || item - 0.5 === (teacher?.average || 0),
+                  'fa-star':
+                    item - 0.5 < (teacher?.average || 0) || item - 0.5 > (teacher?.average || 0),
+                  'text-warning':
+                    item - 0.5 < (teacher?.average || 0) || item - 0.5 === (teacher?.average || 0),
+                  'fa-star-half-stroke': item - 0.5 === (teacher?.average || 0),
+                  'fa-regular': item - 0.5 > (teacher?.average || 0)
+                }"
+              ></i>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -216,13 +275,16 @@
               <i
                 class="fs-3"
                 [ngClass]="{
-                  'fa-solid': (item - 0.5) < userToShowAVG || (item - 0.5) === userToShowAVG,
-                  'fa-star': (item - 0.5) < userToShowAVG || (item - 0.5) > userToShowAVG,
-                  'text-warning': (item - 0.5) < userToShowAVG || (item - 0.5) === userToShowAVG,
-                  'fa-star-half-stroke': (item - 0.5) === userToShowAVG,
-                  'fa-regular': (item - 0.5) > userToShowAVG
-                }"></i>
- 
+                  'fa-solid':
+                    item - 0.5 < userToShowAVG || item - 0.5 === userToShowAVG,
+                  'fa-star':
+                    item - 0.5 < userToShowAVG || item - 0.5 > userToShowAVG,
+                  'text-warning':
+                    item - 0.5 < userToShowAVG || item - 0.5 === userToShowAVG,
+                  'fa-star-half-stroke': item - 0.5 === userToShowAVG,
+                  'fa-regular': item - 0.5 > userToShowAVG
+                }"
+              ></i>
             </span>
           </div>
           <hr />
@@ -239,7 +301,9 @@
                 src="./assets/images/testingavatar2.jpeg"
                 alt=""
               />
-              <div class="fs-5 bg-middle rounded-pill p-3">{{ comment.comments }}</div>
+              <div class="fs-5 bg-middle rounded-pill p-3">
+                {{ comment.comments }}
+              </div>
             </div>
           </div>
         </div>
