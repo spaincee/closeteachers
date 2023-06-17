@@ -425,8 +425,9 @@
               <textarea
                 class="form-control"
                 id="brief_description"
-                rows="3"
-                placeholder=""
+                rows="1"
+                maxlength="50"
+                placeholder="Escriba una frase que le identifique en apenas 50 letras"
                 [(ngModel)]="userLogged.brief_description"
                 formControlName="brief_description"
               ></textarea>

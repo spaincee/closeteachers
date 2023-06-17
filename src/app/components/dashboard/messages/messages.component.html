@@ -67,18 +67,18 @@
               ">
             <div class="d-flex gap-3 ms-3" *ngIf="message.sender === 'profesor' && rol === 'alumno'">
               <p class="fs-6 mb-0"><strong>Profesor</strong></p>
-              <span class="text-muted">{{ message.sent_time }}</span>
+              <span class="text-muted">{{ message.sent_time | fromNow }}</span>
             </div>
             <div class="d-flex gap-3 ms-3" *ngIf="message.sender === 'profesor' && rol === 'profesor'">
-             <span class="text-muted">{{ message.sent_time }}</span>
+             <span class="text-muted">{{ message.sent_time | fromNow }}</span>
              <p class="fs-6 mb-0"><strong>Yo</strong></p>
             </div>
             <div class="d-flex gap-3 ms-3" *ngIf="message.sender === 'alumno' && rol === 'profesor'">
               <p class="fs-6 mb-0"><strong>Alumno</strong></p>
-              <span class="text-muted">{{ message.sent_time }}</span>
+              <span class="text-muted">{{ message.sent_time | fromNow }}</span>
             </div>
             <div class="d-flex gap-3 ms-3" *ngIf="message.sender === 'alumno' && rol === 'alumno'">
-             <span class="text-muted">{{ message.sent_time }}</span>
+             <span class="text-muted">{{ message.sent_time | fromNow }}</span>
              <p class="fs-6 mb-0"><strong>Yo</strong></p>
             </div>
             <div
