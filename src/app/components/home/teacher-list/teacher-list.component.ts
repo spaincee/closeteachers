@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
 import { PublicService } from 'src/app/services/public.service';
+import { StudentService } from 'src/app/services/student.service';
 import { subjectsData } from 'src/assets/data/subjects.data';
 
 @Component({
@@ -12,11 +13,15 @@ import { subjectsData } from 'src/assets/data/subjects.data';
 export class TeacherListComponent implements OnInit {
   @Output() listaActualizada: EventEmitter<any[]> = new EventEmitter<any[]>();
 
+  rol: string | null = localStorage.getItem('rol');
+
   stars: number[] = [1, 2, 3, 4, 5];
   arrUsers: User[] = [];
   arrUsersSorted: User[] = [];
   subjectList: string[] = subjectsData.sort();
+
   p: number = 1;
+  relationshipStatus?: number;
 
   userToShow: User = {
     username: '',
@@ -30,7 +35,10 @@ export class TeacherListComponent implements OnInit {
 
   filterForm: FormGroup;
 
-  constructor(private publicService: PublicService) {
+  constructor(
+    private publicService: PublicService,
+    private studentService: StudentService
+  ) {
     this.filterForm = new FormGroup({
       subject: new FormControl('', []),
       price: new FormControl('0', []),
@@ -143,6 +151,13 @@ export class TeacherListComponent implements OnInit {
     try {
       if (id !== undefined) {
         const data = await this.publicService.getTeacherInfo(id);
+        if (
+          localStorage.getItem('rol') &&
+          localStorage.getItem('rol') === 'alumno'
+        ) {
+          const status = await this.studentService.relationshipStatus(id);
+          this.relationshipStatus = status.status;
+        }
         this.userToShow = data.teacher[0];
         this.userToShowAVG = data.teacherAVG[0].average;
         const result: any[] = data.teacherComments;
@@ -150,9 +165,21 @@ export class TeacherListComponent implements OnInit {
           (comment) => comment.comments !== null
         );
       }
-      console.log(this.userToShowComments);
     } catch (error: any) {
       console.log(error.message);
+    }
+  }
+
+  async contract(): Promise<void> {
+    try {
+      const result = await this.studentService.contactTeacher(
+        this.userToShow.id_user!
+      );
+      console.log(result);
+
+      this.relationshipStatus = 0;
+    } catch (error: any) {
+      console.log(error);
     }
   }
 

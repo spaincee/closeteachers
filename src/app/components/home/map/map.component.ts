@@ -24,7 +24,9 @@ export class MapComponent implements OnInit, OnChanges {
   private markerSource: VectorSource = new VectorSource();
 
   teacherLists: User[] = [];
-  locations: any[]= [];
+  locations: any[] = [];
+  coordinates: any[] = [];
+  myMarker? : any 
 
   @Input() lista: any[] = [];
 
@@ -40,18 +42,16 @@ export class MapComponent implements OnInit, OnChanges {
       })
     });
   
-    this.markerSource = new VectorSource();
-  
     const markerLayer = new VectorLayer({
-      source: this.markerSource,
-      style: new Style({
-        image: new Icon({
-          // src: 'https://openlayers.org/en/latest/examples/data/icon.png',
-          src: './assets/images/placeholder.png',
-          scale: 0.12, 
-          anchor: [0.5, 1],
-        })
-      })
+      source: this.markerSource 
+      // style: new Style({
+      //   image: new Icon({
+      //     // src: 'https://openlayers.org/en/latest/examples/data/icon.png',
+      //     src: './assets/images/placeholder.png',
+      //     scale: 0.12, 
+      //     anchor: [0.5, 1],
+      //   })
+      // })
     });
   
     this.map = new Map({
@@ -59,40 +59,91 @@ export class MapComponent implements OnInit, OnChanges {
       layers: [baseLayer, markerLayer],
       view: new View({
         center: fromLonLat([-75.5744, 6.2509]),
-        zoom: 15
+        zoom: 5
       })
     });
-  
-    const initialMarker = new Feature({
-      geometry: new Point(fromLonLat([-75.5744, 6.2509]))
-    });
-    this.markerSource.addFeature(initialMarker);
   
     const resetButton = document.createElement('button');
     resetButton.innerHTML = 'Restablecer';
     resetButton.addEventListener('click', () => {
       this.map.getView().setCenter(fromLonLat([-75.5744, 6.2509]));
-      this.map.getView().setZoom(15);
+      this.map.getView().setZoom(14);
     });
-  
+
+    const myLocation = document.createElement('button');
+    myLocation.innerHTML = '<i class="fa-solid fa-location-crosshairs fs-4"></i>';
+    myLocation.classList.add('btn');
+    myLocation.addEventListener('click', async () => {
+      try {
+        this.coordinates = await this.getGeolocation();
+        this.addMyLocation(this.coordinates);
+        this.map.getView().setCenter(fromLonLat(this.coordinates));
+        this.map.getView().setZoom(15);
+      } catch (error) {
+        console.error('Error al obtener la geolocalización:', error);
+      }
+    });
+
     const resetControl = new Control({
       element: resetButton
     });
+
+    const myLocationControl = new Control({
+      element: myLocation
+    });
   
     this.map.addControl(resetControl);
-
+    this.map.addControl(myLocationControl);
+    
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['lista']) {
-      this.teacherLists = changes['lista'].currentValue;
-      
-      this.addTeacherMarkers();
-
+    ngOnChanges(changes: SimpleChanges) {
+      if (changes['lista']) {
+        this.teacherLists = changes['lista'].currentValue;
+        
+        this.addTeacherMarkers();
+      } 
     }
+
+  async getGeolocation(): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const coords: any[] = [position.coords.longitude, position.coords.latitude];
+            resolve(coords);
+          },
+          (error) => {
+            console.error('Error al obtener la geolocalización:', error);
+            reject(error);
+          }
+        );
+      } else {
+        console.error('Geolocalización no disponible');
+        reject(new Error('Geolocalización no disponible'));
+      }
+    });
   }
 
+  addMyLocation(coords: any[]): void {
+    this.myMarker = new Feature({
+      geometry: new Point(fromLonLat(coords))
+    });
+
+    const myMarkerStyle = new Style({
+      image: new Icon({
+        src: './assets/images/pin_red.png',
+        scale: 0.12,
+        anchor: [0.5, 1],
+      })
+    });
+
+    this.myMarker.setStyle(myMarkerStyle);
+    this.markerSource.addFeature(this.myMarker);
   
+    this.map.getView().setCenter(fromLonLat(coords));
+    this.map.getView().setZoom(10);
+  }
 
   addTeacherMarkers(): void {  
     this.markerSource.clear();
@@ -109,11 +160,23 @@ export class MapComponent implements OnInit, OnChanges {
         }
       }
 
-      const initialMarker = new Feature({
+      const teacherMarker = new Feature({
         geometry: new Point(fromLonLat([this.locations[1], this.locations[0]]))
       });
-      this.markerSource.addFeature(initialMarker);
+
+      const teacherMarkerStyle = new Style({
+        image: new Icon({
+          src: './assets/images/teacher_pin.png',
+          scale: 0.03,
+          anchor: [0.5, 1],
+        })
+      });
+      teacherMarker.setStyle(teacherMarkerStyle);
+      this.markerSource.addFeature(teacherMarker);
     })
+
+    this.markerSource.addFeature(this.myMarker);
+    
   }
 
   

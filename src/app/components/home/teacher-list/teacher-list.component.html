@@ -137,7 +137,9 @@
   </section>
   <section class="ranking mb-5">
     <hr />
-    <div class="d-flex gap-2 align-items-center justify-content-center mt-3 mb-5">
+    <div
+      class="d-flex gap-2 align-items-center justify-content-center mt-3 mb-5"
+    >
       <i class="fa-solid fa-star text-warning fs-5"></i>
       <i class="fa-solid fa-star text-warning fs-4"></i>
       <i class="fa-solid fa-star text-warning fs-3"></i>
@@ -148,7 +150,10 @@
     </div>
     <div class="theBests">
       <div class="d-flex flex-wrap justify-content-evenly gap-2 mt-3">
-        <div class="d-flex align-items-center flex-column gap-2" *ngFor="let teacher of arrUsersSorted">
+        <div
+          class="d-flex align-items-center flex-column gap-2"
+          *ngFor="let teacher of arrUsersSorted"
+        >
           <div
             class="teacher-avatar"
             [style.backgroundImage]="
@@ -165,11 +170,14 @@
                 class="fs-3"
                 [ngClass]="{
                   'fa-solid':
-                    item - 0.5 < (teacher?.average || 0) || item - 0.5 === (teacher?.average || 0),
+                    item - 0.5 < (teacher?.average || 0) ||
+                    item - 0.5 === (teacher?.average || 0),
                   'fa-star':
-                    item - 0.5 < (teacher?.average || 0) || item - 0.5 > (teacher?.average || 0),
+                    item - 0.5 < (teacher?.average || 0) ||
+                    item - 0.5 > (teacher?.average || 0),
                   'text-warning':
-                    item - 0.5 < (teacher?.average || 0) || item - 0.5 === (teacher?.average || 0),
+                    item - 0.5 < (teacher?.average || 0) ||
+                    item - 0.5 === (teacher?.average || 0),
                   'fa-star-half-stroke': item - 0.5 === (teacher?.average || 0),
                   'fa-regular': item - 0.5 > (teacher?.average || 0)
                 }"
@@ -218,6 +226,18 @@
           <div class="d-flex flex-column mt-2">
             <h3 class="weight-500 fs-3 mb-0">{{ userToShow.fullname }}</h3>
             <span class="fs-5">@{{ userToShow.username }}</span>
+          </div>
+          <div class="status ms-auto d-flex align-items-center">
+            <div
+              class="contracted align-self-center bg-success text-white p-3"
+              *ngIf="rol === 'alumno' && relationshipStatus === 1">
+              <h2 class="mb-0">Contratado</h2>
+            </div>
+            <div
+              class="contracted align-self-center bg-primary text-white p-3"
+              *ngIf="rol === 'alumno' && relationshipStatus === 0">
+              <h2 class="mb-0">Pendiente</h2>
+            </div>
           </div>
         </div>
         <div class="d-flex flex-column gap-3 mt-5">
@@ -309,6 +329,15 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          *ngIf="rol === 'alumno' && relationshipStatus === -1"
+          data-bs-dismiss="modal"
+          (click)="contract()"
+        >
+          Contratar
+        </button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Cerrar
         </button>
