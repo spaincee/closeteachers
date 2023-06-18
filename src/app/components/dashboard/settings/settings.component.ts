@@ -259,7 +259,8 @@ export class SettingsComponent implements OnInit {
     }
     }catch(error: any){
       if (error instanceof HttpErrorResponse) {
-        let errorMsg = `Se produjo un error desconocido: ${error}`;
+        let errorMsg = `Se produjo un error desconocido: ${error.error}`;
+        console.log(error);
         
         if(error.error.msg !== undefined)
           errorMsg = error.error.msg;
@@ -349,6 +350,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  // Verificar si esta funcion podemos ponerla en un archivo aparte como helper
   async getGeolocation(): Promise<any[]> {
     return new Promise((resolve, reject) => {
       if ('geolocation' in navigator) {

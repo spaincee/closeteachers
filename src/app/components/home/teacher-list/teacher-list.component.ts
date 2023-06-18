@@ -4,6 +4,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { PublicService } from 'src/app/services/public.service';
 import { StudentService } from 'src/app/services/student.service';
 import { subjectsData } from 'src/assets/data/subjects.data';
+import {getDistance} from 'ol/sphere';
 
 @Component({
   selector: 'app-teacher-list',
@@ -11,6 +12,7 @@ import { subjectsData } from 'src/assets/data/subjects.data';
   styleUrls: ['./teacher-list.component.css'],
 })
 export class TeacherListComponent implements OnInit {
+
   @Output() listaActualizada: EventEmitter<any[]> = new EventEmitter<any[]>();
 
   rol: string | null = localStorage.getItem('rol');
@@ -46,26 +48,28 @@ export class TeacherListComponent implements OnInit {
       score: new FormControl('0', []),
     });
 
-    this.gotoPage();
+   
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.gotoPage();
+  }
 
   async gotoPage(): Promise<void> {
     try {
       let response = await this.publicService.getAll();
       this.arrUsers = response.teachers;
-      console.log(this.arrUsers);
+  
       this.arrUsersSorted = this.sortbyAverage(this.arrUsers).filter((elem) => {
         return elem.average !== 0 && elem.average !== null;
       });
-      console.log(this.arrUsersSorted);
+
     } catch (error) {
       console.log(error);
     }
   }
 
-  async saveFormValues() {
+  async applyFilter(): Promise<void> { 
     await this.gotoPage();
 
     if (this.filterForm.get('subject')?.value) {
@@ -96,7 +100,39 @@ export class TeacherListComponent implements OnInit {
     this.listaActualizada.emit(this.arrUsers);
   }
 
-  // Funciones para filtros
+  async showNearbyTeachers(): Promise<void>{
+    try{
+      //await this.gotoPage();
+      
+      const distances: any[] = [];
+      const currentPosition = await this.getGeolocation();
+
+      this.arrUsers.forEach((teacher, index) => {
+        if(teacher['location'] && teacher['location'] != null){
+          const location = JSON.parse(teacher['location']);
+          const distance = getDistance(currentPosition, [location[1], location[0]])
+          distances.push({ index, distance });          
+        }
+      });
+
+      this.arrUsers = distances.filter((item) => item.distance < 10000).map((item) => this.arrUsers[item.index]);
+
+      console.log(this.arrUsers);
+      
+      this.listaActualizada.emit(this.arrUsers);
+
+    }catch(error: any){
+      console.log(error.message);
+    }
+  }
+
+  resetFilters() {
+    this.gotoPage();
+    this.filterForm.reset();
+  }
+
+  // Funciones para filtros --------------------------------------------------------
+ 
   filterbySubject(teachers: User[], subject: string): User[] {
     let result: User[] = [];
     teachers.forEach((teacher) => {
@@ -141,11 +177,7 @@ export class TeacherListComponent implements OnInit {
     });
     return result;
   }
-
-  resetFilters() {
-    this.gotoPage();
-    this.filterForm.reset();
-  }
+  //-------------------------------------------------------------------------------
 
   async seeUserInfo(id: number | undefined): Promise<void> {
     try {
@@ -190,5 +222,25 @@ export class TeacherListComponent implements OnInit {
 
   sortbyAverage(list: any[]): any[] {
     return list.sort((a, b) => b.average - a.average);
+  }
+
+  async getGeolocation(): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const coords: any[] = [ position.coords.longitude, position.coords.latitude];
+            resolve(coords);
+          },
+          (error) => {
+            console.error('Error al obtener la geolocalización:', error);
+            reject(error);
+          }
+        );
+      } else {
+        console.error('Geolocalización no disponible');
+        reject(new Error('Geolocalización no disponible'));
+      }
+    });
   }
 }

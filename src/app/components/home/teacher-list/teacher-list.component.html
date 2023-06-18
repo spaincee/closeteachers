@@ -1,6 +1,6 @@
 <div class="app-teacher-list-container">
   <section class="teacher-filter my-2">
-    <form action="" [formGroup]="filterForm" (ngSubmit)="saveFormValues()">
+    <form action="" [formGroup]="filterForm" (ngSubmit)="applyFilter()">
       <div
         class="row d-flex justify-content-between align-items-end g-3 pb-4 border-bottom border-1"
       >
@@ -81,12 +81,14 @@
         </div>
         <!-- botones -->
         <div class="col mt-0 d-flex gap-3">
-          <button class="btn btn-primary rounded-pill" type="submit">
+          <button class="btn btn-primary rounded-2" type="submit">
             Filtrar
           </button>
+          <button class="btn btn-primary rounded-2" (click)="showNearbyTeachers()">
+            Buscar cercanos
+          </button>
           <button
-            class="btn btn-success rounded-pill"
-            type=""
+            class="btn btn-success rounded-2"
             (click)="resetFilters()"
           >
             Resetear filtros

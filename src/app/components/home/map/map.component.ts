@@ -31,7 +31,7 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() lista: any[] = [];
 
   constructor(
-    private publicService: PublicService) { 
+    private publicService: PublicService) { // se va
     }
 
   async ngOnInit(): Promise<void> {
@@ -44,14 +44,6 @@ export class MapComponent implements OnInit, OnChanges {
   
     const markerLayer = new VectorLayer({
       source: this.markerSource 
-      // style: new Style({
-      //   image: new Icon({
-      //     // src: 'https://openlayers.org/en/latest/examples/data/icon.png',
-      //     src: './assets/images/placeholder.png',
-      //     scale: 0.12, 
-      //     anchor: [0.5, 1],
-      //   })
-      // })
     });
   
     this.map = new Map({
@@ -59,7 +51,7 @@ export class MapComponent implements OnInit, OnChanges {
       layers: [baseLayer, markerLayer],
       view: new View({
         center: fromLonLat([-75.5744, 6.2509]),
-        zoom: 5
+        zoom: 3
       })
     });
   
@@ -175,7 +167,7 @@ export class MapComponent implements OnInit, OnChanges {
       this.markerSource.addFeature(teacherMarker);
     })
 
-    this.markerSource.addFeature(this.myMarker);
+    // this.markerSource.addFeature(this.myMarker);
     
   }
 
