@@ -259,7 +259,8 @@ export class SettingsComponent implements OnInit {
     }
     }catch(error: any){
       if (error instanceof HttpErrorResponse) {
-        let errorMsg = `Se produjo un error desconocido: ${error}`;
+        let errorMsg = `Se produjo un error desconocido: ${error.error}`;
+        console.log(error);
         
         if(error.error.msg !== undefined)
           errorMsg = error.error.msg;
@@ -285,14 +286,15 @@ export class SettingsComponent implements OnInit {
 
   // Funcion que es la escargada de optar por usar la geolocalizacion del navegador, se deben implementar
   // los permisos para esto.
-  useGeo(): void {
+  async useGeo(): Promise<void> {
+    const coordinates = await this.getGeolocation();
     const status1 = this.settingForm.controls['latitude'].status;
     const status2 = this.settingForm.controls['longitude'].status;
 
     if (status1 === 'VALID') {
       this.settingForm.controls['latitude'].disable();
       this.settingForm.patchValue({
-        latitude: '-262.6534',
+        latitude: coordinates[0],
       });
     } else {
       this.settingForm.controls['latitude'].enable();
@@ -301,7 +303,7 @@ export class SettingsComponent implements OnInit {
     if (status2 === 'VALID') {
       this.settingForm.controls['longitude'].disable();
       this.settingForm.patchValue({
-        longitude: '62.6534',
+        longitude: coordinates[1],
       });
     } else {
       this.settingForm.controls['longitude'].enable();
@@ -346,5 +348,26 @@ export class SettingsComponent implements OnInit {
         confirmPasswordControl.setErrors(null);
       }
     }
+  }
+
+  // Verificar si esta funcion podemos ponerla en un archivo aparte como helper
+  async getGeolocation(): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const coords: any[] = [ position.coords.latitude, position.coords.longitude];
+            resolve(coords);
+          },
+          (error) => {
+            console.error('Error al obtener la geolocalización:', error);
+            reject(error);
+          }
+        );
+      } else {
+        console.error('Geolocalización no disponible');
+        reject(new Error('Geolocalización no disponible'));
+      }
+    });
   }
 }

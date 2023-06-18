@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +9,7 @@ export class HeaderComponent {
 
   isLogged: boolean = false;
 
-  constructor(private router: Router){ }
+  constructor(){ }
 
   ngDoCheck(): void {
     let token: string | null = localStorage.getItem('token');

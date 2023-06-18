@@ -33,6 +33,10 @@ export class StudentService {
     return lastValueFrom(this.httpClient.post<any>(`${this.baseUrl}/teachers/${id}/contact`, null));
   }
 
+  relationshipStatus(id: number): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/teachers/${id}/relationship_status`));
+  }
+
   updateProfile(data: User): Promise<any> {
     return lastValueFrom(this.httpClient.put<any>(`${this.baseUrl}/change_profile`, data));
   }

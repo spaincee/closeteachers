@@ -22,6 +22,7 @@ import { SettingsComponent } from './components/dashboard/settings/settings.comp
 import { UserslistsComponent } from './components/dashboard/userslists/userslists.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FromNowPipe } from './pipes/from-now.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MessagesComponent,
     MystudentsComponent,
     SettingsComponent,
-    UserslistsComponent
+    UserslistsComponent,
+    FromNowPipe
   ],
   imports: [
     BrowserModule,
