@@ -30,9 +30,7 @@ export class MapComponent implements OnInit, OnChanges {
 
   @Input() lista: any[] = [];
 
-  constructor(
-    private publicService: PublicService) { // se va
-    }
+  constructor() { }
 
   async ngOnInit(): Promise<void> {
 
@@ -166,8 +164,6 @@ export class MapComponent implements OnInit, OnChanges {
       teacherMarker.setStyle(teacherMarkerStyle);
       this.markerSource.addFeature(teacherMarker);
     })
-
-    // this.markerSource.addFeature(this.myMarker);
     
   }
 
