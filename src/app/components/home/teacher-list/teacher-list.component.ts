@@ -13,8 +13,6 @@ import {getDistance} from 'ol/sphere';
 })
 export class TeacherListComponent implements OnInit {
 
-  @Output() listaActualizada: EventEmitter<any[]> = new EventEmitter<any[]>();
-
   rol: string | null = localStorage.getItem('rol');
 
   stars: number[] = [1, 2, 3, 4, 5];
@@ -55,6 +53,7 @@ export class TeacherListComponent implements OnInit {
     this.gotoPage();
   }
 
+  // Funcion para cargar los datos de los profesores y el listado de profesores organizado por average
   async gotoPage(): Promise<void> {
     try {
       let response = await this.publicService.getAll();
@@ -69,6 +68,7 @@ export class TeacherListComponent implements OnInit {
     }
   }
 
+  // Funcion para aplicar los filtros sobre el listado de profesores
   async applyFilter(): Promise<void> { 
     await this.gotoPage();
 
@@ -97,9 +97,9 @@ export class TeacherListComponent implements OnInit {
       );
     }
 
-    this.listaActualizada.emit(this.arrUsers);
   }
 
+  // Funcion para determinar los profesores cercanos a mi ubicacion (hasta 10000 m)
   async showNearbyTeachers(): Promise<void>{
     try{
       //await this.gotoPage();
@@ -118,14 +118,13 @@ export class TeacherListComponent implements OnInit {
       this.arrUsers = distances.filter((item) => item.distance < 10000).map((item) => this.arrUsers[item.index]);
 
       console.log(this.arrUsers);
-      
-      this.listaActualizada.emit(this.arrUsers);
 
     }catch(error: any){
       console.log(error.message);
     }
   }
 
+  // Funcion para reiniciar el filtro
   resetFilters() {
     this.gotoPage();
     this.filterForm.reset();
@@ -243,4 +242,5 @@ export class TeacherListComponent implements OnInit {
       }
     });
   }
+
 }
