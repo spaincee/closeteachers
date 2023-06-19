@@ -1,32 +1,55 @@
 /* New */
 
-.home-hero {
-  background-image: url("/assets/images/heroopacity.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: var(--black);
-  padding: 5em 0;
-}
-
-.home-hero:after {
-  background-color: var(--black);
-}
-
-.home-hero h1 {
-  color: var(--white);
-}
-
-.home-hero p {
-  color: var(--white);
-  font-weight: bold;
-}
-
 .app-teacher-list-container {
   display: block;
-  padding: 20px;
+  padding: 0px 20px 20px;
+  position: relative;
 }
 
+.teacher-filter  {
+  padding: 10px 10px;
+  border-radius: 8px;
+}
+
+.teacher-filter label {
+  font-weight: 500;
+  margin: 0px;
+  padding: 0;
+}
+
+.filter-inputs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  column-gap: 10px;
+}
+
+.filter-buttons {
+  display: flex;
+  column-gap: 10px;
+  padding: 10px 0px;
+  justify-content: center;
+}
+
+.filter-button {
+  background-color: var(--purple);
+  color: var(--white);
+  font-weight: 500;
+}
+
+.close-button {
+  background-color: var(--blue);
+  color: var(--white);
+  font-weight: 500;
+}
+
+.reset-button {
+  background-color: var(--fucsia);
+  color: var(--white);
+  font-weight: 500;
+}
 
 /* Old */
 
@@ -89,4 +112,14 @@ button[disabled]:hover {
   border-radius: 50%;
   background-size: cover;
   background-position: top;
+}
+
+.home-map {
+  margin-bottom: 73px;
+}
+
+.ngx-pagination .current {
+  background: var(--blue) !important;
+  color: #fefefe;
+  cursor: default;
 }

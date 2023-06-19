@@ -1,6 +1,7 @@
 footer {
-  background-color: var(--secondary-blue);
+  background-color: var(--dark-purple);
   text-align: center;
+  font-weight: 600;
 }
 
 footer span {

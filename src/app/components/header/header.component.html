@@ -1,67 +1,25 @@
-<header>
-  <!-- <nav class="navbar bg-body-tertiary" aria-label="Light offcanvas navbar">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="/assets/images/closeteacherslogo1.png" alt="Closeteachers"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbarLight" aria-labelledby="offcanvasNavbarLightLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel"><img src="/assets/images/closeteacherslogo1.png" alt="Closeteachers"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
-              <a [routerLink]="['/home']" class="nav-link active" aria-current="page" >Home</a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard/profile']" class="nav-link">Dashboard</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Cuenta
-              </a>
-              <ul class="dropdown-menu">
-                <li><a [routerLink]="['/login']" class="dropdown-item" href="#">Iniciar Sesión</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a [routerLink]="['/register']" class="dropdown-item" href="#">Registrarme</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
+<header class="sticky-top">
+  <div class="header-container">
+    <div class="header-left">
+      <a href="/" class="">
+        <img class="logo" src="/assets/images/closeteacherslogo1.png" alt="Closeteachers">
+      </a>
     </div>
-  </nav> -->
-  <div class="bg-dark px-4">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-        <img src="/assets/images/closeteacherslogo2.png" alt="Closeteachers">
+  
+    <div class="header-right">
+      <a href="" class="home" *ngIf="isLogged">
+        <i title="Home" class="fa-solid fa-house fs-6 mb-1"></i><span>Inicio</span>
       </a>
 
-      <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-        <li class="d-flex align-items-center">
-          <a href="" class="nav-link text-secondary d-flex flex-column align-items-center pt-3">
-            <i class="fa-solid fa-house fs-5 mb-1"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="d-flex align-items-center" *ngIf="isLogged">
-          <a [routerLink]="['/dashboard/profile']" class="nav-link text-white d-flex flex-column align-items-center pt-3">
-            <i class="fa-solid fa-gauge fs-5 mb-1"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="d-flex align-items-center ms-4">
-          <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2" (click)="logout()" *ngIf="isLogged">Cerrar sesión</button>
-            <button type="button" class="btn btn-outline-light me-2" [routerLink]="['/login']" *ngIf="!isLogged">Iniciar sesión</button>
-            <button type="button" class="btn btn-warning" [routerLink]="['/register']" *ngIf="!isLogged">Registrarse</button>
-          </div>
-        </li>
-      </ul>
+      <a [routerLink]="['/dashboard/profile']" class="dashboard nav-link" *ngIf="isLogged">
+        <i title="Dashboard" class="fa-solid fa-gauge fs-6 mb-1"></i><span>Dashboard</span>
+      </a>
+
+      <div class="text-end">
+        <button title="Cerrar Sesión" type="button" class="logout btn" (click)="logout()" *ngIf="isLogged"><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar Sesión</span></button>
+        <button title="Iniciar Sesión" type="button" class="login btn" [routerLink]="['/login']" *ngIf="!isLogged"><i class="fa-solid fa-right-to-bracket"></i><span>Iniciar sesión</span> </button>
+        <button title="Registrarme" type="button" class="signup btn" [routerLink]="['/register']" *ngIf="!isLogged"><i class="fa-solid fa-user-plus"></i> <span>Registrarse</span></button>
+      </div>
     </div>
   </div>
 </header>

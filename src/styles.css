@@ -1,17 +1,20 @@
 /* Global Styles */
 
 :root {
-  --primary-blue: #00296b;
-  --secondary-blue: #004a8f;
-  --primary-yellow: #fdc500;
-  --secondary-yellow: #ffd500;
-  --black: #292e1e;
+  --blue: #4CC9F0;
+  --dark-blue: #4895EF;
+  --purple: #7209B7;
+  --dark-purple: #3A0CA3;
+  --fucsia: #F72585;
+  --black: #000814;
   --white: #ffffff;
   --gray: #dfdfdf;
+  --yellow: #ffc107;
 }
 
-* {
+*, button {
   font-family: 'Roboto', sans-serif;
+  transition: 0.3s;
 }
 
 .alert {

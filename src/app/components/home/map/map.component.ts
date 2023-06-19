@@ -57,7 +57,7 @@ export class MapComponent implements OnInit, OnChanges {
     resetButton.innerHTML = 'Restablecer';
     resetButton.addEventListener('click', () => {
       this.map.getView().setCenter(fromLonLat([-75.5744, 6.2509]));
-      this.map.getView().setZoom(14);
+      this.map.getView().setZoom(3);
     });
 
     const myLocation = document.createElement('button');
@@ -157,7 +157,7 @@ export class MapComponent implements OnInit, OnChanges {
       const teacherMarkerStyle = new Style({
         image: new Icon({
           src: './assets/images/teacher_pin.png',
-          scale: 0.03,
+          scale: 0.3,
           anchor: [0.5, 1],
         })
       });

@@ -1,35 +1,132 @@
 /* New */
 
+main {
+  max-width: 1920px;
+  margin: auto;
+}
+
 .home-hero {
-  background-image: url("/assets/images/heroopacity.jpg");
+  background-image: url(/assets/images/herobg1.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-color: var(--black);
-  padding: 5em 0;
+  padding: 10em 0;
+  margin: 20px 20px 0px !important;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
 }
 
-.home-hero:after {
-  background-color: var(--black);
+@media (min-width: 1600px) {
+  .home-hero {
+    padding: 15em 0;
+  }
+}
+
+.hero-container {
+  display: flex;
+  width: 100%;
+}
+
+.hero-content {
+  text-align: left;
+  max-width: 60%;
 }
 
 .home-hero h1 {
   color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 .home-hero p {
   color: var(--white);
-  font-weight: bold;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 50px;
 }
 
-.home-sidebar {
-  background-color: gray;
+.hero-ctas {
+  display: flex;
+  column-gap: 10px;
 }
 
-.teacher-filter {
-  height: 60px;
-  background-color: gray;
+.cta-search {
+  color: var(--white);
+  background-color: var(--blue);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
 }
+
+.cta-search:hover {
+  background-color: var(--dark-blue) ;
+}
+
+.cta-register {
+  color: var(--white);
+  background-color: var(--fucsia);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.cta-register:hover {
+  background-color: var(--dark-purple) ;
+}
+
+@media (max-width: 1024px) {
+  .home-hero {
+    padding: 2em 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-hero {
+    background-image: url(/assets/images/herobg1.jpg);
+    background-position: center;
+    padding: 3em 0;
+  }
+
+  .home-hero h1 {
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-size: 2em;
+  }
+
+  .home-hero p {
+    font-size: 1em;
+  }
+
+  .hero-content {
+    max-width: 70%;
+}
+}
+
+@media (max-width: 425px) {
+  .home-hero {
+    background-image: url(/assets/images/herobg1.jpg);
+    background-position: left;
+    padding: 3em 0;
+  }
+
+  .home-hero h1 {
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+  }
+
+  .home-hero p {
+    font-size: 1em;
+  }
+
+  .hero-content {
+    max-width: 100%;
+}
+}
+
 
 
 /* Old */

@@ -12,6 +12,9 @@ import { TeacherListComponent } from '../teacher-list.component';
 export class TeacherCardComponent  {
   @Input() myUser!: User;
 
+  stars: number[] = [1, 2, 3, 4, 5];
+
+
   constructor(
     @Host() private _teacherList: TeacherListComponent,
     private publicService: PublicService) { }
@@ -25,4 +28,10 @@ export class TeacherCardComponent  {
     this._teacherList.seeUserInfo(id);
   }
 
+  printStart(avg?: number): number{
+    if(avg !== undefined){
+      return avg;
+    }
+    return 0;
+  }
 }
