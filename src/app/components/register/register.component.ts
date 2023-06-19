@@ -68,7 +68,9 @@ export class RegisterComponent {
 
     try {
       let resp = await this.authService.register(data);
-
+      
+      localStorage.setItem('userId', resp.user.id_user);
+      localStorage.setItem('rol', resp.user.rol);
       localStorage.setItem('token', resp.token);
 
       if (!resp.error) {
