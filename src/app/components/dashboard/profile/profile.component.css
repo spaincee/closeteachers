@@ -19,24 +19,6 @@ img.teacher-card-avatar {
   border-radius: 5px 5px 0px 0px;
 }
 
-
-
-/* .card {
-    position: relative;
-   }
-   
-   img.teacher-card-avatar {
-     position: relative;
-     border-radius: 50%;
-     width: 70px;
-     margin: auto;
-     margin-top: -40px;
-   }
-   
-   .teacher-card-cover {
-     height: 160px;
-     background-position: center;
-     background-size: cover;
-     background-repeat: no-repeat;
-     border-radius: 5px 5px 0px 0px;
-   } */
+h4 {
+  margin: 20px 0px;
+}

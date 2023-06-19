@@ -51,7 +51,7 @@ p {
   flex: 1 1 auto;
   padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
   color: var(--bs-card-color);
-  min-height: 170px;
+  min-height: 190px;
 }
 
 .card-cta {
@@ -68,4 +68,14 @@ p {
 
 .card-rating i:before {
   font-size: 12px;
+}
+
+.btn-card {
+  background-color: var(--purple);
+  border-color: var(--purple);
+}
+
+.btn-card:hover {
+  background-color: var(--dark-purple);
+  border-color: var(--dark-purple);
 }

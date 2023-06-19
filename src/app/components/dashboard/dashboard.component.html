@@ -1,46 +1,3 @@
-<!-- <header class="py-3 mb-0 bg-dark">
-  <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr">
-    <div class="ms-4">
-      <a
-        href="#"
-        class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
-      >
-        <img src="/assets/images/closeteacherslogo2.png" alt="Closeteachers" />
-      </a>
-    </div>
-
-    <div class="d-flex align-items-center">
-      <div class="flex-shrink-0 dropdown">
-        <a
-          href="#"
-          class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            [src]="userImage ? userImage : './assets/images/no-image.png'"
-            alt="mdo"
-            width="40"
-            height="40"
-            class="rounded-circle"
-          />
-        </a>
-        <ul class="dropdown-menu text-small shadow">
-          <li><a class="dropdown-item" [routerLink]="['/dashboard', 'profile']" (click)="selectItem(1)">Perfil</a></li>
-          <li *ngIf="rol === 'administrador'"><a class="dropdown-item" [routerLink]="['/dashboard', 'lists']" (click)="selectItem(5)">Lista de usuarios</a></li>
-          <li *ngIf="rol === 'profesor'"><a class="dropdown-item" [routerLink]="['/dashboard', 'mystudents']" (click)="selectItem(3)">Mis alumnos</a></li>
-          <li *ngIf="rol === 'alumno'"><a class="dropdown-item" [routerLink]="['/dashboard', 'myteachers']" (click)="selectItem(2)">Mis profesores</a></li>
-          <li *ngIf="rol === 'alumno' || rol === 'profesor'"><a class="dropdown-item" [routerLink]="['/dashboard', 'messages']" (click)="selectItem(4)">Mensajes</a></li>
-          <li><a class="dropdown-item" [routerLink]="['/dashboard', 'settings']" (click)="selectItem(6)">Configuración</a></li>
-          <li><hr class="dropdown-divider" /></li>
-          <li><a class="dropdown-item" [routerLink]="['/home']"><i class="fa-solid fa-house"></i> Home</a></li>
-          <li><a class="dropdown-item" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</header> -->
-
 <header class="sticky-top">
   <div class="header-container">
     <div class="header-left">
@@ -75,9 +32,9 @@
         </a>
         <ul class="dropdown-menu text-small shadow">
           <li><a class="dropdown-item" [routerLink]="['/dashboard', 'profile']" (click)="selectItem(1)">Perfil</a></li>
-          <li *ngIf="rol === 'administrador'"><a class="dropdown-item" [routerLink]="['/dashboard', 'lists']" (click)="selectItem(5)">Lista de usuarios</a></li>
-          <li *ngIf="rol === 'profesor'"><a class="dropdown-item" [routerLink]="['/dashboard', 'mystudents']" (click)="selectItem(3)">Mis alumnos</a></li>
-          <li *ngIf="rol === 'alumno'"><a class="dropdown-item" [routerLink]="['/dashboard', 'myteachers']" (click)="selectItem(2)">Mis profesores</a></li>
+          <li *ngIf="rol === 'administrador'"><a class="dropdown-item" [routerLink]="['/dashboard', 'lists']" (click)="selectItem(5)">Usuarios</a></li>
+          <li *ngIf="rol === 'profesor'"><a class="dropdown-item" [routerLink]="['/dashboard', 'mystudents']" (click)="selectItem(3)">Mis Alumnos</a></li>
+          <li *ngIf="rol === 'alumno'"><a class="dropdown-item" [routerLink]="['/dashboard', 'myteachers']" (click)="selectItem(2)">Mis Profesores</a></li>
           <li *ngIf="rol === 'alumno' || rol === 'profesor'"><a class="dropdown-item" [routerLink]="['/dashboard', 'messages']" (click)="selectItem(4)">Mensajes</a></li>
           <li><a class="dropdown-item" [routerLink]="['/dashboard', 'settings']" (click)="selectItem(6)">Configuración</a></li>
           <li><hr class="dropdown-divider" /></li>

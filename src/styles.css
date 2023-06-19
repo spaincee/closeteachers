@@ -17,11 +17,22 @@
   transition: 0.3s;
 }
 
-.alert {
-  display: flex;
-  align-items: center;
+.ngx-pagination .current {
+  background-color: var(--purple) !important;
+  border-radius: 4px;
+  color: var(--white) !important;
 }
 
-.alert p {
-  margin: 0 !important;
+.ol-zoom-in {
+  background-color: var(--purple) !important;
+  border-color: var(--purple) !important;
+  color: var(--white) !important;
+  padding: 10px !important;
+}
+
+.ol-zoom-out {
+  background-color: var(--purple) !important;
+  border-color: var(--purple) !important;
+  color: var(--white) !important;
+  padding: 10px !important;
 }

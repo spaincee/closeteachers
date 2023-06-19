@@ -235,3 +235,24 @@ a.ssolink {
     transform: translateX(0px);
   }
 } 
+
+.form-check-input:checked {
+  background-color: var(--purple);
+}
+
+.form-check-input:not(:checked) {
+  background-color: var(--blue);
+}
+
+.label-estudiante {
+  color: var(--blue);
+}
+
+.label-profesor{
+  color: var(--purple);
+}
+
+.register-type {
+  text-align: center;
+  margin-bottom: 5px;
+}
