@@ -25,3 +25,13 @@ img.teacher-card-avatar {
     height: 150px;
     margin: auto;
   }
+
+  button {
+    background-color: var(--purple);
+    border-color: var(--purple);
+  }
+
+  button:hover {
+    background-color: var(--dark-purple);
+    border-color: var(--dark-purple);
+  }

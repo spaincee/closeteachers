@@ -13,9 +13,7 @@ import { UserslistsComponent } from './components/dashboard/userslists/userslist
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  { path: "", pathMatch: 'full', redirectTo: 'home' },
-  { path: "home", component: HomeComponent },
-
+  { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
 
@@ -27,15 +25,6 @@ const routes: Routes = [
     { path: "settings", component: SettingsComponent },
     { path: "lists", component: UserslistsComponent }
   ] },
-
-  // { path: "user/:userid", component: SingleTeacherComponent }
-
-  
-
-
-  // Router
-  // login
-  // register
 ];
 
 @NgModule({

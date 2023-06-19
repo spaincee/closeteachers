@@ -42,3 +42,7 @@
   border-radius: 5px;
   color: #ffffff;
 }
+
+a {
+  cursor: pointer;
+}
