@@ -55,6 +55,7 @@ export class MapComponent implements OnInit, OnChanges {
   
     const resetButton = document.createElement('button');
     resetButton.innerHTML = 'Restablecer';
+    resetButton.classList.add('btn-reset');
     resetButton.addEventListener('click', () => {
       this.map.getView().setCenter(fromLonLat([-75.5744, 6.2509]));
       this.map.getView().setZoom(3);
