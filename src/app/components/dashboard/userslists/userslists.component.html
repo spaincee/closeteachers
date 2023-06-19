@@ -181,20 +181,6 @@
               <td>{{ teacher.email }}</td>
               <td>{{ teacher.phone }}</td>
               <td>{{ teacher.subjects }}</td>
-              <!-- <td>
-                <div
-                  class="progress"
-                  role="progressbar"
-                  aria-label="Example with label"
-                  aria-valuenow="100"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  <div class="progress-bar" style="width: 100%">
-                    <span class="mx-auto">100%</span>
-                  </div>
-                </div>
-              </td> -->
               <td>
                 <span
                   [ngClass]="{
@@ -207,6 +193,7 @@
               </td>
               <td class="d-flex gap-4 justify-content-between">
                 <i
+                  title="Admitir"
                   class="fa-solid fs-4 text-success"
                   [ngClass]="{
                     'fa-circle-check': teacher.active === 1,
@@ -217,6 +204,7 @@
                   (click)="activeTeacher(teacher.id_user)"
                 ></i>
                 <i
+                  title="Ver Detalles"
                   data-id="{{ teacher.id_user }}"
                   class="fa-solid fa-eye fs-4 text-primary"
                   data-bs-toggle="modal"
@@ -226,6 +214,7 @@
 
                 <div class="form-check form-switch">
                   <input
+                    title="Dar de Baja/Alta"
                     data-id="{{ teacher.id_user }}"
                     class="form-check-input h-75"
                     type="checkbox"
@@ -290,6 +279,7 @@
               </td>
               <td class="d-flex gap-4">
                 <i
+                  title="Ver Detalles"
                   data-id="{{ student.id_user }}"
                   class="fa-solid fa-eye fs-4 text-primary"
                   data-bs-toggle="modal"
@@ -298,6 +288,7 @@
                 ></i>
                 <div class="form-check form-switch">
                   <input
+                    title="Dar de Baja/Alta"
                     data-id="{{ student.id_user }}"
                     class="form-check-input h-75"
                     type="checkbox"

@@ -36,3 +36,9 @@
   color: var(--white) !important;
   padding: 10px !important;
 }
+
+.btn-reset{
+  background-color: #7209B7;
+  border-radius: 5px;
+  color: #ffffff;
+}
