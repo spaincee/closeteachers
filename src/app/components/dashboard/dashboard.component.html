@@ -7,11 +7,11 @@
     </div>
   
     <div class="header-right">
-      <a href="" class="home">
+      <a [routerLink]="['/home']" class="home">
         <i title="Home" class="fa-solid fa-house fs-6 mb-1"></i><span>Inicio</span>
       </a>
 
-      <a [routerLink]="['/dashboard/profile']" class="dashboard nav-link">
+      <a [routerLink]="['/dashboard', 'profile']" class="dashboard nav-link">
         <i title="Dashboard" class="fa-solid fa-gauge fs-6 mb-1"></i><span>Dashboard</span>
       </a>
       

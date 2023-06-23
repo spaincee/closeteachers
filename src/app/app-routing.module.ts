@@ -13,7 +13,8 @@ import { UserslistsComponent } from './components/dashboard/userslists/userslist
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
+  
+  { path: "home", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
 
@@ -25,6 +26,7 @@ const routes: Routes = [
     { path: "settings", component: SettingsComponent },
     { path: "lists", component: UserslistsComponent }
   ] },
+  { path: "**", redirectTo: 'home'}
 ];
 
 @NgModule({
