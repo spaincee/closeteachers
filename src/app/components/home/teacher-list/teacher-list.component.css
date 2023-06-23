@@ -118,6 +118,13 @@ button[disabled]:hover {
   margin-bottom: 73px;
 }
 
+@media (max-width: 991px) {
+  .home-map {
+    height: 350px;
+    margin-bottom: 20px;
+  }
+}
+
 .ngx-pagination .current {
   background: var(--blue) !important;
   color: #fefefe;
