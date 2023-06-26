@@ -9,6 +9,7 @@ import { User } from '../interfaces/user.interface';
 export class TeacherService {
 
   baseUrl: string = 'https://api-teacher-app.up.railway.app/api/teacher/dashboard';
+  //baseUrl: string = 'http://localhost:3001/api/teacher/dashboard';
 
   constructor(private httpClient: HttpClient) { }
 

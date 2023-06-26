@@ -114,7 +114,12 @@ export class MessagesComponent implements AfterViewChecked {
         }
         this.ourComunication(data.receiverId);
         
-        this.chatForm.resetForm();
+        this.chatForm.resetForm({
+            receiverId: this.userChatActive.id_user,
+            message: ''
+          });
+        console.log(data.receiverId);
+        
 
       }else{
         console.log('Error');
